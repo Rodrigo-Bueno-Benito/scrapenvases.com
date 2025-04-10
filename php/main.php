@@ -3,7 +3,7 @@
     require_once 'modelo.php';
 ?>
 <html>
-    <link rel="stylesheet" href="../css/estiloss_Portada.css">
+    <link rel="stylesheet" href="../css/estilos_portada.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
 <body>
     <div class="page-container">
@@ -14,17 +14,22 @@
                     <div class="carousel-slide">
                         <div class="carousel-item">
                             <div class="noticia">
-                                    <img src="../imagenes/scrapArriba.png" alt="Imagen de noticia">
+                                    <img src="../imagenes/scrapenvases.svg" alt="Imagen de noticia">
                             </div>
                         </div>
                         <div class="carousel-item">
                             <div class="noticia">
-                                    <img src="../imagenes/scrapArriba.png" alt="Imagen de noticia">
+                                    <img src="../imagenes/banerenvases.svg" alt="Imagen de noticia">
                             </div>
                         </div>
                         <div class="carousel-item">
                             <div class="noticia">
-                                    <img src="../imagenes/scrapArriba.png" alt="Imagen de noticia">
+                                    <img src="../imagenes/banerdigital.svg" alt="Imagen de noticia">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="noticia">
+                                    <img src="../imagenes/banerhumano.svg" alt="Imagen de noticia">
                             </div>
                         </div>
                     </div>

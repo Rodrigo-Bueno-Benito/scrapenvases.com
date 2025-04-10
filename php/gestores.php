@@ -10,19 +10,24 @@
         <div class="arriba">
             <h2>GESTORES</h2>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium quas sequi eos et? Ducimus odio ratione aliquam magni recusandae eveniet in ullam excepturi omnis eius, fugit, iure voluptates vero ipsam?
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad facere facilis iure blanditiis ea quos illum exercitationem laboriosam! Voluptate impedit ullam vel omnis, officiis iste dolores quod. Provident, quae fugit!
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta delectus perspiciatis, voluptas excepturi magni consequuntur inventore, animi rerum corrupti vitae, numquam sit nisi quisquam facilis obcaecati sint? Dolorem, sint distinctio?
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem excepturi tempora autem molestiae. Aliquam voluptatem perferendis nesciunt fugiat labore est perspiciatis soluta exercitationem corrupti! Eos quia excepturi nobis nulla voluptatem?
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum natus dignissimos consequatur architecto mollitia quidem modi, sunt nobis autem officiis excepturi unde quod dolor voluptatem alias temporibus impedit. Tempore, repellendus?
+                Con la implantación de la <b class="coloruno">Responsabilidad Ampliada del Productor (RAP)</b> para los envases comerciales e industriales, los <b class="colordos">gestores de residuos</b> juegan un papel clave en la cadena. Pero también se enfrentan a <b class="coloruno">nuevos requisitos de trazabilidad</b>, <b class="colordos">coordinación con SCRAP y reporting normativo</b>, que exigen una adaptación técnica y operativa. 
+                <br>
+                Desde nuestra empresa, ayudamos a los gestores a integrarse de forma eficaz y conforme a la normativa en este nuevo modelo, optimizando su papel dentro del sistema y reforzando su propuesta de valor.
+
             </p>
         </div>
         <div class="abajo">
             <div class="aIzquierda">
-                <img src="../imagenes/scrapp_gestores.png" alt="">
+                <div class="imagen-con-texto">
+                    <img src="../imagenes/scrapp_gestores.png" alt="">
+                    <p class="descripcion">Soluciones avanzadas para gestores de residuos industriales.</p>
+                </div>
             </div>
             <div class="aDerecha">
-                <img src="../imagenes/probatus_gestores.png" alt="">
+                <div class="imagen-con-texto">
+                    <img src="../imagenes/probatus_gestores.png" alt="">
+                    <p class="descripcion">Probatus: herramienta integral de trazabilidad y cumplimiento.</p>
+                </div>
             </div>
         </div>
     </div>

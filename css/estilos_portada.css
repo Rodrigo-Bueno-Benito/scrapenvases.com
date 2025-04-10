@@ -35,13 +35,14 @@ body {
     position: relative;
     overflow: hidden;
     width: 100%; /* El contenedor del carrusel ocupa el 100% del espacio */
-    height: 40vh; /* 25% de la altura de la ventana del navegador */
+    height: 50vh; /* 25% de la altura de la ventana del navegador */
 }
 
 .carousel-slide {
     display: flex;
     transition: transform 0.5s ease-in-out;
-    width: 100%; /* Asegura que la transición ocupe el ancho completo */
+    width: 100%; 
+    height: 50%;/* Asegura que la transición ocupe el ancho completo */
 }
 
 .carousel-item {
@@ -64,32 +65,18 @@ body {
 }
 
 .abajo .aIzquierda, .abajo .aDerecha {
-    flex: 1; /* Ambas imágenes ocupan el mismo espacio */
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 40px;
+    padding: 40px 0;
+    box-sizing: border-box;
 }
 
-.abajo .aDerecha img {
-    width: 100%; /* Cambié el tamaño para que sea más responsivo */
-    height: auto;
-}
-
-.abajo .aIzquierda img{
+/* IZQUIERDA */
+.abajo .aIzquierda img {
     width: 65%;
     height: auto;
-}
-
-.imagen-con-texto {
-    margin-top: 10px;
-}
-
-.imagen-con-texto img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
 }
 
 .descripcionIzq {
@@ -99,13 +86,40 @@ body {
     font-family: 'Montserrat', sans-serif;
     text-align: justify;
 }
+
+/* DERECHA */
+.abajo .aDerecha {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    box-sizing: border-box;
+}
+
+.aDerecha .imagen-con-texto {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.abajo .aDerecha img {
+    width: 100%;
+    height: auto;
+}
+
 .descripcionDer {
+    position: absolute;
+    top: 77%;
     margin-top: 8px;
+    width: 100%;
     font-size: 1em;
     color: #333;
     font-family: 'Montserrat', sans-serif;
     text-align: justify;
-    margin-top: 34.5%;
 }
 
 /* Ajustes responsivos */

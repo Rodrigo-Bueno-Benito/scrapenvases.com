@@ -43,10 +43,10 @@ $indiceSeleccionado = isset($_GET['indice']) ? $_GET['indice'] : null;
 <body>
     <?php require './header.php'; ?>
     <div class="banner">
-        <img class="banner" src="../imagenes/banner_fusionado.png" alt="Banner LER">
+        <img class="banner" src="../imagenes/banernormativa.svg" alt="Banner LER">
     </div>
     <div class="container"> 
-        <h1>LER (Listado Europeo de Residuos)</h1>
+        <h1>LER (Familia envases)</h1>
         <p class="subtitulo">(Decisión 2014/955/CE de la Comisión de 18 de diciembre de 2014 por la que se modifica la Decisión 2000/532/CE...)</p>
         <!-- NUEVO CONTENEDOR DE COLUMNAS -->
         <div class="main-columns">

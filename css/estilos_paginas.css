@@ -35,7 +35,8 @@ body {
     text-align: justify;
     font-family: 'Montserrat', sans-serif;
     padding-right: 40px;
-    font-size: 1.6em;
+    font-size: 1.4em;
+    font-weight: 300;
 }
 
 .arriba p .coloruno{
@@ -70,19 +71,19 @@ body {
     margin-top: 10px;
 }
 
-.imagen-con-texto img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
+.imagen-con-texto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .descripcion {
-    margin-top: 8px;
-    font-size: 1em;
+    margin-top: 12px;
+    font-size: 1.2em;
     color: #333;
     font-family: 'Montserrat', sans-serif;
-    text-align: justify;
+    width: 90%;
 }
 
 /* Ajustes responsivos */
