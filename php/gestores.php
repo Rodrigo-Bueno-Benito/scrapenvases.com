@@ -3,8 +3,9 @@
     require_once 'modelo.php';
 ?>
 <html>
-    <link rel="stylesheet" href="../css/estilos_paginas.css">
+    <link rel="stylesheet" href="../css/estilo_pagina.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
 <body>
     <div class="page-container">
         <div class="arriba">
@@ -20,13 +21,13 @@
             <div class="aIzquierda">
                 <div class="imagen-con-texto">
                     <img src="../imagenes/scrapp_gestores.png" alt="">
-                    <p class="descripcion">Soluciones avanzadas para gestores de residuos industriales.</p>
+                    <p class="descripcion">Garantizando una gestión documental fluida, segura y conforme a las exigencias normativas.</p>
                 </div>
             </div>
             <div class="aDerecha">
                 <div class="imagen-con-texto">
                     <img src="../imagenes/probatus_gestores.png" alt="">
-                    <p class="descripcion">Probatus: herramienta integral de trazabilidad y cumplimiento.</p>
+                    <p class="descripcion">Utiliza un canal único para operar con distintos SCRAPs de manera ágil y eficiente.</p>
                 </div>
             </div>
         </div>

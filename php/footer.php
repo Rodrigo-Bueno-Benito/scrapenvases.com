@@ -18,19 +18,18 @@
 
             <!-- Logos de Redes Sociales -->
             <div class="social-icons">
-                <a href="#"><img src="../imagenes/facebook-icon.png" alt="Facebook"></a>
-                <a href="#"><img src="../imagenes/twitter-icon.png" alt="Twitter"></a>
-                <a href="#"><img src="../imagenes/linkedin-icon.png" alt="LinkedIn"></a>
-                <a href="#"><img src="../imagenes/watshapp-icon.png" alt="Watshapp"></a>
-                <a href="#"><img src="../imagenes/email-icon.png" alt="Email"></a>
+                <a href="#"><img src="../imagenes/facebook.png" alt="Facebook"></a>
+                <a href="#"><img src="../imagenes/twitter.png" alt="Twitter"></a>
+                <a href="#"><img src="../imagenes/linkedin.png" alt="LinkedIn"></a>
+                <a href="#"><img src="../imagenes/whatsapp.png" alt="Watshapp"></a>
+                <a href="#"><img src="../imagenes/mail.png" alt="Email"></a>
             </div>
 
             <!-- Enlaces: QUIENES SOMOS, POLÍTICA DE COOKIES, AVISO LEGAL, CONTACTO -->
             <div class="footer-links">
-                <a href="#">QUIÉNES SOMOS</a>
                 <a href="#">POLÍTICA DE COOKIES</a>
+                <a href="#">POLÍTICA DE PRIVACIDAD</a>
                 <a href="#">AVISO LEGAL</a>
-                <a href="#">CONTACTO</a>
             </div>
 
             <!-- Frase de Desarrollo -->

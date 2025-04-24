@@ -3,8 +3,9 @@
     require_once 'modelo.php';
 ?>
 <html>
-    <link rel="stylesheet" href="../css/estilos_paginas.css">
+    <link rel="stylesheet" href="../css/estilo_pagina.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
 <body>
     <div class="page-container">
         <div class="arriba">
@@ -20,13 +21,13 @@
             <div class="aIzquierda">
                 <div class="imagen-con-texto">
                     <img src="../imagenes/scrapp-poseedores.png" alt="">
-                    <p class="descripcion">Asesoramiento experto para poseedores en el marco de la RAP.</p>
+                    <p class="descripcion">Simplifica la colaboración con gestores y SCRAPs, generando valor dentro de los sistemas de responsabilidad colectiva.</p>
                 </div>
             </div>
             <div class="aDerecha">
                 <div class="imagen-con-texto">
-                    <img src="../imagenes/probatus_poseedores.png" alt="">
-                    <p class="descripcion">Probatus: control documental y trazabilidad para poseedores.</p>
+                    <img src="../imagenes/probatus_poseedor.svg" alt="">
+                    <p class="descripcion">Controla que tus gestores cumplen con los estándares técnicos, legales y ambientales requeridos.</p>
                 </div>
             </div>
         </div>

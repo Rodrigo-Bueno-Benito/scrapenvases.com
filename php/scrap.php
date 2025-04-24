@@ -3,8 +3,9 @@
     require_once 'modelo.php';
 ?>
 <html>
-    <link rel="stylesheet" href="../css/estilos_paginas.css">
+    <link rel="stylesheet" href="../css/estilo_pagina.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
 <body>
     <div class="page-container">
         <div class="arriba">
@@ -17,14 +18,14 @@
         <div class="abajo">
             <div class="aIzquierda">
                 <div class="imagen-con-texto">
-                    <img src="../imagenes/scrapp_scrap.png" alt="">
-                    <p class="descripcion">Soluciones para la gestión eficiente de SCRAP en envases industriales.</p>
+                    <img src="../imagenes/MONTAJE.svg" alt="">
+                    <p class="descripcion">Automatiza la coordinación con todos los agentes implicados y centraliza la información y documentación necesaria para el cumplimiento legal.</p>
                 </div>
             </div>
             <div class="aDerecha">
                 <div class="imagen-con-texto">
                     <img src="../imagenes/probatus_scrap.png" alt="">
-                    <p class="descripcion">Plataforma Probatus para el seguimiento y control normativo.</p>
+                    <p class="descripcion">Evalúa, homologa y audita a tus proveedores de forma homogénea y transparente.</p>
                 </div>
             </div>
         </div>

@@ -3,13 +3,15 @@
     require_once 'modelo.php';
 ?>
 <html>
-    <link rel="stylesheet" href="../css/estilos_portada.css">
+    <link rel="stylesheet" href="../css/estilos_main.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@600;800&display=swap" rel="stylesheet">
 <body>
     <div class="page-container">
         <div class="arriba">
             <div class="carousel-section">
-            <h1>ACTUALIDAD</h1>
                 <div class="carousel-container">
                     <div class="carousel-slide">
                         <div class="carousel-item">
@@ -36,20 +38,29 @@
                 </div>
             </div>
         </div>
-        <div class="abajo">
-            <div class="aIzquierda">
-                <div class="imagen-con-texto">
-                    <img src="../imagenes/logoScrapp.png" alt="">
-                    <p class="descripcionIzq">Texto descriptivo de la imagen izquierda. Lorem ipsum elit. Repudiandae quisquam error architecto iusto sit quos veritatis. Vitae laborum mollitia iusto repudiandae. Atque nesciunt doloribus odio veniam qui harum sapiente earum?</p>
+
+        <div class="contenedor-principal">
+            <p class="slogan">Dos soluciones, una misión: <span class="acento">la RAP conectada y bajo control.</span></p>
+
+            <div class="contenedor-items">
+                <!-- SCRAPP -->
+                <div class="contenedor-item">
+                <div class="contenedor-img">
+                    <img src="../imagenes/logoScrapp.png" alt="Logo Scrapp" class="logo-img izquierda">
                 </div>
-            </div>
-            <div class="aDerecha">
-                <div class="imagen-con-texto">
-                    <img src="../imagenes/logoProbatus.png" alt="">
-                    <p class="descripcionDer">Texto descriptivo de la imagen derecha. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas sint vitae rem culpa et fuga unde eum, corporis quasi at animi fugiat adipisci tempora. Ipsam quae quos animi atque dolore.</p>
+                <p class="descripcion">Trazabilidad inteligente para SCRAPs exigentes. La herramienta que convierte la gestión de la RAP en eficiencia operativa.</p>
+                </div>
+
+                <!-- PROBATUS -->
+                <div class="contenedor-item">
+                <div class="contenedor-img">
+                    <img src="../imagenes/logoProbatus.png" alt="Logo Probatus" class="logo-img derecha">
+                </div>
+                <p class="descripcion">Plataforma digital especializada en la homologación, evaluación y seguimiento de proveedores.</p>
                 </div>
             </div>
         </div>
+
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {

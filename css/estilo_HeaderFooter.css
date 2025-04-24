@@ -89,12 +89,13 @@
     color: white;
     text-decoration: none;
     padding: 15px 20px;
-    font-size: 1.3em;
+    font-size: 2rem;
     font-weight: bold;
     text-align: center;
     display: inline-block;
     margin: 0;
     position: relative;  /* Necesario para la interactividad */
+    font-family: 'Barlow Condensed', sans-serif;
 }
 
 @keyframes gradientMove {

@@ -26,8 +26,9 @@ body {
     margin-top: 4%;
     padding-right: 40px;
     margin-bottom: 0;
-    font-size: 2em;
+    font-size: 3rem;
     color: #0075a8;
+    font-family: 'Barlow Condensed', sans-serif;
 }
 
 .arriba p{
@@ -35,8 +36,9 @@ body {
     text-align: justify;
     font-family: 'Montserrat', sans-serif;
     padding-right: 40px;
-    font-size: 1.4em;
-    font-weight: 300;
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 2%;
 }
 
 .arriba p .coloruno{
@@ -53,6 +55,7 @@ body {
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 50px;
+    margin-top: -5%;
 }
 
 .abajo .aIzquierda, .abajo .aDerecha {
@@ -64,8 +67,8 @@ body {
 }
 
 .abajo .aIzquierda img, .abajo .aDerecha img {
-    width: 600px;
-    height: 500px;
+    width: 100%;
+    height: auto;
 }
 .imagen-con-texto {
     margin-top: 10px;
@@ -79,11 +82,10 @@ body {
 }
 
 .descripcion {
-    margin-top: 12px;
-    font-size: 1.2em;
+    font-size: 1.5rem;
     color: #333;
-    font-family: 'Montserrat', sans-serif;
-    width: 90%;
+    font-family: 'Barlow Condensed', sans-serif;
+    width: 100%;
 }
 
 /* Ajustes responsivos */
