@@ -28,7 +28,7 @@
             <!-- Enlaces: QUIENES SOMOS, POLÍTICA DE COOKIES, AVISO LEGAL, CONTACTO -->
             <div class="footer-links">
                 <a href="../html/politica-cookies.html">POLÍTICA DE COOKIES</a>
-                <a href="../html/politica_privacidad.html">POLÍTICA DE PRIVACIDAD</a>
+                <a href="../html/politica-privacidad.html">POLÍTICA DE PRIVACIDAD</a>
                 <a href="../html/aviso-legal.html">AVISO LEGAL</a>
             </div>
 
