@@ -29,7 +29,7 @@ body {
 
 
 /* -------------------- ENCABEZADOS -------------------- */
-h1 {
+.content-container h1 {
     font-family: 'Century Gothic', sans-serif;
     font-size: 2.5em;
     background: linear-gradient(to right, #0075a8, #2fa496, #0075a8);
@@ -37,7 +37,7 @@ h1 {
     background-repeat: no-repeat;
     background-position: left center;
     text-align: center;
-    margin-top: 8%;
+    margin-top: 90px;
     padding: 10px;
     margin-bottom: 0;
     background-clip: text;
@@ -136,6 +136,43 @@ li strong {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.right-column h1{
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 2.5em;
+    background: linear-gradient(to right, #0075a8, #2fa496, #0075a8);
+    background-size: 200% auto;
+    background-repeat: no-repeat;
+    background-position: left center;
+    text-align: center;
+    margin-top: 40px;
+    padding: 10px;
+    margin-bottom: 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 5s ease infinite;
+}
+
+.right-column .subtitulo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 5%;
+}
+
+.subtitulo a{
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(to right, #0075a8, #2fa496, #0075a8);
+    padding: 15px;
+    border-radius: 5px;
 }
 
 .info-expandible {

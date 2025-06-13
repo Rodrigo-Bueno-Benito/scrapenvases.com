@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado LER</title>
-    <link rel="stylesheet" href="../css/e_normativa.css">
+    <link rel="stylesheet" href="./css/esti_normativa.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <script>
         function toggleContent(id) {
@@ -39,11 +39,11 @@
     <?php require './header.php'; ?>
 
     <div class="container"> 
-        <h1>LER (Familia envases)</h1>
         <div class="main-columns">
             <!-- Columna izquierda -->
             <div class="content-container">
-                <h2>Residuos de envases y materiales de protección</h2>
+                <h1>LER (Familia envases)</h1>
+                <h2>15 Residuos de envases; absorbentes, trapos de limpieza, materiales de filtración y ropas de protección no especificados en otra categoría.</h2>
                 <ul>
                     <li><strong>15 01 01:</strong> Envases de papel y cartón</li>
                     <li><strong>15 01 02:</strong> Envases de plástico</li>
@@ -62,6 +62,9 @@
 
             <!-- Columna derecha: info-expandible -->
             <div class="right-column">
+                <h1>OBLIGACIONES</h1>
+                <h2>Real Decreto 1055/2022, de 27 de diciembre, de envases y residuos de envases</h2>
+                <p class="subtitulo"><a href="https://www.boe.es/buscar/act.php?id=BOE-A-2022-22690" target="blank">Enlace BOE</a></p>
                 <div class="info-expandible">
                     <!-- 🏭 Productores -->
                     <div class="column" onclick="expandColumn(this)">
@@ -123,7 +126,7 @@
         </div> <!-- /.main-columns -->
     </div> <!-- /.container -->
 
-    <div class="banner"><img src="../imagenes/banernormativa.svg" alt=""></div>
+    <div class="banner"><img src="./imagenes/banernormativa.svg" alt=""></div>
 
     <?php require './footer.php'; ?>
 </body>

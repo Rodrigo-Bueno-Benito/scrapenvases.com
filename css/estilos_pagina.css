@@ -3,9 +3,16 @@ body {
     font-family: 'Century Gothic', sans-serif;
 }
 
+img {
+    height: 300px;
+    object-fit: contain; /* Asegura que no se deformen */
+    display: block;
+    margin: 0 auto;
+}
+
 .page-container {
     display: flex;
-    flex-direction: column; /* Secciones apiladas */
+    flex-direction: column;
     gap: 20px;
     margin-right: 100px;
     margin-left: 100px;
@@ -16,9 +23,9 @@ body {
 
 .arriba {
     display: flex;
-    flex-direction: column; /* Asegura que los elementos se apilen verticalmente */
-    align-items: center; /* Centra los elementos horizontalmente */
-    gap: 10px; /* Espacio entre el h3 y el párrafo */
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
 .arriba h2 {
@@ -31,7 +38,7 @@ body {
     font-family: 'Barlow Condensed', sans-serif;
 }
 
-.arriba p{
+.arriba p {
     width: 98%;
     text-align: justify;
     font-family: 'Montserrat', sans-serif;
@@ -41,11 +48,11 @@ body {
     margin-bottom: 2%;
 }
 
-.arriba p .coloruno{
+.arriba p .coloruno {
     color: #0075a8;
 }
 
-.arriba p .colordos{
+.arriba p .colordos {
     color: #2fa496;
 }
 
@@ -58,23 +65,23 @@ body {
     margin-top: -5%;
 }
 
-.abajo .aIzquierda, .abajo .aDerecha {
-    flex: 1; /* Ambas imágenes ocupan el mismo espacio */
+.abajo .aIzquierda,
+.abajo .aDerecha {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 40px;
 }
 
-.abajo .aIzquierda img, .abajo .aDerecha img {
-    width: 100%;
-    height: auto;
-}
-.imagen-con-texto {
-    margin-top: 10px;
+/* Ya no necesitas esto porque img ahora está global */
+.abajo .aIzquierda img,
+.abajo .aDerecha img {
+    height: 300px;
 }
 
 .imagen-con-texto {
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -88,28 +95,31 @@ body {
     width: 100%;
 }
 
-/* Ajustes responsivos */
+/* Responsivo */
 @media (max-width: 768px) {
     .abajo {
         flex-direction: column;
         align-items: center;
     }
 
-    .abajo .aIzquierda, .abajo .aDerecha {
+    .abajo .aIzquierda,
+    .abajo .aDerecha {
         width: 100%;
         margin-top: 20px;
     }
 
-    .abajo .aIzquierda img, .abajo .aDerecha img {
+    .abajo .aIzquierda img,
+    .abajo .aDerecha img {
         max-width: 90%;
     }
 
     .noticia {
-        flex-direction: column; /* En pantallas pequeñas, imagen y texto en columna */
+        flex-direction: column;
         text-align: center;
     }
 
-    .izquierda, .derecha {
+    .izquierda,
+    .derecha {
         width: 100%;
     }
 }
