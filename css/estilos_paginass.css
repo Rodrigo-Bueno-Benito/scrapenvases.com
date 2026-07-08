@@ -1,0 +1,112 @@
+body {
+    margin: 0;
+    font-family: 'Century Gothic', sans-serif;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column; /* Secciones apiladas */
+    gap: 20px;
+    margin-right: 100px;
+    margin-left: 100px;
+    padding: 0;
+    box-sizing: border-box;
+    margin-top: 80px;
+}
+
+.arriba {
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos se apilen verticalmente */
+    align-items: center; /* Centra los elementos horizontalmente */
+    gap: 10px; /* Espacio entre el h3 y el párrafo */
+}
+
+.arriba h2 {
+    text-align: center;
+    margin-top: 4%;
+    padding-right: 40px;
+    margin-bottom: 0;
+    font-size: 2em;
+    color: #0075a8;
+}
+
+.arriba p{
+    width: 98%;
+    text-align: justify;
+    font-family: 'Montserrat', sans-serif;
+    padding-right: 40px;
+    font-size: 1.6em;
+}
+
+.arriba p .coloruno{
+    color: #0075a8;
+}
+
+.arriba p .colordos{
+    color: #2fa496;
+}
+
+.abajo {
+    display: flex;
+    gap: 50px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 50px;
+}
+
+.abajo .aIzquierda, .abajo .aDerecha {
+    flex: 1; /* Ambas imágenes ocupan el mismo espacio */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.abajo .aIzquierda img, .abajo .aDerecha img {
+    width: 600px;
+    height: 500px;
+}
+.imagen-con-texto {
+    margin-top: 10px;
+}
+
+.imagen-con-texto img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.descripcion {
+    margin-top: 8px;
+    font-size: 1em;
+    color: #333;
+    font-family: 'Montserrat', sans-serif;
+    text-align: justify;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .abajo {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .abajo .aIzquierda, .abajo .aDerecha {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .abajo .aIzquierda img, .abajo .aDerecha img {
+        max-width: 90%;
+    }
+
+    .noticia {
+        flex-direction: column; /* En pantallas pequeñas, imagen y texto en columna */
+        text-align: center;
+    }
+
+    .izquierda, .derecha {
+        width: 100%;
+    }
+}
