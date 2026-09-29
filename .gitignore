@@ -1,0 +1,7 @@
+/.env
+/data/*.sqlite
+/public/uploads/*
+!/public/uploads/.gitkeep
+/vendor/
+.DS_Store
+Thumbs.db
