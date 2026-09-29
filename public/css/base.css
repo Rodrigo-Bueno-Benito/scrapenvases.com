@@ -9,11 +9,12 @@ body {
   margin: 0;
   font-family: var(--font-body);
   font-size: var(--step-0);
-  line-height: 1.65;
+  line-height: 1.6;
   color: var(--ink);
-  background: var(--paper);
+  background: var(--surface);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  font-variant-numeric: tabular-nums;
   overflow-x: clip;
 }
 
@@ -22,236 +23,277 @@ body::after {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: 2147483000;
+  z-index: var(--z-grain);
   pointer-events: none;
-  opacity: 0.028;
+  opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 img { max-width: 100%; height: auto; display: block; }
 
+/* ---------- Tipografía: display con peso y tracking negativo ---------- */
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-weight: 800;
-  line-height: 1.04;
-  letter-spacing: -0.02em;
   color: var(--ink);
   margin: 0 0 0.5em;
   text-wrap: balance;
 }
-h1 { font-size: var(--step-3); }
-h2 { font-size: var(--step-2); }
-h3 { font-size: var(--step-1); font-weight: 700; }
-
-p { margin: 0 0 1em; }
-
-a { color: var(--brand-orange-dark); text-decoration: none; transition: color 0.2s var(--ease); }
-a:hover { color: var(--brand-orange); }
-
-strong, b { font-weight: 700; }
-
-::selection { background: var(--brand-orange); color: #fff; }
-
-:focus-visible {
-  outline: 3px solid var(--brand-orange);
-  outline-offset: 2px;
-  border-radius: 4px;
+/* Un peldaño arriba y el tracking cerrado: a este tamaño el espacio
+   entre letras de la fuente sobra y afloja el bloque. */
+h1 {
+  font-size: var(--step-4);
+  font-weight: 600;
+  line-height: 0.93;
+  letter-spacing: var(--track-poster);
+}
+h2 {
+  font-size: var(--step-3);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.038em;
+}
+h3 {
+  font-size: var(--step-1);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: var(--track-tight);
+}
+h4 {
+  font-size: var(--step-0);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: var(--track-tight);
 }
 
-/* Layout helpers */
+p { margin: 0 0 1em; text-wrap: pretty; }
+p:last-child { margin-bottom: 0; }
+
+/* --accent-deep aguanta 4,5:1 también sobre las superficies tintadas,
+   no solo sobre blanco. */
+a { color: var(--accent-deep); text-decoration: none; transition: color var(--dur-1) var(--ease); }
+a:hover { color: var(--accent-dark); }
+
+strong, b { font-weight: 600; }
+
+/* Archivo trae eje de anchura: los titulares lo abren, el cuerpo no.
+   Sin esto la familia se queda en su anchura normal y la escala de
+   cartel pierde la mitad de su presencia. */
+h1, h2, .display { font-variation-settings: "wdth" var(--wdth-wide); }
+
+::selection { background: var(--accent); color: #fff; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--r-xs);
+}
+
+/* ---------- Contenedores y secciones ---------- */
 .wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
 .wrap-narrow { max-width: var(--maxw-narrow); margin-inline: auto; padding-inline: var(--gutter); }
-.section { padding-block: clamp(3rem, 8vw, 7rem); }
-.section--alt { background: var(--paper-alt); }
+/* Vertical asimétrico a propósito: el aire de abajo pesa más.
+   El aire es la mitad del trabajo: una sección apretada se lee como
+   folleto por mucho que el titular sea grande. */
+.section { padding-block: clamp(4.5rem, 10vw, 8.5rem) clamp(5rem, 11vw, 9.5rem); }
+.section--alt {
+  background: var(--surface-2);
+  border-block: 1px solid var(--rule-soft);
+}
 .center { text-align: center; }
 
 /* Acentos tipográficos */
-.acento   { color: var(--brand-orange); }
-.coloruno { color: var(--brand-teal); }
-.colordos { color: var(--brand-orange-dark); }
+.acento   { color: var(--accent); }
+.coloruno { color: var(--teal-600); }
+.colordos { color: var(--accent-dark); }
 
-/* ---------- Kicker: etiqueta con punto orbital ---------- */
+/* ---------- Kicker: etiqueta técnica, no chip decorativo ---------- */
 .kicker {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  font-family: var(--font-cond);
-  font-size: 0.95rem;
-  letter-spacing: 0.14em;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
   text-transform: uppercase;
-  color: var(--brand-teal-dark);
-  background: var(--brand-teal-soft);
-  padding: 0.42rem 1rem 0.42rem 0.75rem;
-  border-radius: 999px;
-  margin: 0 0 1.25rem;
+  color: var(--teal-600);
+  margin: 0 0 1.1rem;
 }
 .kicker::before {
   content: "";
-  width: 14px; height: 14px; flex: none;
-  border-radius: 50%;
-  border: 2px dashed currentColor;
-  background: radial-gradient(circle at center, var(--brand-orange) 0 3px, transparent 3.5px);
+  width: 1.6rem;
+  height: 2px;
+  flex: none;
+  background: var(--accent);
 }
-@media (prefers-reduced-motion: no-preference) {
-  .kicker::before { animation: kicker-spin 7s linear infinite; }
-}
-@keyframes kicker-spin { to { transform: rotate(360deg); } }
 
-/* ---------- Botones: brillo que barre + magnetismo (JS) ---------- */
+/* ---------- Botones ---------- */
 .btn {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
+  justify-content: center;
+  gap: 0.5rem;
   font-family: var(--font-body);
-  font-weight: 800;
-  font-size: var(--step-0);
-  padding: 0.85em 1.8em;
-  border-radius: 999px;
-  border: 2px solid transparent;
+  font-weight: 600;
+  font-size: var(--step--1);
+  letter-spacing: 0.005em;
+  padding: 0.95em 1.6em;
+  border-radius: var(--r-btn);
+  border: 1px solid transparent;
   cursor: pointer;
   text-decoration: none;
   line-height: 1;
-  overflow: hidden;
-  transform: translate(var(--mag-x, 0px), var(--mag-y, 0px));
-  transition: box-shadow var(--dur-1) var(--ease), background var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+  transition:
+    background var(--dur-1) var(--ease),
+    color var(--dur-1) var(--ease),
+    border-color var(--dur-1) var(--ease),
+    box-shadow var(--dur-1) var(--ease),
+    translate var(--dur-1) var(--ease);
   will-change: transform;
 }
-.btn::after {
-  content: "";
-  position: absolute;
-  top: 0; left: -80%;
-  width: 55%; height: 100%;
-  background: linear-gradient(105deg, transparent, rgba(255,255,255,0.45), transparent);
-  transform: skewX(-20deg);
-  transition: left 0.55s var(--ease-quint);
-  pointer-events: none;
-}
-.btn:hover::after { left: 130%; }
-.btn:active { transition-duration: 0.08s; }
+.btn:active { translate: 0 1px; transition-duration: 0.08s; }
 
-.btn--primary { background: var(--orange-gradient); color: #fff; box-shadow: var(--shadow-orange); }
-.btn--primary:hover { color: #fff; box-shadow: 0 20px 44px -10px rgba(255,132,44,0.65); }
-.btn--ghost { background: transparent; color: var(--brand-teal-dark); border-color: var(--brand-teal); }
-.btn--ghost:hover { background: var(--brand-teal); color: #fff; box-shadow: var(--shadow-teal); }
-.btn--light { background: #fff; color: var(--brand-teal-dark); box-shadow: 0 14px 30px -12px rgba(0,0,0,0.35); }
-.btn--light:hover { color: var(--brand-teal-dark); }
-.btn--lg { font-size: var(--step-1); padding: 0.95em 2.1em; }
+.btn--primary {
+  background: var(--accent-dark);   /* no --accent: con blanco encima no llega a AA */
+  color: #fff;
+  box-shadow: var(--sh-accent);
+}
+.btn--primary:hover {
+  background: var(--accent-deep);
+  color: #fff;
+  box-shadow: 0 12px 26px -12px oklch(0.487 0.108 48 / 0.5);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--teal-700);
+  border-color: var(--rule);
+}
+.btn--ghost:hover { background: var(--white); border-color: var(--teal-400); color: var(--teal-800); box-shadow: var(--sh-1); }
+
+.btn--light {
+  background: rgba(255, 255, 255, 0.09);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(6px);
+}
+.btn--light:hover { background: rgba(255, 255, 255, 0.16); border-color: rgba(255, 255, 255, 0.42); color: #fff; }
+/* Sobre fondo claro el botón "light" se vuelve sólido legible.
+   Fuera de .section (heros y pie, en oscuro) mantiene el cristal. */
+.section .btn--light {
+  background: var(--white);
+  color: var(--teal-800);
+  border-color: var(--rule);
+  box-shadow: var(--sh-1);
+}
+.section .btn--light:hover { border-color: var(--teal-400); box-shadow: var(--sh-2); }
+
+.btn--lg { font-size: var(--step-0); padding: 1.05em 2em; }
+.btn--sm { font-size: var(--step--2); padding: 0.8em 1.25em; }
+/* En puntero grueso ni el botón pequeño baja de los 44 px */
+@media (pointer: coarse) {
+  .btn--sm { min-height: 44px; }
+}
+
+/* Enlace-flecha */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--teal-700);
+  /* Es un destino de navegación, no texto dentro de una frase: WCAG
+     2.5.8 pide 24 px de lado y el texto en versalitas mide 16. */
+  min-height: 24px;
+}
+@media (pointer: coarse) { .link-arrow { min-height: 36px; } }
+.link-arrow .arrow { transition: translate var(--dur-1) var(--ease); }
+.link-arrow:hover { color: var(--accent-dark); }
+.link-arrow:hover .arrow { translate: 4px 0; }
 
 /* ============================================================
-   Sistema de reveals — entradas cinematográficas por scroll
-   Variantes: (por defecto sube) data-reveal="left|right|zoom"
-   Stagger: los hijos de [data-reveal-group] entran en cascada.
+   Sistema de reveals — entradas por scroll
    ============================================================ */
+/* El estado oculto lo condiciona la clase `js`, que pone el propio
+   documento antes de pintar. Si el JS no llega —bloqueado, caído, un
+   error de red— el contenido se queda visible en lugar de en blanco:
+   una animación de entrada nunca puede ser el único camino al texto. */
 @media (prefers-reduced-motion: no-preference) {
-  [data-reveal],
-  [data-reveal-group] > * {
+  .js [data-reveal],
+  .js [data-reveal-group] > * {
     opacity: 0;
-    transform: translateY(34px);
-    filter: blur(6px);
+    transform: translateY(12px);
     transition:
       opacity var(--dur-2) var(--ease),
-      transform var(--dur-3) var(--ease-quint),
-      filter var(--dur-2) var(--ease);
+      transform var(--dur-3) var(--ease-quint);
     transition-delay: var(--reveal-delay, 0s);
   }
-  [data-reveal="left"]  { transform: translateX(-44px); }
-  [data-reveal="right"] { transform: translateX(44px); }
-  [data-reveal="zoom"]  { transform: scale(0.92); }
+  .js [data-reveal="left"]  { transform: translateX(-14px); }
+  .js [data-reveal="right"] { transform: translateX(14px); }
+  .js [data-reveal="zoom"]  { transform: scale(0.985); }
 
-  [data-reveal].is-visible,
-  [data-reveal-group].is-visible > * {
+  .js [data-reveal].is-visible,
+  .js [data-reveal-group].is-visible > * {
     opacity: 1;
     transform: none;
-    filter: blur(0);
   }
-  [data-reveal-group].is-visible > *:nth-child(1) { transition-delay: 0.05s; }
-  [data-reveal-group].is-visible > *:nth-child(2) { transition-delay: 0.14s; }
-  [data-reveal-group].is-visible > *:nth-child(3) { transition-delay: 0.23s; }
-  [data-reveal-group].is-visible > *:nth-child(4) { transition-delay: 0.32s; }
-  [data-reveal-group].is-visible > *:nth-child(5) { transition-delay: 0.41s; }
-  [data-reveal-group].is-visible > *:nth-child(6) { transition-delay: 0.50s; }
+  .js [data-reveal-group].is-visible > *:nth-child(1) { transition-delay: 0.04s; }
+  .js [data-reveal-group].is-visible > *:nth-child(2) { transition-delay: 0.12s; }
+  .js [data-reveal-group].is-visible > *:nth-child(3) { transition-delay: 0.20s; }
+  .js [data-reveal-group].is-visible > *:nth-child(4) { transition-delay: 0.28s; }
+  .js [data-reveal-group].is-visible > *:nth-child(5) { transition-delay: 0.36s; }
+  .js [data-reveal-group].is-visible > *:nth-child(6) { transition-delay: 0.44s; }
 }
 @media (prefers-reduced-motion: reduce) {
   [data-reveal], [data-reveal-group] > * { opacity: 1; transform: none; filter: none; }
   html { scroll-behavior: auto; }
-  .kicker::before, .btn::after { animation: none !important; transition: none !important; }
 }
 
 /* ---------- Titular partido en palabras (JS añade .w) ---------- */
 @media (prefers-reduced-motion: no-preference) {
-  [data-split] .w {
+  .js [data-split] .w {
     display: inline-block;
     opacity: 0;
-    transform: translateY(0.9em) rotate(2.5deg);
-    filter: blur(8px);
+    transform: translateY(0.28em);
     transition:
-      opacity 0.6s var(--ease),
-      transform 0.9s var(--ease-quint),
-      filter 0.6s var(--ease);
-    transition-delay: calc(var(--wi) * 70ms);
-    will-change: transform, filter;
+      opacity 0.5s var(--ease),
+      transform 0.8s var(--ease-quint);
+    transition-delay: calc(var(--wi) * 45ms);
+    will-change: transform;
   }
-  [data-split].is-split-in .w {
-    opacity: 1;
-    transform: none;
-    filter: blur(0);
-  }
+  .js [data-split].is-split-in .w { opacity: 1; transform: none; }
 }
 
-/* ---------- Subrayado que se dibuja (para el énfasis del hero) ---------- */
-.hl { position: relative; white-space: nowrap; }
-.hl svg {
-  position: absolute;
-  left: 0; bottom: -0.18em;
-  width: 100%; height: 0.34em;
-  overflow: visible;
-  pointer-events: none;
-}
-.hl svg path {
-  fill: none;
-  stroke: var(--brand-orange);
-  stroke-width: 7;
-  stroke-linecap: round;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .is-split-in .hl svg path,
-  .is-visible .hl svg path {
-    animation: draw-line 0.9s var(--ease-quint) 0.9s forwards;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hl svg path { stroke-dashoffset: 0; }
-}
-@keyframes draw-line { to { stroke-dashoffset: 0; } }
+/* ---------- Énfasis del hero: bloque de acento, no subrayado dibujado ---------- */
+.hl { position: relative; white-space: nowrap; color: var(--accent); }
+.hl svg { display: none; }
 
 /* ---------- Barra de progreso de lectura ---------- */
 .scrollbar-progress {
   position: fixed;
   top: 0; left: 0;
-  height: 3px;
+  height: 2px;
   width: 100%;
-  background: var(--orange-gradient);
+  background: var(--accent);
   transform-origin: 0 50%;
   transform: scaleX(var(--scroll-p, 0));
-  z-index: 2000;
+  z-index: var(--z-modal);
   pointer-events: none;
 }
 
-/* ---------- Transiciones de página cinematográficas ---------- */
+/* ---------- Transiciones de página ---------- */
 @media (prefers-reduced-motion: no-preference) {
   @view-transition { navigation: auto; }
-  ::view-transition-old(root) {
-    animation: vt-out 0.25s var(--ease) both;
-  }
-  ::view-transition-new(root) {
-    animation: vt-in 0.45s var(--ease-quint) both;
-  }
+  ::view-transition-old(root) { animation: vt-out 0.18s var(--ease) both; }
+  ::view-transition-new(root) { animation: vt-in 0.38s var(--ease-quint) both; }
 }
-@keyframes vt-out { to { opacity: 0; transform: translateY(-14px); } }
-@keyframes vt-in { from { opacity: 0; transform: translateY(18px); } }
+@keyframes vt-out { to { opacity: 0; } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(10px); } }
 
 .visually-hidden {
   position: absolute; width: 1px; height: 1px;

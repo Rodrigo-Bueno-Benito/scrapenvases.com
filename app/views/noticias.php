@@ -12,7 +12,6 @@ $tendencias = $destacada ? array_slice($todas, 0, 3) : [];
 $hemeroteca = $destacada ? array_slice($todas, 3) : $todas;
 ?>
 <section class="pagehero">
-  <div class="pagehero__ring" aria-hidden="true"></div>
   <div class="wrap pagehero__inner" data-reveal>
     <span class="kicker">Actualidad</span>
     <h1 data-split>Noticias del mundo de los envases</h1>
@@ -22,12 +21,12 @@ $hemeroteca = $destacada ? array_slice($todas, 3) : $todas;
 
 <section class="section wrap">
   <?php if ($categorias): ?>
-  <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:2.5rem">
-    <a class="btn-sm <?= !$catFiltro ? 'primary' : '' ?>" href="/noticias">Todas</a>
+  <nav class="catfilter" aria-label="Filtrar por categoría">
+    <a class="catfilter__item<?= !$catFiltro ? ' is-active' : '' ?>" href="/noticias"<?= !$catFiltro ? ' aria-current="page"' : '' ?>>Todas</a>
     <?php foreach ($categorias as $c): ?>
-      <a class="btn-sm <?= $catFiltro === $c ? 'primary' : '' ?>" href="/noticias?cat=<?= urlencode($c) ?>"><?= e($c) ?></a>
+      <a class="catfilter__item<?= $catFiltro === $c ? ' is-active' : '' ?>" href="/noticias?cat=<?= urlencode($c) ?>"<?= $catFiltro === $c ? ' aria-current="page"' : '' ?>><?= e($c) ?></a>
     <?php endforeach; ?>
-  </div>
+  </nav>
   <?php endif; ?>
 
   <?php if (db_is_down()): ?>
@@ -45,8 +44,8 @@ $hemeroteca = $destacada ? array_slice($todas, 3) : $todas;
 
   <div class="edi-grid" style="margin-bottom:clamp(3rem,6vw,4.5rem);<?= !$tendencias ? 'grid-template-columns:1fr' : '' ?>">
     <article class="edi-lead" data-reveal>
-      <a class="edi-media" href="/noticia/<?= e($destacada['slug']) ?>">
-        <img src="<?= e(noticia_img_src($destacada['imagen'])) ?>" alt="<?= e($destacada['titulo']) ?>">
+      <a class="edi-media" tabindex="-1" aria-hidden="true" href="/noticia/<?= e($destacada['slug']) ?>">
+        <img src="<?= e($src = noticia_img_src($destacada['imagen'])) ?>" alt="<?= e($destacada['titulo']) ?>"<?= img_attrs($src) ?>>
       </a>
       <div class="edi-meta">
         <span class="etag"><?= e($destacada['categoria']) ?></span>
@@ -68,10 +67,10 @@ $hemeroteca = $destacada ? array_slice($todas, 3) : $todas;
             <span class="dot"></span>
             <span><?= e(fecha_es($n['fecha_publicacion'])) ?></span>
           </div>
-          <h4 class="edi-title"><a href="/noticia/<?= e($n['slug']) ?>"><?= e($n['titulo']) ?></a></h4>
+          <h3 class="edi-title"><a href="/noticia/<?= e($n['slug']) ?>"><?= e($n['titulo']) ?></a></h3>
         </div>
-        <a class="edi-media" href="/noticia/<?= e($n['slug']) ?>">
-          <img src="<?= e(noticia_img_src($n['imagen'])) ?>" alt="" loading="lazy">
+        <a class="edi-media" tabindex="-1" aria-hidden="true" href="/noticia/<?= e($n['slug']) ?>">
+          <img src="<?= e($src = noticia_img_src($n['imagen'])) ?>" alt="" loading="lazy"<?= img_attrs($src) ?>>
         </a>
       </article>
       <?php endforeach; ?>
@@ -91,8 +90,8 @@ $hemeroteca = $destacada ? array_slice($todas, 3) : $todas;
   <div class="edi-cardgrid" data-reveal-group>
     <?php foreach ($hemeroteca as $n): ?>
     <article class="edi-card">
-      <a class="edi-media" href="/noticia/<?= e($n['slug']) ?>">
-        <img src="<?= e(noticia_img_src($n['imagen'])) ?>" alt="<?= e($n['titulo']) ?>" loading="lazy">
+      <a class="edi-media" tabindex="-1" aria-hidden="true" href="/noticia/<?= e($n['slug']) ?>">
+        <img src="<?= e($src = noticia_img_src($n['imagen'])) ?>" alt="<?= e($n['titulo']) ?>" loading="lazy"<?= img_attrs($src) ?>>
       </a>
       <div class="edi-meta">
         <span class="etag etag--outline"><?= e($n['categoria']) ?></span>

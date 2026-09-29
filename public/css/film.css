@@ -1,0 +1,399 @@
+/* ============================================================
+   OBERTURA Y FILMSTRIP — la portada como secuencia
+   ============================================================
+   Dos piezas que solo existen en la home:
+
+   1) .overture — una sola pantalla, un solo mensaje, a escala de
+      cartel. No compite con nada porque no hay nada más a la vista.
+   2) .film — tres actos anclados: la pantalla se queda quieta y el
+      producto pasa por delante. Homologar, controlar, liquidar.
+
+   El recorrido lo publica el JS en --p (0 → 1) sobre .film, y aquí
+   solo se lee. Sin --p (JS caído, o reduce-motion) todo queda en su
+   estado legible: la secuencia se convierte en tres bloques.
+   ============================================================ */
+
+@property --p {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+/* ============================================================
+   1 · OBERTURA
+   ============================================================ */
+.overture {
+  position: relative;
+  isolation: isolate;
+  min-height: min(100svh, 62rem);
+  display: grid;
+  align-content: center;
+  padding-block: clamp(5rem, 14vh, 9rem) clamp(4rem, 10vh, 7rem);
+  background: var(--grad-deep);
+  color: var(--on-deep);
+  overflow: hidden;
+}
+/* Retícula técnica: estructura, no textura */
+.overture::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(90deg, var(--grid-line-on-deep) 1px, transparent 1px),
+    linear-gradient(var(--grid-line-on-deep) 1px, transparent 1px);
+  background-size: 96px 96px;
+  mask-image: radial-gradient(150% 110% at 15% -10%, #000 5%, transparent 72%);
+  -webkit-mask-image: radial-gradient(150% 110% at 15% -10%, #000 5%, transparent 72%);
+}
+
+.overture__inner { display: grid; gap: clamp(1.5rem, 4vh, 2.75rem); }
+
+.overture__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--teal-200);
+}
+.overture__eyebrow::before {
+  content: "";
+  width: clamp(1.5rem, 5vw, 3.5rem);
+  height: 1px;
+  background: currentColor;
+  flex: none;
+  opacity: 0.6;
+}
+
+/* El titular a escala de cartel: manda el tracking, no el tamaño */
+.overture__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" var(--wdth-poster);
+  font-size: var(--step-6);
+  font-weight: 600;
+  line-height: 0.86;
+  letter-spacing: var(--track-mega);
+  color: #fff;
+  text-wrap: balance;
+  max-width: 16ch;
+}
+.overture__title .hl {
+  color: var(--teal-200);
+  font-style: normal;
+}
+
+.overture__lead {
+  margin: 0;
+  max-width: 46ch;
+  font-size: clamp(1.05rem, 0.95rem + 0.55vw, 1.42rem);
+  line-height: 1.45;
+  color: var(--on-deep-muted);
+}
+
+.overture__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+/* Datos duros: ficha técnica, no tarjetas */
+.overture__facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 0 clamp(1.5rem, 4vw, 3.5rem);
+  margin-top: clamp(0.5rem, 3vh, 2rem);
+  border-top: 1px solid var(--deep-rule);
+  padding-top: 1.35rem;
+}
+.overture__facts > div { padding-block: 0.55rem; }
+.overture__facts dt,
+.overture__facts .k {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--on-deep-faint);
+  margin-bottom: 0.3rem;
+}
+.overture__facts .v {
+  display: block;
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" var(--wdth-wide);
+  font-size: clamp(1.35rem, 1.1rem + 1vw, 2.1rem);
+  font-weight: 600;
+  letter-spacing: var(--track-display);
+  line-height: 1;
+  color: #fff;
+}
+.overture__facts .s {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: var(--step--1);
+  line-height: 1.35;
+  color: var(--on-deep-muted);
+}
+
+/* Señal de continuidad: la obertura no termina, sigue */
+.overture__cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--on-deep-faint);
+}
+.overture__cue i {
+  display: block;
+  width: 1px;
+  height: 2.2rem;
+  background: linear-gradient(var(--on-deep-faint), transparent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .overture__cue i { animation: cue-drop 2.4s var(--ease-in-out) infinite; transform-origin: top center; }
+}
+@keyframes cue-drop {
+  0%, 100% { scale: 1 0.4; opacity: 0.35; }
+  50%      { scale: 1 1;   opacity: 1; }
+}
+
+/* ============================================================
+   2 · FILMSTRIP
+   ============================================================
+   El bloque mide varias pantallas de alto; dentro, el escenario se
+   queda pegado. Lo que se mueve es el contenido, no la página.
+   ============================================================ */
+.film {
+  --actos: 3;
+  position: relative;
+  background: var(--grad-deep);
+  color: var(--on-deep);
+}
+.film__track { height: calc(var(--actos) * 105svh + 60svh); }
+
+.film__stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: clamp(0.75rem, 2vh, 1.5rem);
+  padding: clamp(4.5rem, 9vh, 6.5rem) var(--gutter) clamp(1.25rem, 3vh, 2.25rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+.film__stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(90deg, var(--grid-line-on-deep) 1px, transparent 1px),
+    linear-gradient(var(--grid-line-on-deep) 1px, transparent 1px);
+  background-size: 96px 96px;
+  mask-image: radial-gradient(130% 90% at 80% 110%, #000 5%, transparent 70%);
+  -webkit-mask-image: radial-gradient(130% 90% at 80% 110%, #000 5%, transparent 70%);
+}
+
+/* --- HUD: la barra de estado de la secuencia --- */
+.film__hud {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--on-deep-faint);
+  max-width: var(--maxw);
+  width: 100%;
+  margin-inline: auto;
+}
+.film__count { color: var(--on-deep-muted); font-variant-numeric: tabular-nums; }
+.film__count b { color: #fff; font-weight: 500; }
+
+/* --- Titular por acto: uno visible, los demás apilados debajo --- */
+.film__titles {
+  position: relative;
+  margin: 0;
+  max-width: var(--maxw);
+  width: 100%;
+  margin-inline: auto;
+  min-height: calc(var(--step-5) * 1.05);
+}
+.film__t {
+  position: absolute;
+  inset: 0 auto auto 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" var(--wdth-poster);
+  font-size: var(--step-5);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: var(--track-poster);
+  color: #fff;
+  white-space: nowrap;
+  opacity: 0;
+  translate: 0 0.35em;
+  /* Sale rápido y entra después: si los dos cruzan a media opacidad
+     en el mismo sitio, el titular se lee como un borrón. */
+  transition: opacity 0.2s var(--ease), translate 0.28s var(--ease);
+}
+.film__t em {
+  font-style: normal;
+  font-size: var(--step--1);
+  font-family: var(--font-mono);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--teal-200);
+  white-space: normal;
+  max-width: 30ch;
+  line-height: 1.35;
+  align-self: center;
+}
+.film__stage[data-acto="0"] .film__t[data-acto="0"],
+.film__stage[data-acto="1"] .film__t[data-acto="1"],
+.film__stage[data-acto="2"] .film__t[data-acto="2"] {
+  opacity: 1;
+  translate: 0 0;
+  transition-duration: 0.5s, 0.6s;
+  transition-delay: 0.18s;
+}
+
+/* --- La ventana: el objeto que el visitante ha venido a ver --- */
+.film__win {
+  position: relative;
+  max-width: var(--maxw);
+  width: 100%;
+  margin-inline: auto;
+  min-height: 0;
+  display: grid;
+  /* La entrada la dirige --p: entra levantándose y se asienta */
+  scale: calc(0.94 + 0.06 * clamp(0, var(--p) * 6, 1));
+  translate: 0 calc((1 - clamp(0, var(--p) * 6, 1)) * 4vh);
+  transform-origin: center top;
+}
+/* La cadena completa hasta la ventana hereda el alto disponible:
+   basta con que un eslabón no lo pase para que la aplicación se
+   desborde por abajo. min-height:0 es lo que permite a un hijo de
+   grid encogerse por debajo de su contenido. */
+.film__win,
+.film__win [data-demotabs],
+.film__win .demopanel:not([hidden]) {
+  display: grid;
+  min-height: 0;
+}
+.film__win .app,
+.film__win .skin { height: 100%; min-height: 0; }
+.film__win .skin__main { min-height: 0; overflow: hidden; }
+.film__win .stablewrap,
+.film__win .sgrid2 { min-height: 0; }
+
+/* Lo que no cabe se desvanece: el corte deja de parecer un fallo de
+   maquetación y pasa a leerse como que la tabla continúa. */
+.film__win .skin__main {
+  mask-image: linear-gradient(#000 calc(100% - 3.5rem), transparent);
+  -webkit-mask-image: linear-gradient(#000 calc(100% - 3.5rem), transparent);
+}
+
+/* El conmutador vive en el recorrido, no encima de la ventana */
+.film__win .demotabs { display: none; }
+.film__win .demonote { display: none; }
+
+.film__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  max-width: var(--maxw);
+  width: 100%;
+  margin-inline: auto;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.05em;
+  color: var(--on-deep-faint);
+}
+.film__foot a {
+  color: var(--on-deep-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 24px;
+}
+@media (pointer: coarse) { .film__foot a { min-height: 36px; } }
+.film__foot a:hover { color: #fff; }
+
+/* Barra de progreso de la secuencia */
+.film__bar {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.film__bar i {
+  display: block;
+  width: clamp(1.5rem, 4vw, 3rem);
+  height: 2px;
+  background: var(--deep-rule);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.film__bar i::after {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--teal-200);
+  transform-origin: left center;
+  scale: 0 1;
+  transition: scale 0.4s var(--ease);
+}
+.film__stage[data-acto="0"] .film__bar i:nth-child(-n+1)::after,
+.film__stage[data-acto="1"] .film__bar i:nth-child(-n+2)::after,
+.film__stage[data-acto="2"] .film__bar i:nth-child(-n+3)::after { scale: 1 1; }
+
+/* ============================================================
+   Reserva: sin JS, sin --p o con movimiento reducido
+   ============================================================
+   El escenario deja de estar anclado y los tres actos se leen
+   seguidos. Nada depende de que la animación llegue a ejecutarse.
+   ============================================================ */
+.film:not([data-film-listo]) .film__track { height: auto; }
+.film:not([data-film-listo]) .film__stage {
+  position: static;
+  height: auto;
+  min-height: 0;
+  padding-block: clamp(3rem, 7vw, 5.5rem);
+}
+.film:not([data-film-listo]) .film__titles { min-height: 0; }
+.film:not([data-film-listo]) .film__t {
+  position: static;
+  opacity: 1;
+  translate: none;
+  white-space: normal;
+  margin-bottom: 0.5rem;
+}
+.film:not([data-film-listo]) .film__t:not([data-acto="0"]) { display: none; }
+.film:not([data-film-listo]) .film__win { scale: 1; translate: none; }
+.film:not([data-film-listo]) .film__win .demotabs { display: flex; margin-bottom: var(--space-md); }
+.film:not([data-film-listo]) .film__win .app,
+.film:not([data-film-listo]) .film__win .skin { height: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  .film__track { height: auto; }
+  .film__stage { position: static; height: auto; padding-block: clamp(3rem, 7vw, 5.5rem); }
+  .film__t { transition: none; }
+}
+
+@media (max-width: 760px) {
+  .overture { min-height: 0; }
+  .film__stage { padding-top: clamp(3.5rem, 8vh, 5rem); }
+  .film__t { font-size: var(--step-4); white-space: normal; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .film__titles { min-height: calc(var(--step-4) * 2.6); }
+}

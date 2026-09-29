@@ -1,0 +1,73 @@
+# ============================================================
+#  ScrapEnvases — Apache
+#  DocumentRoot debe apuntar a /public
+# ============================================================
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # --- Redirecciones 301 de las rutas anteriores al rediseño ---
+    RewriteRule ^scrap/?$        /para-tu-scrap  [R=301,L]
+    RewriteRule ^core/?$         /el-core        [R=301,L]
+    RewriteRule ^ots/?$          /contacto       [R=301,L]
+
+    # --- Detalle de noticia: /noticia/<slug> ---
+    RewriteRule ^noticia/([a-z0-9-]+)/?$  index.php?p=noticia&slug=$1  [L,QSA]
+
+    # --- Ficheros y directorios existentes: se sirven tal cual ---
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # --- Resto de rutas limpias: /el-core, /noticias, /contacto… ---
+    RewriteRule ^([a-z0-9_-]+)/?$  index.php?p=$1  [L,QSA]
+
+    # --- Raíz ---
+    RewriteRule ^$  index.php?p=home  [L,QSA]
+</IfModule>
+
+# ------------------------------------------------------------
+#  Seguridad
+# ------------------------------------------------------------
+
+# Nada de listados de directorio
+Options -Indexes
+
+# En /uploads solo se sirven ficheros subidos: nunca se ejecuta código
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+<FilesMatch "\.(php|phtml|php3|php4|php5|php7|phps|pl|py|cgi|sh)$">
+    <If "%{REQUEST_URI} =~ m#^/uploads/#">
+        Require all denied
+    </If>
+</FilesMatch>
+
+# Ficheros sensibles fuera de alcance por si el docroot se configura mal
+<FilesMatch "^(\.env|\.htaccess|\.gitignore|composer\.(json|lock))$">
+    Require all denied
+</FilesMatch>
+
+# ------------------------------------------------------------
+#  Caché de estáticos
+# ------------------------------------------------------------
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css                "access plus 1 month"
+    ExpiresByType application/javascript  "access plus 1 month"
+    ExpiresByType image/png               "access plus 6 months"
+    ExpiresByType image/jpeg              "access plus 6 months"
+    ExpiresByType image/svg+xml           "access plus 6 months"
+    ExpiresByType image/webp              "access plus 6 months"
+    ExpiresByType video/mp4               "access plus 6 months"
+</IfModule>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml
+</IfModule>
+
+# UTF-8 por defecto
+AddDefaultCharset UTF-8

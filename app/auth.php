@@ -7,6 +7,12 @@ require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/helpers.php';
 
 if (session_status() === PHP_SESSION_NONE) {
+    session_set_cookie_params([
+        'httponly' => true,
+        'samesite' => 'Lax',
+        'secure'   => (($_SERVER['HTTPS'] ?? '') !== '' && ($_SERVER['HTTPS'] ?? '') !== 'off'),
+        'path'     => '/',
+    ]);
     session_start();
 }
 
@@ -76,9 +82,20 @@ function flash_get(string $k, $default = null) {
 /* ---- Redirección / guardias ---- */
 function redirect(string $url): void { header('Location: ' . $url); exit; }
 
-function require_admin(): void {
+/** Exige sesión activa (cualquier rol) */
+function require_login(): void {
     if (!is_logged_in()) {
         flash_set('login_error', 'Inicia sesión para acceder al panel.');
-        redirect('/acceso?next=admin');
+        redirect('/acceso');
+    }
+}
+
+/** Exige sesión activa CON rol de administrador */
+function require_admin(): void {
+    require_login();
+    if (!is_admin()) {
+        flash_set('login_error', 'Tu usuario no tiene permisos de administración.');
+        logout_user();
+        redirect('/acceso');
     }
 }

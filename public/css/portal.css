@@ -1,0 +1,708 @@
+/* ============================================================
+   Portal del CORE — bloques del rediseño
+   Se apoya en tokens.css · base.css · layout.css · components.css
+   ============================================================ */
+
+/* ---------- Accesibilidad: salto al contenido ---------- */
+.skiplink {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: var(--z-modal);
+  background: var(--deep-800);
+  color: #fff;
+  padding: 0.85rem 1.35rem;
+  border-radius: 0 0 var(--r-sm) 0;
+  font-weight: 600;
+  font-size: var(--step--1);
+  text-decoration: none;
+}
+.skiplink:focus { left: 0; }
+
+/* ---------- Navegación: 7 entradas ---------- */
+.mainnav a { white-space: nowrap; }
+.site-header__bar { gap: 1rem; }
+@media (max-width: 1180px) {
+  .site-header__tagline { display: none; }
+}
+
+.mainnav__cta {
+  background: var(--accent-dark);
+  color: #fff !important;
+  padding: 0.6em 1.1em !important;
+  border-radius: var(--r-btn);
+  transition: background var(--dur-1) var(--ease), translate var(--dur-1) var(--ease);
+}
+.mainnav__cta::after { display: none; }
+.mainnav__cta:hover { background: var(--accent-deep); translate: 0 -1px; }
+.mainnav__cta[aria-current="page"] { background: var(--accent-deep); }
+
+.site-footer__ots { margin-top: 1.5rem; }
+
+/* ============================================================
+   FRANJA DE CONTEXTO — dato de encuadre, no bloque de color
+   ============================================================ */
+.contextband {
+  background: var(--white);
+  border-bottom: 1px solid var(--rule);
+  padding-block: clamp(2.25rem, 5vw, 3.5rem);
+}
+.contextband .wrap-narrow { max-width: 62rem; }
+/* Bloque con fondo propio en lugar de banda lateral de acento */
+.contextband p {
+  margin: 0;
+  padding: clamp(1rem, 2.5vw, 1.6rem) clamp(1.1rem, 3vw, 2rem);
+  background: var(--teal-50);
+  border: 1px solid var(--teal-100);
+  border-radius: var(--r-md);
+  font-size: clamp(1.05rem, 0.98rem + 0.4vw, 1.3rem);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 72ch;
+}
+.contextband strong { color: var(--ink); font-weight: 600; }
+
+/* ============================================================
+   LAS TRES PIEZAS DEL CORE
+   Home: índice técnico en filas. /el-core: bento asimétrico.
+   ============================================================ */
+
+/* --- Variante A · índice en filas (Home) --- */
+.coregrid {
+  display: grid;
+  border-top: 1px solid var(--rule);
+}
+.coregrid .toolcard {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 200px) minmax(0, 1fr) auto;
+  gap: clamp(1rem, 3vw, 3rem);
+  align-items: center;
+  padding: clamp(1.5rem, 3vw, 2.15rem) clamp(0.75rem, 2vw, 1.5rem);
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  color: var(--ink);
+  overflow: hidden;
+  transition: background var(--dur-1) var(--ease);
+}
+/* Barra de acento que entra desde la izquierda */
+.coregrid .toolcard::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--accent);
+  scale: 1 0;
+  transform-origin: 50% 0;
+  transition: scale var(--dur-2) var(--ease);
+}
+/* El contenido se desplaza con transform: animar padding recalcula layout */
+.coregrid .toolcard > * { transition: translate var(--dur-2) var(--ease); }
+.coregrid .toolcard:hover { background: var(--white); }
+.coregrid .toolcard:hover > * { translate: 0.5rem 0; }
+.coregrid .toolcard:hover::before { scale: 1 1; }
+
+.coregrid .toolcard__head { display: flex; align-items: center; gap: 0.75rem; }
+.coregrid .toolcard__logo { height: 30px; width: auto; max-width: 160px; object-fit: contain; object-position: left center; }
+.coregrid .toolcard__rol {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--teal-600);
+}
+.coregrid .toolcard__text {
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0.4rem 0 0;
+  color: var(--ink-muted);
+  font-size: var(--step--1);
+  max-width: 60ch;
+}
+.coregrid .toolcard__head { grid-row: 1 / span 2; }
+.coregrid .toolcard__more { grid-column: 3; grid-row: 1 / span 2; }
+
+/* --- Variante B · bento asimétrico (/el-core) --- */
+.coregrid--bento {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  grid-auto-rows: minmax(0, auto);
+  gap: clamp(0.85rem, 1.8vw, 1.35rem);
+  border-top: 0;
+}
+.coregrid--bento .toolcard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  grid-template-columns: none;
+  align-items: stretch;
+  padding: clamp(1.5rem, 2.8vw, 2.25rem);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-lg);
+  background: var(--white);
+  box-shadow: var(--sh-1);
+  transition: border-color var(--dur-1) var(--ease), box-shadow var(--dur-2) var(--ease), translate var(--dur-2) var(--ease);
+}
+.coregrid--bento .toolcard::before { display: none; }
+.coregrid--bento .toolcard:hover {
+  border-color: var(--teal-300);
+  box-shadow: var(--sh-3);
+  translate: 0 -3px;
+  background: var(--white);
+}
+/* La primera pieza ocupa la columna alta: rompe la simetría */
+.coregrid--bento .toolcard:first-child {
+  grid-row: 1 / span 2;
+  justify-content: space-between;
+  background:
+    radial-gradient(120% 90% at 100% 0%, var(--teal-50) 0%, transparent 60%),
+    var(--white);
+}
+.coregrid--bento .toolcard:first-child .toolcard__rol { font-size: var(--step--1); }
+.coregrid--bento .toolcard:first-child .toolcard__text { font-size: var(--step-0); max-width: 42ch; }
+.coregrid--bento .toolcard__head { min-height: 34px; }
+.coregrid--bento .toolcard__logo { height: 30px; max-width: 150px; object-fit: contain; object-position: left center; }
+.coregrid--bento .toolcard__rol {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--teal-600);
+}
+.coregrid--bento .toolcard__text { margin: 0; color: var(--ink-muted); font-size: var(--step--1); flex: 1; }
+
+/* --- Piezas comunes de la tarjeta de herramienta --- */
+.toolcard__ambito { color: var(--ink-muted); letter-spacing: 0.06em; }
+/* Marca tipográfica: un tono de la escala teal por pieza */
+.toolcard__wordmark {
+  display: grid;
+  place-items: center;
+  width: 34px; height: 34px;
+  flex: none;
+  border-radius: var(--r-sm);
+  background: var(--teal-700);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+}
+/* Tres tonos distinguibles entre sí y todos por encima de 4,5:1 con blanco */
+.toolcard__wordmark--probatus  { background: var(--teal-800); }
+.toolcard__wordmark--inprogest { background: var(--teal-700); }
+.toolcard__wordmark--scrapp    { background: var(--teal-600); }
+.toolcard__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.06rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+.toolcard__more {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+.toolcard__more .arrow { transition: translate var(--dur-1) var(--ease); }
+.toolcard:hover .toolcard__more .arrow { translate: 4px 0; }
+
+/* ============================================================
+   ACCESOS POR PERFIL — bento: el prioritario manda
+   ============================================================ */
+.rolegrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(0.85rem, 1.8vw, 1.35rem);
+}
+.rolecard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: clamp(1.4rem, 2.6vw, 2rem);
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-lg);
+  text-decoration: none;
+  color: var(--ink);
+  overflow: hidden;
+  transition: border-color var(--dur-1) var(--ease), box-shadow var(--dur-2) var(--ease), translate var(--dur-2) var(--ease);
+}
+.rolecard:hover { border-color: var(--teal-300); box-shadow: var(--sh-2); translate: 0 -2px; }
+.rolecard h3 { font-size: var(--step-1); font-weight: 600; margin: 0; }
+.rolecard p { margin: 0; color: var(--ink-muted); font-size: var(--step--1); flex: 1; }
+.rolecard__go {
+  min-height: 24px;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  margin-top: 0.75rem;
+}
+.rolecard__go .arrow { transition: translate var(--dur-1) var(--ease); display: inline-block; }
+.rolecard:hover .rolecard__go .arrow { translate: 4px 0; }
+
+/* El perfil prioritario: alto, oscuro y con retícula */
+.rolecard--lead {
+  grid-row: 1 / span 2;
+  justify-content: flex-end;
+  gap: 0.65rem;
+  min-height: clamp(15rem, 26vw, 20rem);
+  background: var(--grad-deep);
+  border-color: transparent;
+  color: rgba(255, 255, 255, 0.72);
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+}
+.rolecard--lead::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, var(--grid-line-on-deep) 1px, transparent 1px),
+    linear-gradient(var(--grid-line-on-deep) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(110% 90% at 90% 0%, #000 5%, transparent 70%);
+  -webkit-mask-image: radial-gradient(110% 90% at 90% 0%, #000 5%, transparent 70%);
+  pointer-events: none;
+}
+.rolecard--lead > * { position: relative; }
+.rolecard--lead:hover { border-color: transparent; box-shadow: var(--sh-4); }
+.rolecard--lead h3 { color: #fff; font-size: var(--step-2); font-weight: 700; }
+.rolecard--lead p { color: rgba(255, 255, 255, 0.7); font-size: var(--step-0); }
+.rolecard--lead .rolecard__go { color: var(--teal-200); }
+.rolecard__tag {
+  align-self: start;
+  margin-bottom: auto;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--teal-200);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--r-xs);
+}
+
+/* ============================================================
+   FLUJO 01 → 02 → 03 — línea conectora y número al margen
+   ============================================================ */
+.coreflow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 2rem);
+  counter-reset: flowstep;
+}
+.coreflow__step {
+  position: relative;
+  padding-top: 3.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+/* Riel superior: la línea que conecta los tres pasos */
+.coreflow__step::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--rule);
+}
+.coreflow__step::after {
+  content: "";
+  position: absolute;
+  top: -4px; left: 0;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--surface-2);
+}
+.coreflow__num {
+  position: absolute;
+  top: 0.95rem;
+  left: 0;
+  font-family: var(--font-mono);
+  font-size: var(--step-1);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--accent-dark);
+}
+.coreflow__step h3 { margin: 0; font-size: var(--step-1); font-weight: 600; }
+.coreflow__step p { margin: 0; color: var(--ink-muted); font-size: var(--step--1); flex: 1; max-width: 34ch; }
+.coreflow__tool {
+  align-self: start;
+  margin-top: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--teal-700);
+  padding: 0.28rem 0.55rem;
+  border: 1px solid var(--teal-200);
+  background: var(--teal-50);
+  border-radius: var(--r-xs);
+}
+
+/* ============================================================
+   MATRIZ POR ACTOR — tabla de datos, no tarjetas
+   ============================================================ */
+.actormatrix { margin: 0; display: grid; }
+.actormatrix__row {
+  display: grid;
+  grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+  gap: 0.5rem clamp(1.5rem, 4vw, 4rem);
+  align-items: baseline;
+  padding-block: clamp(1.15rem, 2.5vw, 1.75rem);
+  border-top: 1px solid var(--rule);
+  transition: background var(--dur-1) var(--ease);
+}
+.actormatrix__row:last-child { border-bottom: 1px solid var(--rule); }
+.actormatrix dt {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-1);
+  letter-spacing: var(--track-tight);
+  color: var(--ink);
+}
+.actormatrix dd { margin: 0; color: var(--ink-muted); max-width: 62ch; }
+
+/* ============================================================
+   NECESIDAD → HERRAMIENTA — zig-zag a dos columnas
+   ============================================================ */
+.needgrid {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  counter-reset: need;
+}
+.needcard {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(1.25rem, 4vw, 3.5rem);
+  align-items: start;
+  padding-block: clamp(1.5rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--rule);
+}
+.needcard:first-child { border-top: 0; padding-top: 0; }
+/* Las pares invierten el orden: el zig-zag rompe la retícula */
+.needcard:nth-child(even) .needcard__head { order: 2; }
+.needcard:nth-child(even) .needcard__body { order: 1; }
+
+.needcard__head { display: grid; gap: 0.85rem; align-content: start; }
+.needcard__mark {
+  display: grid;
+  place-items: center;
+  width: 44px; height: 44px;
+  border-radius: var(--r-sm);
+  background: var(--deep-800);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+.needcard__head h3 {
+  margin: 0;
+  font-size: var(--step-2);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: var(--track-display);
+  max-width: 20ch;
+}
+.needcard__tool {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--teal-600);
+}
+.needcard__body { display: grid; gap: 1rem; }
+.needcard__pain {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: var(--step-0);
+  max-width: 58ch;
+}
+/* La solución destaca sobre superficie blanca: es la respuesta */
+.needcard__fix {
+  margin: 0;
+  padding: clamp(1rem, 2vw, 1.35rem) clamp(1.1rem, 2.2vw, 1.5rem);
+  background: var(--teal-50);
+  border: 1px solid var(--teal-100);
+  border-radius: var(--r-md);
+  font-size: var(--step-0);
+  font-weight: 500;
+  color: var(--ink);
+  max-width: 58ch;
+}
+.needcard__link {
+  min-height: 24px;
+  justify-self: start;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--accent-dark);
+}
+.needcard__link .arrow { transition: translate var(--dur-1) var(--ease); display: inline-block; }
+.needcard__link:hover .arrow { translate: 4px 0; }
+
+/* ============================================================
+   CONTACTO · OTS
+   ============================================================ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: start;
+}
+.contact-form {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-lg);
+  padding: clamp(1.4rem, 3vw, 2.5rem);
+  box-shadow: var(--sh-2);
+}
+.contact-form h2 { margin: 0 0 1.5rem; font-size: var(--step-2); }
+.contact-form .btn { width: 100%; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1rem; }
+/* Texto corrido, no etiqueta técnica: recupera la tipografía de cuerpo */
+.field--check label {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--ink-muted);
+  margin-bottom: 0;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.field--check a { text-decoration: underline; text-underline-offset: 2px; }
+/* El consentimiento RGPD es la casilla más importante del formulario:
+   13 px por defecto no se pueden pulsar con el dedo. */
+.field--check input {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.1rem;
+  accent-color: var(--teal-600);
+  flex: none;
+}
+@media (pointer: coarse) {
+  .field--check input { width: 1.6rem; height: 1.6rem; }
+  .field--check label { padding-block: 0.4rem; }
+}
+/* Trampa antispam: fuera de pantalla, nunca visible para un humano */
+.field-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.contact-side { display: grid; gap: 1rem; }
+.contact-box {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-lg);
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+.contact-box h3 {
+  margin: 0 0 1.15rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.contact-list { list-style: none; margin: 0; padding: 0; display: grid; }
+.contact-list li {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 1rem;
+  align-items: baseline;
+  padding-block: 0.7rem;
+  border-top: 1px solid var(--rule-soft);
+}
+.contact-list li:first-child { border-top: 0; padding-top: 0; }
+.contact-list li > span {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.contact-list a, .contact-list strong { grid-column: 2; color: var(--ink); font-weight: 500; }
+.contact-list a:hover { color: var(--accent-dark); }
+/* Se alinea con el valor, no debajo de la etiqueta */
+.pending {
+  grid-column: 2;
+  color: var(--accent-dark);
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.04em;
+}
+
+.person { display: flex; gap: 0.85rem; align-items: center; padding-block: 0.75rem; border-top: 1px solid var(--rule-soft); }
+.person:first-of-type { border-top: 0; padding-top: 0; }
+.person:last-child { padding-bottom: 0; }
+/* Squircle en lugar del círculo de avatar por defecto */
+.person__avatar {
+  display: grid;
+  place-items: center;
+  width: 44px; height: 44px;
+  flex: none;
+  border-radius: 30%;
+  background: var(--teal-700);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+}
+.person div { display: grid; gap: 0.1rem; }
+.person strong { font-size: var(--step--1); font-weight: 600; }
+/* Solo el cargo, no las iniciales del avatar, que van en blanco */
+.person > div span { color: var(--ink-muted); font-size: var(--step--2); }
+
+.contact-close {
+  margin-top: 2.5rem;
+  color: var(--ink-muted);
+  font-size: var(--step-0);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+/* ============================================================
+   ADAPTACIÓN
+   ============================================================ */
+@media (max-width: 980px) {
+  .coregrid .toolcard { grid-template-columns: minmax(0, 1fr) auto; }
+  .coregrid .toolcard__head { grid-row: 1; grid-column: 1; }
+  .coregrid .toolcard__rol { grid-row: 2; grid-column: 1; margin-top: 0.75rem; }
+  .coregrid .toolcard__text { grid-row: 3; grid-column: 1; }
+  .coregrid .toolcard__more { grid-row: 1; grid-column: 2; align-self: center; }
+
+  .coregrid--bento { grid-template-columns: 1fr; }
+  .coregrid--bento .toolcard:first-child { grid-row: auto; }
+
+  .rolegrid { grid-template-columns: 1fr; }
+  .rolecard--lead { grid-row: auto; min-height: 0; }
+
+  .coreflow { grid-template-columns: 1fr; gap: 0; }
+  .coreflow__step { padding-top: 1.5rem; padding-left: 1.75rem; }
+  .coreflow__step::before { top: 0; bottom: 0; left: 4px; right: auto; width: 2px; height: auto; }
+  .coreflow__step:last-child::before { bottom: auto; height: 1.5rem; }
+  .coreflow__step::after { top: 1.05rem; left: 0; }
+  .coreflow__num { position: static; margin-bottom: 0.35rem; }
+  .coreflow__step { padding-bottom: 1.75rem; }
+
+  .needcard { grid-template-columns: 1fr; gap: 1.25rem; }
+  .needcard:nth-child(even) .needcard__head,
+  .needcard:nth-child(even) .needcard__body { order: initial; }
+
+  .actormatrix__row { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .field-row { grid-template-columns: 1fr; }
+  .mainnav__cta { display: inline-block; margin-top: 0.5rem; }
+  .contact-list li { grid-template-columns: 1fr; gap: 0.15rem; }
+}
+
+/* ============================================================
+   BLOQUES PARA GRANDES CUENTAS
+   Sobriedad y dato verificable: nada de movimiento decorativo.
+   ============================================================ */
+
+/* ---------- Banda de marco normativo (sustituye a la cinta) ---------- */
+.factband {
+  background: var(--white);
+  border-bottom: 1px solid var(--rule);
+}
+.factband__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0;
+  padding-block: 0;
+}
+.factband__grid > div {
+  padding: 1.15rem clamp(0.75rem, 2vw, 1.75rem);
+  border-left: 1px solid var(--rule-soft);
+}
+.factband__grid > div:first-child { border-left: 0; padding-left: 0; }
+.factband dt {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 0.3rem;
+}
+.factband dd {
+  margin: 0;
+  font-size: var(--step--1);
+  line-height: 1.45;
+  color: var(--ink-muted);
+}
+.factband dd b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--step-0);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  color: var(--ink);
+  margin-bottom: 0.1rem;
+}
+
+/* ---------- Capacidad y garantías ---------- */
+.assur {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--rule);
+}
+.assur__i {
+  padding: clamp(1.25rem, 2.5vw, 1.85rem) clamp(1rem, 2vw, 1.75rem) clamp(1.25rem, 2.5vw, 1.85rem) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.assur__i dt {
+  font-family: var(--font-display);
+  font-size: var(--step-0);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+.assur__i dd {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: var(--step--1);
+  line-height: 1.6;
+  max-width: 44ch;
+}
+
+@media (max-width: 700px) {
+  .factband__grid > div { border-left: 0; padding-left: 0; border-top: 1px solid var(--rule-soft); }
+  .factband__grid > div:first-child { border-top: 0; }
+}

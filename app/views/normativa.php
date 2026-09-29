@@ -41,7 +41,6 @@ $obligaciones = [
 ];
 ?>
 <section class="pagehero">
-  <div class="pagehero__ring" aria-hidden="true"></div>
   <div class="wrap pagehero__inner" data-reveal>
     <span class="kicker">Marco legal</span>
     <h1 data-split>Normativa RAP y códigos LER</h1>
@@ -54,21 +53,21 @@ $obligaciones = [
     <!-- LER -->
     <div class="ler-panel" data-reveal>
       <span class="kicker">Catálogo LER</span>
-      <h1 style="font-size:var(--step-2)">Familia 15 · Envases</h1>
-      <h2>Residuos de envases; absorbentes, trapos de limpieza, materiales de filtración y ropas de protección no especificados en otra categoría.</h2>
+      <h2>Familia 15 · Envases</h2>
+      <p class="panel-sub">Residuos de envases; absorbentes, trapos de limpieza, materiales de filtración y ropas de protección no especificados en otra categoría.</p>
       <ul class="ler-list">
         <?php foreach ($ler as [$cod, $desc, $pel]): ?>
           <li class="<?= $pel ? 'peligroso' : '' ?>"><strong><?= e($cod) ?></strong> <span><?= e($desc) ?></span></li>
         <?php endforeach; ?>
       </ul>
-      <p style="margin-top:1rem; font-size:var(--step--1); color:var(--ink-muted)">* Los códigos marcados con asterisco corresponden a residuos peligrosos.</p>
+      <p class="ler-foot">* Los códigos marcados con asterisco corresponden a residuos peligrosos.</p>
     </div>
 
     <!-- OBLIGACIONES -->
     <div class="oblig-panel" data-reveal>
       <span class="kicker">Obligaciones</span>
-      <h1 style="font-size:var(--step-2)">¿A quién obliga?</h1>
-      <h2 style="font-family:var(--font-body); font-weight:400; color:var(--ink-muted); font-size:var(--step-0)">Real Decreto 1055/2022, de 27 de diciembre, de envases y residuos de envases.</h2>
+      <h2>¿A quién obliga?</h2>
+      <p class="panel-sub">Real Decreto 1055/2022, de 27 de diciembre, de envases y residuos de envases.</p>
       <a class="boe-link btn btn--ghost" href="https://www.boe.es/buscar/act.php?id=BOE-A-2022-22690" target="_blank" rel="noopener">Ver texto en el BOE ↗</a>
       <div class="oblig-accordion">
         <?php foreach ($obligaciones as $i => [$titulo, $intro, $items]): ?>

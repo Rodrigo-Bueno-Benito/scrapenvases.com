@@ -1,74 +1,207 @@
 /* ============================================================
-   Design tokens — ScrapEnvases editorial
-   Paleta de marca (teal + naranja) en clave editorial PDR
+   Design tokens — ScrapEnvases
+   Dirección: proveedor de referencia del sector para grandes cuentas.
+   El portal no habla del producto: lo enseña funcionando. Sobriedad,
+   dato verificable y contención — el acento se gana, no se reparte.
+
+   Tipografía — tres voces, tres objetos físicos:
+     Archivo      → señalética industrial (titulares, eje de anchura)
+     Public Sans  → tipografía de documento oficial (cuerpo)
+     Spline Sans Mono → manual de terminal de control (dato y etiqueta)
+
+   Color en OKLCH: perceptualmente uniforme, la escala se deriva de
+   los hues de marca en vez de inventar tonos sueltos.
    ============================================================ */
 :root {
-  /* Marca */
-  --brand-teal:        #00988c;   /* principal scrapenvases */
-  --brand-teal-dark:   #007268;   /* hover / estados activos */
-  --brand-teal-soft:   #d6ece9;   /* fondos sutiles */
-  --brand-blue:        #0075a8;   /* segundo tono del gradiente original */
-  --brand-mint:        #2fa496;   /* centro del gradiente */
-  --brand-orange:      #ff842c;   /* CTAs, links, acentos */
-  --brand-orange-dark: #e36a14;   /* hover naranjas */
+  /* Hues de marca */
+  --h-teal:   184;
+  --h-accent:  48;
 
-  /* Neutros editoriales */
-  --ink:        #14201e;   /* texto principal */
-  --ink-muted:  #566461;   /* texto secundario */
-  --paper:      #fafaf7;   /* fondo editorial cálido */
-  --paper-alt:  #f2f4f2;   /* secciones alternas */
-  --white:      #ffffff;
-  --rule:       #e4e7e5;   /* bordes / divisores */
+  /* ---------- Marca: escala teal derivada del hue ---------- */
+  --teal-50:  oklch(0.968 0.014 var(--h-teal));
+  --teal-100: oklch(0.928 0.031 var(--h-teal));
+  --teal-200: oklch(0.860 0.056 var(--h-teal));
+  --teal-300: oklch(0.775 0.078 var(--h-teal));
+  --teal-400: oklch(0.685 0.092 var(--h-teal));
+  --teal-500: oklch(0.588 0.096 var(--h-teal));   /* ≈ #00988c, marca */
+  --teal-600: oklch(0.505 0.087 var(--h-teal));
+  --teal-700: oklch(0.420 0.074 var(--h-teal));
+  --teal-800: oklch(0.335 0.058 var(--h-teal));
+  --teal-900: oklch(0.258 0.043 var(--h-teal));
 
-  /* Gradientes de marca */
-  --brand-gradient: linear-gradient(100deg, var(--brand-blue), var(--brand-mint), var(--brand-blue));
-  --brand-gradient-diag: linear-gradient(135deg, #0075a8 0%, #00988c 55%, #2fa496 100%);
-  --brand-gradient-hero: linear-gradient(150deg, #005f88 0%, #00988c 60%, #2fa496 100%);
-  --orange-gradient: linear-gradient(120deg, #ff842c, #ff6a3d);
+  --brand-teal:      var(--teal-500);
+  --brand-teal-dark: var(--teal-700);
+  --brand-teal-soft: var(--teal-100);
+  --brand-blue:      oklch(0.520 0.093 232);
+  --brand-mint:      var(--teal-400);
 
-  /* Tipografía — display con carácter + cuerpo funcional */
-  --font-display: "Bricolage Grotesque", "Hanken Grotesk", system-ui, sans-serif;
-  --font-body:    "Hanken Grotesk", "Montserrat", system-ui, -apple-system, sans-serif;
-  --font-cond:    "Barlow Condensed", "Arial Narrow", sans-serif;
-  --font-script:  "Dancing Script", cursive;
-  /* Voz editorial (sección de noticias, estilo PDR) */
-  --font-serif: "Fraunces", "Playfair Display", Georgia, serif;
-  --font-mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  /* ---------- Acento único: reservado a la acción ---------- */
+  /* --accent se reserva a superficies sin texto encima (barras, marcas).
+     Para texto blanco sobre fondo naranja hace falta --accent-dark:
+     --accent daba 3,12:1 y no llega al 4,5:1 que exige WCAG AA. */
+  --accent:      oklch(0.672 0.132 var(--h-accent));
+  --accent-hot:  oklch(0.628 0.142 var(--h-accent));
+  --accent-dark: oklch(0.560 0.124 var(--h-accent));   /* 4,9:1 con blanco */
+  --accent-deep: oklch(0.487 0.108 var(--h-accent));   /* estado :hover */
+  --accent-soft: oklch(0.960 0.024 var(--h-accent));
+  --brand-orange:      var(--accent);
+  --brand-orange-dark: var(--accent-dark);
 
-  /* Escala tipográfica fluida */
-  --step--1: clamp(0.83rem, 0.79rem + 0.2vw, 0.94rem);
-  --step-0:  clamp(1rem, 0.95rem + 0.25vw, 1.15rem);
-  --step-1:  clamp(1.25rem, 1.15rem + 0.5vw, 1.6rem);
-  --step-2:  clamp(1.6rem, 1.4rem + 1vw, 2.4rem);
-  --step-3:  clamp(2.1rem, 1.7rem + 2vw, 3.6rem);
-  --step-4:  clamp(2.6rem, 1.9rem + 3.3vw, 4.6rem);
+  /* ---------- Estados operativos (semáforo de la sala) ---------- */
+  --ok:      oklch(0.620 0.128 155);
+  --ok-soft: oklch(0.955 0.030 155);
+  --warn:      oklch(0.760 0.148 78);
+  --warn-soft: oklch(0.965 0.040 78);
+  --bad:      oklch(0.575 0.176 27);
+  --bad-soft: oklch(0.958 0.030 27);
 
-  /* Espaciado / radios / sombras */
-  --gutter: clamp(1.2rem, 4vw, 4rem);
-  --maxw:   1200px;
-  --maxw-narrow: 760px;
-  --radius:     20px;
-  --radius-sm:  12px;
-  --radius-lg:  28px;
-  --shadow:     0 24px 60px -20px rgba(0, 96, 90, 0.30);
-  --shadow-sm:  0 8px 24px -10px rgba(0, 96, 90, 0.22);
-  --shadow-teal: 0 20px 45px -18px rgba(0, 152, 140, 0.55);
-  --shadow-orange: 0 16px 34px -12px rgba(255, 132, 44, 0.5);
+  /* ---------- Neutros: todos tintados hacia el teal ---------- */
+  --ink:        oklch(0.238 0.014 var(--h-teal));
+  --ink-soft:   oklch(0.408 0.013 var(--h-teal));
+  --ink-muted:  oklch(0.520 0.012 var(--h-teal));   /* 5,5:1 en blanco · 4,8:1 en surface-2 */
+  --ink-faint:  oklch(0.550 0.010 var(--h-teal));   /* 4,8:1 en blanco (antes 2,9:1) */
 
-  /* Curvas de movimiento */
-  --ease:       cubic-bezier(0.16, 1, 0.3, 1);   /* out-expo suave */
-  --ease-quint: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur-1: 0.35s;
-  --dur-2: 0.7s;
-  --dur-3: 1.1s;
+  /* Los claros se templan hacia el papel (hue 85) en vez de seguir el
+     teal: una superficie fría lee a panel de control, una templada lee
+     a documento impreso, que es el registro de este portal. */
+  --h-paper:     85;
+  --surface:    oklch(0.982 0.0055 var(--h-paper));
+  --surface-2:  oklch(0.962 0.0075 var(--h-paper));
+  --surface-3:  oklch(0.934 0.010 var(--h-paper));
+  --white:      oklch(0.996 0.0025 var(--h-paper));
+  --rule:       oklch(0.890 0.008 var(--h-teal));
+  --rule-soft:  oklch(0.932 0.006 var(--h-teal));
+
+  /* Superficies profundas: el chasis del producto */
+  --deep-950:   oklch(0.168 0.019 var(--h-teal));
+  --deep-900:   oklch(0.198 0.022 var(--h-teal));
+  --deep-800:   oklch(0.246 0.026 var(--h-teal));
+  --deep-700:   oklch(0.302 0.031 var(--h-teal));
+  --deep-600:   oklch(0.372 0.034 var(--h-teal));
+  /* Texto sobre superficie profunda: tinta el gris, no gris plano */
+  --on-deep:        oklch(0.855 0.012 var(--h-teal));
+  --on-deep-muted:  oklch(0.762 0.014 var(--h-teal));  /* 4,6:1 incluso sobre la zona clara del degradado */
+  --on-deep-faint:  oklch(0.718 0.016 var(--h-teal));  /* rótulos menores sobre superficie profunda, 4,5:1 */
+  --deep-rule:      oklch(0.330 0.024 var(--h-teal));
+
+  --paper:     var(--surface);
+  --paper-alt: var(--surface-2);
+
+  /* ---------- Gradientes: radiales y mallados ---------- */
+  --grad-deep:
+    radial-gradient(115% 95% at 8% -5%, oklch(0.335 0.055 var(--h-teal)) 0%, transparent 55%),
+    radial-gradient(85% 85% at 95% 12%, oklch(0.400 0.070 200) 0%, transparent 58%),
+    radial-gradient(70% 70% at 72% 105%, oklch(0.268 0.044 var(--h-teal)) 0%, transparent 62%),
+    var(--deep-950);
+  --grad-accent: linear-gradient(135deg, var(--accent) 0%, var(--accent-hot) 100%);
+
+  --brand-gradient:      var(--grad-deep);
+  --brand-gradient-diag: var(--grad-deep);
+  --brand-gradient-hero: var(--grad-deep);
+  --orange-gradient:     var(--grad-accent);
+
+  /* Retícula técnica */
+  --grid-line: oklch(0.238 0.014 var(--h-teal) / 0.055);
+  --grid-line-on-deep: oklch(1 0 0 / 0.05);
+
+  /* ---------- Tipografía ---------- */
+  --font-display: "Archivo", "Archivo Expanded", system-ui, sans-serif;
+  --font-body:    "Public Sans", system-ui, -apple-system, sans-serif;
+  /* Mono estrecha: Martian Mono tiene mucho carácter pero es demasiado
+     ancha para tablas de datos — los subtextos se partían en tres líneas. */
+  --font-mono:    "Spline Sans Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-cond:   var(--font-mono);
+  --font-serif:  var(--font-display);
+  --font-script: var(--font-display);
+
+  /* Escala modular ~1.28, fluida en marketing */
+  --step--2: clamp(0.70rem, 0.68rem + 0.09vw, 0.755rem);
+  --step--1: clamp(0.845rem, 0.82rem + 0.13vw, 0.925rem);
+  --step-0:  clamp(1rem, 0.97rem + 0.16vw, 1.075rem);
+  --step-1:  clamp(1.28rem, 1.18rem + 0.45vw, 1.6rem);
+  --step-2:  clamp(1.65rem, 1.42rem + 1.1vw, 2.45rem);
+  --step-3:  clamp(2.1rem, 1.68rem + 2vw, 3.4rem);
+  --step-4:  clamp(2.4rem, 1.82rem + 2.7vw, 4.2rem);
+  /* Escala de cartel: titulares que ocupan el ancho de la retícula.
+     Por debajo de --step-5 el titular es información; a partir de
+     --step-5 es superficie, y manda el tracking negativo. */
+  --step-5:  clamp(3rem, 1.9rem + 5.2vw, 6.4rem);
+  --step-6:  clamp(3.6rem, 1.6rem + 9.4vw, 9.5rem);
+
+  --track-display: -0.022em;
+  --track-tight:   -0.011em;
+  --track-label:    0.115em;
+  /* A tamaño de cartel el espacio entre letras sobra: se cierra. */
+  --track-poster:  -0.055em;
+  --track-mega:    -0.072em;
+
+  /* Anchura variable de Archivo: los titulares se expanden */
+  --wdth-wide:   108;
+  --wdth-normal: 100;
+  --wdth-narrow:  86;
+  --wdth-poster: 112;   /* el extremo del eje: solo para la escala de cartel */
+
+  /* ---------- Espaciado (escala 4pt, nombres semánticos) ---------- */
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --space-5xl: clamp(6rem, 12vw, 11rem);   /* respiración de sección editorial */
+
+  --gutter: clamp(1.15rem, 4vw, 3.5rem);
+  --maxw:        1320px;
+  --maxw-narrow: 720px;
+  --measure:     68ch;
+
+  /* ---------- Radios ---------- */
+  --r-xs:  4px;
+  --r-sm:  7px;
+  --r-md:  12px;
+  --r-lg:  20px;
+  --r-xl:  28px;
+  --r-btn: 8px;
+  --r-pill: 999px;
+  --radius:    var(--r-lg);
+  --radius-sm: var(--r-md);
+  --radius-lg: var(--r-xl);
+
+  /* ---------- Sombras tintadas de marca ---------- */
+  --sh-1: 0 1px 2px oklch(0.258 0.043 var(--h-teal) / 0.05), 0 2px 6px -2px oklch(0.258 0.043 var(--h-teal) / 0.07);
+  --sh-2: 0 2px 4px oklch(0.258 0.043 var(--h-teal) / 0.045), 0 12px 24px -10px oklch(0.258 0.043 var(--h-teal) / 0.14);
+  --sh-3: 0 4px 8px oklch(0.258 0.043 var(--h-teal) / 0.04), 0 22px 44px -22px oklch(0.258 0.043 var(--h-teal) / 0.16);
+  --sh-4: 0 8px 16px oklch(0.258 0.043 var(--h-teal) / 0.05), 0 38px 76px -34px oklch(0.258 0.043 var(--h-teal) / 0.22);
+  --sh-accent: 0 6px 16px -8px oklch(0.672 0.132 var(--h-accent) / 0.32);
+  --sh-deep: 0 32px 72px -28px oklch(0.168 0.019 var(--h-teal) / 0.7);
+  --shadow:        var(--sh-3);
+  --shadow-sm:     var(--sh-2);
+  --shadow-teal:   0 24px 52px -22px oklch(0.505 0.087 var(--h-teal) / 0.5);
+  --shadow-orange: var(--sh-accent);
+
+  /* ---------- Movimiento ---------- */
+  --ease:       cubic-bezier(0.22, 1, 0.36, 1);      /* out-quint */
+  --ease-quint: cubic-bezier(0.16, 1, 0.3, 1);       /* out-expo  */
+  --ease-out:   cubic-bezier(0.33, 1, 0.68, 1);      /* out-cubic */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-1: 0.2s;
+  --dur-2: 0.5s;
+  --dur-3: 0.85s;
+
+  /* ---------- z-index ---------- */
+  --z-base:    1;
+  --z-raised:  10;
+  --z-sticky:  100;
+  --z-header:  200;
+  --z-overlay: 300;
+  --z-modal:   400;
+  --z-grain:   500;
 }
 
-/* Propiedades registradas → animables (gradientes, órbitas) */
-@property --orbit-angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
+/* Propiedades registradas → animables */
 @property --glow-x {
   syntax: "<percentage>";
   inherits: false;
@@ -78,4 +211,21 @@
   syntax: "<percentage>";
   inherits: false;
   initial-value: 50%;
+}
+@property --glow-a {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+@property --sweep {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
+/* Progreso de anillos y donuts: registrado para poder animarse */
+@property --p {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
 }

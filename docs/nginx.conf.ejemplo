@@ -1,0 +1,65 @@
+# ============================================================
+#  ScrapEnvases — Nginx + PHP-FPM
+#  Equivalente a public/.htaccess. Ajusta server_name y las rutas.
+# ============================================================
+
+server {
+    listen 80;
+    server_name scrapenvases.com www.scrapenvases.com;
+
+    root /var/www/scrapenvases/public;
+    index index.php;
+    charset utf-8;
+
+    # --- Redirecciones 301 de las rutas anteriores al rediseño ---
+    location = /scrap  { return 301 /para-tu-scrap; }
+    location = /core   { return 301 /el-core; }
+    location = /ots    { return 301 /contacto; }
+
+    # --- Detalle de noticia ---
+    location ~ ^/noticia/([a-z0-9-]+)/?$ {
+        try_files $uri /index.php?p=noticia&slug=$1;
+    }
+
+    # --- Rutas limpias ---
+    location / {
+        try_files $uri $uri/ @portal;
+    }
+    location @portal {
+        rewrite ^/([a-z0-9_-]+)/?$ /index.php?p=$1 last;
+        rewrite ^/$               /index.php?p=home last;
+        return 404;
+    }
+
+    # --- PHP ---
+    location ~ \.php$ {
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+    }
+
+    # --- /uploads: se sirve, nunca se ejecuta ---
+    location ^~ /uploads/ {
+        location ~ \.(php|phtml|pl|py|cgi|sh)$ { deny all; }
+        expires 6M;
+        add_header Cache-Control "public";
+    }
+
+    # --- Estáticos ---
+    location ~* \.(css|js|png|jpe?g|svg|webp|gif|mp4|webm|woff2?)$ {
+        expires 1M;
+        add_header Cache-Control "public";
+        access_log off;
+    }
+
+    # --- Cabeceras de seguridad ---
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+    # --- Ficheros sensibles ---
+    location ~ /\.(env|git|htaccess) { deny all; }
+
+    gzip on;
+    gzip_types text/css application/javascript image/svg+xml;
+}

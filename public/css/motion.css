@@ -1,0 +1,64 @@
+/* ============================================================
+   Movimiento — animaciones ligadas al scroll y al cursor
+   Todo con mejora progresiva: sin soporte, el diseño estático
+   se mantiene íntegro.
+   ============================================================ */
+
+/* ============================================================
+   1 · Animaciones dirigidas por scroll (CSS puro, sin JS)
+   Chrome/Edge/Safari. Firefox mantiene el estado final.
+   ============================================================ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+
+    /* Las filas del índice del core entran una a una */
+    .coregrid .toolcard {
+      animation: row-slide linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 65%;
+    }
+    @keyframes row-slide {
+      from { opacity: 0; translate: -0.6rem 0; }
+      to   { opacity: 1; translate: 0 0; }
+    }
+
+    /* El riel del flujo 01→02→03 se dibuja al bajar */
+    .coreflow__step::before {
+      animation: rail-draw linear both;
+      animation-timeline: view(block);
+      animation-range: entry 15% entry 75%;
+      transform-origin: left center;
+    }
+    @keyframes rail-draw { from { scale: 0 1; } to { scale: 1 1; } }
+
+    /* Las filas de la matriz por actor se revelan con barrido */
+    .actormatrix__row {
+      animation: sweep-in linear both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 70%;
+    }
+    @keyframes sweep-in {
+      from { opacity: 0; translate: 0 0.5rem; }
+      to   { opacity: 1; translate: 0 0; }
+    }
+
+    /* Sin animación de entrada en las ventanas de demo: son más altas
+       que el viewport, así que el rango `entry` nunca se completa y la
+       aplicación se quedaba a medio aparecer. */
+
+    /* El zig-zag solo se atenúa al entrar, sin desplazamiento lateral */
+    .needcard {
+      animation: soft-in linear both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 60%;
+    }
+    @keyframes soft-in { from { opacity: 0; } }
+  }
+}
+
+/* ============================================================
+   2 · Números que cuentan (JS añade .is-counted)
+   ============================================================ */
+[data-count] { font-variant-numeric: tabular-nums; }
+
+

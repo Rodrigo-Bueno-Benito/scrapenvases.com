@@ -1,0 +1,160 @@
+<title>Copy de El CORE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --petrol:#146079;--green:#57a24a;--green-deep:#3f7f37;
+    --ground:#f4f6f6;--surface:#ffffff;--surface-2:#eef2f2;
+    --ink:#152227;--ink-soft:#41575e;--ink-faint:#6d8189;
+    --line:#d7e0e0;--line-soft:#e6ecec;
+    --amber:#b4731a;--amber-bg:#f6ecdb;--green-bg:#e4efdf;--ggreen:#3f7f37;
+    --accent-grad:linear-gradient(100deg,var(--petrol),var(--green));
+    --shadow-soft:0 1px 2px rgba(20,60,72,.05);
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --petrol:#3fa3c4;--green:#78c268;--green-deep:#8fd07f;
+    --ground:#0e181c;--surface:#152227;--surface-2:#1b2b31;
+    --ink:#e9f0f0;--ink-soft:#aebec3;--ink-faint:#7b9198;
+    --line:#2a3c42;--line-soft:#223137;
+    --amber:#e0a44f;--amber-bg:#2c2416;--green-bg:#182a18;--ggreen:#8fd07f;
+    --shadow-soft:0 1px 2px rgba(0,0,0,.3);
+  }}
+  :root[data-theme="dark"]{
+    --petrol:#3fa3c4;--green:#78c268;--green-deep:#8fd07f;
+    --ground:#0e181c;--surface:#152227;--surface-2:#1b2b31;
+    --ink:#e9f0f0;--ink-soft:#aebec3;--ink-faint:#7b9198;
+    --line:#2a3c42;--line-soft:#223137;
+    --amber:#e0a44f;--amber-bg:#2c2416;--green-bg:#182a18;--ggreen:#8fd07f;
+    --shadow-soft:0 1px 2px rgba(0,0,0,.3);
+  }
+  *{box-sizing:border-box}
+  body{background:var(--ground);color:var(--ink);font-family:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:"Archivo",system-ui,sans-serif;text-wrap:balance;letter-spacing:-.015em;line-height:1.14;margin:0}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  header.top{padding:60px 0 34px;border-bottom:1px solid var(--line)}
+  .brandmark{font-family:"Archivo";font-weight:800;font-size:1.05rem;letter-spacing:-.02em;margin-bottom:26px}
+  .brandmark b{color:var(--petrol)}.brandmark i{color:var(--green);font-style:normal}.brandmark span{color:var(--ink-faint);font-weight:600}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--petrol)}
+  header.top h1{font-size:clamp(1.9rem,4.6vw,2.7rem);font-weight:800;margin:14px 0 14px}
+  header.top h1 .g{background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  header.top p{font-size:1.08rem;color:var(--ink-soft);max-width:56ch;margin:0}
+
+  .page{margin:44px 0 10px}
+  .pagehead{display:flex;align-items:baseline;gap:12px;padding-bottom:16px;border-bottom:2px solid var(--ink);margin-bottom:8px}
+  .pagehead .pg{font-family:"IBM Plex Mono",monospace;font-size:.74rem;font-weight:600;color:var(--green-deep)}
+  .pagehead h2{font-size:1.5rem;font-weight:800}
+  .pagehead .url{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--ink-faint)}
+
+  .field{padding:18px 0;border-bottom:1px solid var(--line-soft)}
+  .flabel{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:8px}
+  .c-kicker{font-family:"IBM Plex Mono",monospace;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--petrol);font-weight:500;margin:0}
+  .c-h1{font-family:"Archivo";font-weight:800;font-size:clamp(1.6rem,3.8vw,2.2rem);letter-spacing:-.02em;line-height:1.14;margin:0}
+  .c-sub{font-size:1.12rem;color:var(--ink-soft);max-width:58ch;margin:0}
+  .c-body{font-size:1rem;color:var(--ink);max-width:64ch;margin:0}
+  .c-h2{font-family:"Archivo";font-weight:700;font-size:1.35rem;margin:0 0 6px}
+  .c-cta{display:inline-block;font-family:"Archivo";font-weight:700;font-size:.95rem;color:#fff;background:var(--accent-grad);padding:11px 20px;border-radius:9px}
+
+  .tool{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow-soft);display:grid;grid-template-columns:auto 1fr;gap:3px 16px;margin-top:12px}
+  .tool .chip{grid-row:1 / span 4;width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:"Archivo";font-weight:800;color:#fff;font-size:1.2rem}
+  .c-scrapp{background:linear-gradient(135deg,#1a7fa0,#146079)}.c-inpro{background:linear-gradient(135deg,#57a24a,#3f7f37)}.c-proba{background:linear-gradient(135deg,#2b8ca8,#57a24a)}
+  .tool .nm{font-family:"Archivo";font-weight:800;font-size:1.12rem}
+  .tool .role{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+  .tool .txt{font-size:.93rem;color:var(--ink-soft);margin:6px 0 0}
+  .tool .lk{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--petrol);margin-top:8px;font-weight:600}
+  .tool .lk.flag{color:var(--amber)}
+
+  .flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:8px;margin-top:12px}
+  .step{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:var(--shadow-soft);text-align:center}
+  .step .n{font-family:"IBM Plex Mono",monospace;font-size:.64rem;color:var(--ggreen);font-weight:600}
+  .step .who{font-family:"Archivo";font-weight:800;font-size:1rem;margin:4px 0 2px}
+  .step .act{font-size:.85rem;color:var(--ink-soft)}
+  .step .tl{font-family:"IBM Plex Mono",monospace;font-size:.62rem;color:var(--petrol);margin-top:8px;text-transform:uppercase;letter-spacing:.08em}
+  .arrow{display:flex;align-items:center;justify-content:center;color:var(--ink-faint);font-size:1.2rem;font-weight:700}
+
+  .matrix{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+  .mrow{display:grid;grid-template-columns:130px 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:13px 16px;box-shadow:var(--shadow-soft)}
+  .mrow .a{font-family:"Archivo";font-weight:700;font-size:.98rem}
+  .mrow .g{font-size:.9rem;color:var(--ink-soft)}
+
+  .note{background:var(--amber-bg);border:1px solid color-mix(in srgb,var(--amber) 30%,transparent);border-radius:10px;padding:15px 18px;margin:16px 0 0;font-size:.88rem;color:var(--ink)}
+  .note .nl{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:600;margin-bottom:6px}
+  .note ul{margin:6px 0 0;padding-left:18px}.note li{margin:3px 0}
+
+  footer{padding:36px 0 60px;color:var(--ink-faint);font-size:.8rem;border-top:1px solid var(--line);margin-top:40px}
+  footer .brandmark{font-size:.9rem;margin-bottom:8px}
+  @media (max-width:600px){.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}.mrow{grid-template-columns:1fr}.pagehead{flex-wrap:wrap}.pagehead .url{margin-left:0;flex-basis:100%}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="brandmark"><b>SCRAP</b><i>envases</i><span>.com</span></div>
+  <div class="eyebrow">Copy para maquetar · Tono neutro de portal · Sept 2026</div>
+  <h1>Textos de <span class="g">El CORE</span></h1>
+  <p>La página nueva que presenta el ecosistema completo: qué es el core, cómo encajan sus tres piezas y qué aporta a cada actor. Es la página que da sentido al resto del portal.</p>
+</header>
+
+<div class="page">
+  <div class="pagehead"><span class="pg">E</span><h2>El CORE</h2><span class="url">/el-core</span></div>
+
+  <div class="field"><div class="flabel">Kicker</div><p class="c-kicker">El ecosistema del core</p></div>
+
+  <div class="field"><div class="flabel">Titular · H1</div><p class="c-h1">El core: el ecosistema que ya opera la RAP de envases</p></div>
+
+  <div class="field"><div class="flabel">Subtítulo</div><p class="c-sub">Tres herramientas que encajan entre sí —SCRAPP, INPROGEST y PROBATUS— para cubrir, de punta a punta, lo que la RAP de envases comerciales e industriales exige a SCRAPs, gestores y poseedores.</p></div>
+
+  <div class="field"><div class="flabel">Párrafo de contexto</div><p class="c-body">El core no es un producto nuevo ni una promesa de futuro: es un conjunto de herramientas de INPRONET Solutions que ya está en marcha y resuelve las tres tareas que la RAP obliga a hacer bien —homologar a quien interviene, controlar la documentación de cada servicio y trazar el flujo de residuos e incentivos. scrapenvases.com es su escaparate y su puerta de entrada.</p></div>
+
+  <div class="field">
+    <div class="flabel">Bloque "Una necesidad, una pieza" · tarjetas</div>
+    <div class="tool"><div class="chip c-proba">P</div><div class="nm">PROBATUS</div><div class="role">Homologación de proveedores · para SCRAP y gestores</div><p class="txt">Evalúa, homologa y hace seguimiento de gestores y proveedores de forma homogénea, transparente y auditable.</p><span class="lk">→ probatus.es</span></div>
+    <div class="tool"><div class="chip c-inpro">I</div><div class="nm">INPROGEST</div><div class="role">Control documental · para SCRAP y gestores</div><p class="txt">Coordina a los agentes implicados y centraliza la documentación de cada servicio para el cumplimiento legal.</p><span class="lk">→ inprogest.com</span></div>
+    <div class="tool"><div class="chip c-scrapp">S</div><div class="nm">SCRAPP</div><div class="role">Trazabilidad de la RAP · para SCRAP y poseedores</div><p class="txt">Conecta a poseedores, gestores y SCRAP y ordena el flujo de documentos e incentivos con la trazabilidad que exige la norma.</p><span class="lk">→ scrapp.es</span></div>
+  </div>
+
+  <div class="field">
+    <div class="flabel">Bloque "Cómo encajan" · título + flujo</div>
+    <p class="c-h2">Una sola trazabilidad, compartida</p>
+    <p class="c-body" style="margin-bottom:4px">El dato se introduce una vez y sirve a las tres piezas: el poseedor genera la documentación, el gestor homologado la entrega limpia y el SCRAP la controla, reporta y libera el incentivo.</p>
+    <div class="flow">
+      <div class="step"><div class="n">01</div><div class="who">Homologar</div><div class="act">Gestores y proveedores verificados y auditables.</div><div class="tl">PROBATUS</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">02</div><div class="who">Documentar</div><div class="act">DI, fichas y certificados centralizados y validados.</div><div class="tl">INPROGEST</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">03</div><div class="who">Trazar y liquidar</div><div class="act">Trazabilidad completa e incentivo al poseedor.</div><div class="tl">SCRAPP</div></div>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="flabel">Bloque "Qué aporta a cada actor" · matriz</div>
+    <div class="matrix">
+      <div class="mrow"><div class="a">SCRAP</div><div class="g">Homologación de gestores, control documental y gestión de incentivos, sin montar una plataforma propia desde cero.</div></div>
+      <div class="mrow"><div class="a">Gestor</div><div class="g">Una homologación y un canal de reporte, en lugar de uno por cada SCRAP.</div></div>
+      <div class="mrow"><div class="a">Poseedor</div><div class="g">Documentación ordenada, a disposición de su SCRAP, y su incentivo cobrado.</div></div>
+    </div>
+  </div>
+
+  <div class="field" style="border-bottom:none">
+    <div class="flabel">Cierre + CTA</div>
+    <p class="c-body" style="margin-bottom:14px">El core ya funciona. scrapenvases.com es la puerta para conocerlo y empezar a usarlo, con el acompañamiento de la Oficina Técnica de SCRAPs (OTS).</p>
+    <span class="c-cta">Consultar con la OTS</span>
+  </div>
+
+  <div class="note">
+    <div class="nl">Notas para maquetación · El CORE</div>
+    <ul>
+      <li>Es la página "bandera": debe transmitir "esto ya existe y ya funciona", no una promesa.</li>
+      <li>El flujo 01→02→03 es el elemento visual clave; puede animarse suavemente al hacer scroll.</li>
+      <li>Orden de tarjetas por el flujo (PROBATUS → INPROGEST → SCRAPP), no alfabético.</li>
+      <li>Enlazar cada herramienta a su web (SCRAPP, INPROGEST, PROBATUS).</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <div class="brandmark"><b>SCRAP</b><i>envases</i><span>.com</span></div>
+  Copy web · El CORE · Tono neutro de portal del sector · Preparado para Víctor Bueno (Grupo INPWASTE) · Desarrollo INPRONET Solutions · Septiembre 2026
+</footer>
+</div>

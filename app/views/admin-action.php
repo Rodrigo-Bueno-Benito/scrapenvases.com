@@ -2,6 +2,7 @@
 require_admin();
 require_once __DIR__ . '/../data/noticias_db.php';
 require_once __DIR__ . '/../data/demos_db.php';
+require_once __DIR__ . '/../data/consultas_db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !csrf_check()) {
     flash_set('admin_err', 'Solicitud no válida o sesión expirada.');
@@ -32,6 +33,26 @@ if ($op === 'demo_delete') {
         flash_set('admin_ok', 'Elemento de la demo eliminado.');
     }
     redirect('/admin?view=demos');
+}
+
+/* -------- Consultas OTS: marcar atendida / reabrir -------- */
+if ($op === 'consulta_estado') {
+    $id = (int)($_POST['id'] ?? 0);
+    if ($id > 0) {
+        consulta_marcar($id, $_POST['estado'] ?? 'nueva');
+        flash_set('admin_ok', 'Estado de la consulta actualizado.');
+    }
+    redirect('/admin?view=consultas');
+}
+
+/* -------- Consultas OTS: borrar -------- */
+if ($op === 'consulta_delete') {
+    $id = (int)($_POST['id'] ?? 0);
+    if ($id > 0) {
+        consulta_borrar($id);
+        flash_set('admin_ok', 'Consulta eliminada.');
+    }
+    redirect('/admin?view=consultas');
 }
 
 /* -------- Demo: crear -------- */

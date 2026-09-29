@@ -1,0 +1,156 @@
+<title>Wireframe de Contacto y OTS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#eef0f2;--frame:#ffffff;--site:#ffffff;--block-2:#eef1f3;--hatch:#dfe4e8;
+    --ink:#2a3338;--muted:#6c767d;--faint:#98a1a8;--line:#c3cbd1;--dash:#b4bdc4;
+    --accent:#146079;--green:#3f7f37;--amber:#a9711c;--ann-bg:#132a34;--ann-ink:#cfe6ef;
+    --shadow:0 1px 2px rgba(20,50,62,.08),0 10px 34px rgba(20,50,62,.10);
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --paper:#0d1417;--frame:#141d21;--site:#101a1e;--block-2:#18242a;--hatch:#233139;
+    --ink:#e7edf0;--muted:#9aa6ad;--faint:#6f7d84;--line:#31424a;--dash:#3a4c55;
+    --accent:#40a3c4;--green:#79c169;--amber:#dca24d;--ann-bg:#04222d;--ann-ink:#a9d7e6;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 36px rgba(0,0,0,.45);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#0d1417;--frame:#141d21;--site:#101a1e;--block-2:#18242a;--hatch:#233139;
+    --ink:#e7edf0;--muted:#9aa6ad;--faint:#6f7d84;--line:#31424a;--dash:#3a4c55;
+    --accent:#40a3c4;--green:#79c169;--amber:#dca24d;--ann-bg:#04222d;--ann-ink:#a9d7e6;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 36px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box}
+  body{background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.5;margin:0;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto;padding:28px 20px 60px}
+  .doc-head{margin:6px 0 22px}
+  .doc-head .k{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .doc-head h1{font-family:"Archivo";font-weight:800;font-size:1.7rem;letter-spacing:-.02em;margin:8px 0 6px}
+  .doc-head p{color:var(--muted);font-size:.92rem;margin:0;max-width:66ch}
+  .legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:14px;font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--faint)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .lg-ann{width:16px;height:16px;border-radius:50%;background:var(--ann-bg);color:var(--ann-ink);display:inline-flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:600}
+  .flag{color:var(--amber)}
+
+  .frame{background:var(--frame);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+  .chrome{display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--block-2);border-bottom:1px solid var(--line)}
+  .dots{display:flex;gap:6px}.dots i{width:9px;height:9px;border-radius:50%;background:var(--dash);display:block}
+  .urlbar{flex:1;background:var(--site);border:1px solid var(--line);border-radius:20px;padding:5px 14px;font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--muted)}
+  .site{background:var(--site)}
+  .annbar{display:flex;align-items:flex-start;gap:10px;padding:13px 18px 5px}
+  .annnum{flex:none;width:21px;height:21px;border-radius:50%;background:var(--ann-bg);color:var(--ann-ink);display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Mono",monospace;font-size:.7rem;font-weight:600;margin-top:1px}
+  .anntxt{font-family:"IBM Plex Mono",monospace;font-size:.71rem;color:var(--muted);line-height:1.45}
+  .anntxt b{color:var(--ink);text-transform:uppercase;letter-spacing:.08em}
+  .sec{margin:0 14px 8px;border:1px solid var(--line);border-radius:10px;padding:20px;background:var(--frame)}
+  .sec.alt{background:var(--block-2)}
+
+  .snav{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .logo{font-family:"Archivo";font-weight:800;font-size:1rem;letter-spacing:-.02em}
+  .logo b{color:var(--accent)}.logo i{color:var(--green);font-style:normal}.logo span{color:var(--faint);font-weight:600}
+  .snav ul{list-style:none;display:flex;gap:12px;margin:0;padding:0;flex-wrap:wrap}
+  .snav li{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+  .snav li.on{color:var(--accent);font-weight:600}
+  .snav .push{margin-left:auto}
+  .btn{font-family:"Archivo";font-weight:700;font-size:.78rem;padding:7px 14px;border-radius:8px;background:var(--accent);color:#fff;display:inline-block}
+  .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+
+  .hero{text-align:center;padding:4px 0}
+  .kick{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:500}
+  .h1{font-family:"Archivo";font-weight:800;font-size:1.7rem;letter-spacing:-.02em;line-height:1.12;margin:10px auto;max-width:20ch}
+  .sub{color:var(--muted);font-size:.96rem;max-width:58ch;margin:0 auto}
+
+  .split{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}
+  .form{border:1px solid var(--line);border-radius:10px;padding:16px;background:var(--site)}
+  .form .fl{font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin:10px 0 4px}
+  .form .fl:first-child{margin-top:0}
+  .inp{border:1px dashed var(--dash);border-radius:7px;padding:8px 10px;font-size:.82rem;color:var(--faint);background:repeating-linear-gradient(45deg,transparent,transparent 6px,var(--hatch) 6px,var(--hatch) 8px)}
+  .inp.big{min-height:60px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .chk{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:.76rem;color:var(--muted)}
+  .chk .b{width:14px;height:14px;border:1px solid var(--dash);border-radius:3px;flex:none}
+  .submit{margin-top:12px}
+
+  .aside{display:flex;flex-direction:column;gap:12px}
+  .cbox{border:1px solid var(--line);border-radius:10px;padding:15px;background:var(--site)}
+  .cbox h3{font-family:"Archivo";font-weight:800;font-size:.95rem;margin:0 0 8px}
+  .cbox .line{font-size:.84rem;color:var(--muted);margin:3px 0}
+  .cbox .line b{color:var(--ink)}
+  .person{display:flex;gap:10px;align-items:center;margin:8px 0}
+  .person .av{width:32px;height:32px;border-radius:50%;border:1px dashed var(--dash);background:repeating-linear-gradient(45deg,transparent,transparent 4px,var(--hatch) 4px,var(--hatch) 6px);flex:none}
+  .person .nm{font-family:"Archivo";font-weight:700;font-size:.86rem}
+  .person .rl{font-size:.74rem;color:var(--faint)}
+
+  .faq{display:flex;flex-direction:column;gap:8px}
+  .qa{border:1px solid var(--line);border-radius:9px;padding:12px 14px;background:var(--site);display:flex;justify-content:space-between;gap:10px;align-items:center}
+  .qa .q{font-family:"Archivo";font-weight:700;font-size:.88rem}
+  .qa .pl{color:var(--faint);font-size:1.1rem}
+  .bhead{font-family:"Archivo";font-weight:700;font-size:1.1rem;margin:0 0 12px;text-align:center}
+
+  .foot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center;font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:var(--faint)}
+  .foot .social{display:flex;gap:6px}.foot .social i{width:20px;height:20px;border-radius:5px;border:1px solid var(--dash);display:block}
+  @media (max-width:720px){.split{grid-template-columns:1fr}.snav ul{width:100%;order:3}}
+</style>
+
+<div class="wrap">
+  <div class="doc-head">
+    <div class="k">Wireframe · Página Contacto / OTS · No es diseño final</div>
+    <h1>Wireframe — Contacto · OTS</h1>
+    <p>La puerta de entrada del portal: formulario de consulta, contacto directo, cara visible (María y Rodrigo) y un FAQ de apoyo. Recuadros rayados = campo/imagen; círculos = nota.</p>
+    <div class="legend"><span><i class="lg-ann">1</i> nota</span><span class="flag">■ pendiente de confirmar</span></div>
+  </div>
+
+  <div class="frame">
+    <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="urlbar">https://scrapenvases.com/contacto</div></div>
+    <div class="site">
+      <div class="sec">
+        <nav class="snav"><span class="logo"><b>SCRAP</b><i>envases</i><span>.com</span></span>
+          <ul><li>El CORE</li><li>Para tu SCRAP</li><li>Poseedores</li><li>Gestores</li><li>Normativa</li><li class="on">Contacto · OTS</li></ul>
+          <span class="push"></span><a class="btn ghost">Contactar</a></nav>
+      </div>
+
+      <div class="annbar"><div class="annnum">1</div><div class="anntxt"><b>Hero centrado</b> — kicker + H1 + subtítulo. Tono de servicio.</div></div>
+      <div class="sec"><div class="hero">
+        <div class="kick">Oficina Técnica de SCRAPs (OTS)</div>
+        <div class="h1">Habla con la Oficina Técnica de SCRAPs</div>
+        <p class="sub">¿Dudas sobre tus obligaciones en la RAP de envases, sobre el core o sobre cómo empezar? La OTS acompaña a SCRAPs, gestores y poseedores. Cuéntanos tu caso y te orientamos.</p>
+      </div></div>
+
+      <div class="annbar"><div class="annnum">2</div><div class="anntxt"><b>Formulario + contacto</b> — a dos columnas. Izquierda: formulario (envía a la OTS + RGPD). Derecha: contacto directo y quién atiende. <span class="flag">Email/teléfono por confirmar; fotos reales.</span></div></div>
+      <div class="sec"><div class="split">
+        <div class="form">
+          <div class="two"><div><div class="fl">Nombre *</div><div class="inp">&nbsp;</div></div><div><div class="fl">Empresa *</div><div class="inp">&nbsp;</div></div></div>
+          <div class="two"><div><div class="fl">Email *</div><div class="inp">&nbsp;</div></div><div><div class="fl">Teléfono</div><div class="inp">&nbsp;</div></div></div>
+          <div class="fl">Soy… *</div><div class="inp">SCRAP · Gestor · Poseedor · Productor · Otro ▾</div>
+          <div class="fl">Tu consulta *</div><div class="inp big">&nbsp;</div>
+          <div class="chk"><span class="b"></span> Acepto la política de privacidad (RGPD)</div>
+          <div class="submit"><a class="btn">Enviar consulta</a></div>
+        </div>
+        <div class="aside">
+          <div class="cbox"><h3>Contacto directo</h3>
+            <div class="line"><b>Email:</b> ots@scrapenvases.com <span class="flag">(por confirmar)</span></div>
+            <div class="line"><b>Teléfono:</b> <span class="flag">(por confirmar)</span></div>
+            <div class="line"><b>Horario:</b> L–V, oficina</div>
+          </div>
+          <div class="cbox"><h3>Quién te atiende</h3>
+            <div class="person"><span class="av"></span><div><div class="nm">María Izquierdo</div><div class="rl">Directora General · INPROECO</div></div></div>
+            <div class="person"><span class="av"></span><div><div class="nm">Rodrigo Bueno</div><div class="rl">Desarrollo · INPRONET Solutions</div></div></div>
+          </div>
+        </div>
+      </div></div>
+
+      <div class="annbar"><div class="annnum">3</div><div class="anntxt"><b>FAQ de apoyo</b> — acordeón desplegable. Resuelve las dudas más repetidas y refuerza SEO.</div></div>
+      <div class="sec">
+        <h3 class="bhead">Preguntas frecuentes</h3>
+        <div class="faq">
+          <div class="qa"><span class="q">¿Estoy obligado a estar en un SCRAP?</span><span class="pl">+</span></div>
+          <div class="qa"><span class="q">¿Qué es el incentivo y a quién le corresponde?</span><span class="pl">+</span></div>
+          <div class="qa"><span class="q">¿Qué código LER uso para mis residuos de envase?</span><span class="pl">+</span></div>
+          <div class="qa"><span class="q">Soy poseedor, ¿la RAP me quita obligaciones?</span><span class="pl">+</span></div>
+        </div>
+      </div>
+
+      <div class="sec alt"><div class="foot"><span class="logo"><b>SCRAP</b><i>envases</i><span>.com</span></span><span>Pie común · nav · legal</span><span class="social"><i></i><i></i><i></i><i></i></span></div></div>
+    </div>
+  </div>
+</div>

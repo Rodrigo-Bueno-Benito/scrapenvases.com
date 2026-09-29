@@ -1,0 +1,232 @@
+<title>Wireframes de perfil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#eef0f2;--frame:#ffffff;--site:#ffffff;
+    --block-2:#eef1f3;--hatch:#dfe4e8;
+    --ink:#2a3338;--muted:#6c767d;--faint:#98a1a8;
+    --line:#c3cbd1;--dash:#b4bdc4;
+    --accent:#146079;--green:#3f7f37;--amber:#a9711c;
+    --ann-bg:#132a34;--ann-ink:#cfe6ef;
+    --shadow:0 1px 2px rgba(20,50,62,.08),0 10px 34px rgba(20,50,62,.10);
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --paper:#0d1417;--frame:#141d21;--site:#101a1e;
+    --block-2:#18242a;--hatch:#233139;
+    --ink:#e7edf0;--muted:#9aa6ad;--faint:#6f7d84;
+    --line:#31424a;--dash:#3a4c55;
+    --accent:#40a3c4;--green:#79c169;--amber:#dca24d;
+    --ann-bg:#04222d;--ann-ink:#a9d7e6;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 36px rgba(0,0,0,.45);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#0d1417;--frame:#141d21;--site:#101a1e;
+    --block-2:#18242a;--hatch:#233139;
+    --ink:#e7edf0;--muted:#9aa6ad;--faint:#6f7d84;
+    --line:#31424a;--dash:#3a4c55;
+    --accent:#40a3c4;--green:#79c169;--amber:#dca24d;
+    --ann-bg:#04222d;--ann-ink:#a9d7e6;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 36px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box}
+  body{background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.5;margin:0;-webkit-font-smoothing:antialiased}
+  .mono{font-family:"IBM Plex Mono",monospace}
+  .wrap{max-width:1000px;margin:0 auto;padding:28px 20px 60px}
+
+  .doc-head{margin:6px 0 22px}
+  .doc-head .k{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .doc-head h1{font-family:"Archivo";font-weight:800;font-size:1.7rem;letter-spacing:-.02em;margin:8px 0 6px}
+  .doc-head p{color:var(--muted);font-size:.92rem;margin:0;max-width:66ch}
+  .legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:14px;font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--faint)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .lg-ann{width:16px;height:16px;border-radius:50%;background:var(--ann-bg);color:var(--ann-ink);display:inline-flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:600}
+  .lg-img{width:18px;height:13px;border:1px dashed var(--dash);background:repeating-linear-gradient(45deg,transparent,transparent 3px,var(--hatch) 3px,var(--hatch) 5px)}
+  .flag{color:var(--amber)}
+
+  .pagetitle{font-family:"IBM Plex Mono",monospace;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:34px 0 8px;display:flex;align-items:center;gap:10px}
+  .pagetitle b{color:var(--ink)}
+  .pagetitle .tab{background:var(--ann-bg);color:var(--ann-ink);border-radius:6px;padding:3px 9px;font-size:.66rem}
+
+  .frame{background:var(--frame);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+  .chrome{display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--block-2);border-bottom:1px solid var(--line)}
+  .dots{display:flex;gap:6px}.dots i{width:9px;height:9px;border-radius:50%;background:var(--dash);display:block}
+  .urlbar{flex:1;background:var(--site);border:1px solid var(--line);border-radius:20px;padding:5px 14px;font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--muted)}
+  .site{background:var(--site)}
+
+  .annbar{display:flex;align-items:flex-start;gap:10px;padding:13px 18px 5px}
+  .annnum{flex:none;width:21px;height:21px;border-radius:50%;background:var(--ann-bg);color:var(--ann-ink);display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Mono",monospace;font-size:.7rem;font-weight:600;margin-top:1px}
+  .anntxt{font-family:"IBM Plex Mono",monospace;font-size:.71rem;color:var(--muted);line-height:1.45}
+  .anntxt b{color:var(--ink);text-transform:uppercase;letter-spacing:.08em}
+
+  .sec{margin:0 14px 8px;border:1px solid var(--line);border-radius:10px;padding:20px;background:var(--frame)}
+  .sec.alt{background:var(--block-2)}
+
+  .snav{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .logo{font-family:"Archivo";font-weight:800;font-size:1rem;letter-spacing:-.02em}
+  .logo b{color:var(--accent)}.logo i{color:var(--green);font-style:normal}.logo span{color:var(--faint);font-weight:600}
+  .snav ul{list-style:none;display:flex;gap:12px;margin:0;padding:0;flex-wrap:wrap}
+  .snav li{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+  .snav li.on{color:var(--accent);font-weight:600}
+  .snav .push{margin-left:auto}
+  .btn{font-family:"Archivo";font-weight:700;font-size:.78rem;padding:7px 14px;border-radius:8px;background:var(--accent);color:#fff;display:inline-block}
+  .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+
+  .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;align-items:center}
+  .kick{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:500}
+  .h1{font-family:"Archivo";font-weight:800;font-size:1.7rem;letter-spacing:-.02em;line-height:1.12;margin:10px 0}
+  .sub{color:var(--muted);font-size:.98rem;max-width:46ch;margin:0 0 16px}
+  .ph{border:1.5px dashed var(--dash);border-radius:10px;background:repeating-linear-gradient(45deg,transparent,transparent 7px,var(--hatch) 7px,var(--hatch) 9px);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--faint);font-family:"IBM Plex Mono",monospace;font-size:.7rem;padding:14px;min-height:150px}
+  .ph .lab{background:var(--site);padding:4px 10px;border-radius:6px;border:1px solid var(--dash);max-width:84%}
+
+  .strip{margin:0;color:var(--muted);font-size:.95rem;max-width:78ch}
+  .strip b{color:var(--ink)}
+
+  .bhead{font-family:"Archivo";font-weight:700;font-size:1.15rem;letter-spacing:-.015em;margin:0 0 14px}
+  .needs{display:flex;flex-direction:column;gap:12px}
+  .needc{border:1px solid var(--line);border-radius:10px;padding:15px 17px;background:var(--site);display:grid;grid-template-columns:36px 1fr;gap:4px 14px}
+  .needc .ic{grid-row:1 / span 3;width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:"Archivo";font-weight:800;color:#fff;font-size:1rem}
+  .i-p{background:linear-gradient(135deg,#2b8ca8,#3f7f37)}.i-i{background:linear-gradient(135deg,#57a24a,#3f7f37)}.i-s{background:linear-gradient(135deg,#1a7fa0,#146079)}
+  .needc .nt{font-family:"Archivo";font-weight:700;font-size:1rem}
+  .needc .rl{font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);grid-column:2}
+  .needc .cx{grid-column:2;font-size:.86rem;color:var(--muted);margin:6px 0 0}
+  .needc .so{grid-column:2;font-size:.88rem;color:var(--ink);border-left:2.5px solid var(--green);padding-left:11px;margin-top:8px}
+  .needc .lk{grid-column:2;font-family:"IBM Plex Mono",monospace;font-size:.66rem;color:var(--accent);margin-top:6px;font-weight:600}
+  .needc .lk.flag{color:var(--amber)}
+
+  .band{display:flex;align-items:center;gap:16px;flex-wrap:wrap;border:1px solid var(--line);border-radius:10px;padding:18px 20px;background:linear-gradient(100deg,color-mix(in srgb,var(--accent) 12%,var(--site)),color-mix(in srgb,var(--green) 12%,var(--site)))}
+  .band h3{font-family:"Archivo";font-weight:800;font-size:1.1rem;margin:0}
+  .band p{margin:4px 0 0;color:var(--muted);font-size:.86rem;max-width:52ch}
+  .band .push{margin-left:auto}
+
+  .foot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center;font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:var(--faint)}
+  .foot .social{display:flex;gap:6px}.foot .social i{width:20px;height:20px;border-radius:5px;border:1px solid var(--dash);display:block}
+
+  @media (max-width:720px){.hero{grid-template-columns:1fr}.snav ul{width:100%;order:3}}
+</style>
+
+<div class="wrap">
+  <div class="doc-head">
+    <div class="k">Wireframes · Páginas de perfil · No es diseño final</div>
+    <h1>Wireframes — Para tu SCRAP · Poseedores · Gestores</h1>
+    <p>Las tres páginas de perfil con el copy real colocado, mismo patrón que la Home: hero, franja de contexto, tres bloques de necesidad → solución (con la pieza del core que la resuelve) y cierre con la OTS. Recuadros rayados = imagen; círculos = nota de maquetación.</p>
+    <div class="legend">
+      <span><i class="lg-ann">1</i> nota</span>
+      <span><i class="lg-img"></i> imagen</span>
+      <span class="flag">■ pendiente de confirmar</span>
+    </div>
+  </div>
+
+  <!-- =============== PARA TU SCRAP =============== -->
+  <div class="pagetitle"><span class="tab">B</span> <b>Para tu SCRAP</b> · /para-tu-scrap · perfil prioritario</div>
+  <div class="frame">
+    <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="urlbar">https://scrapenvases.com/para-tu-scrap</div></div>
+    <div class="site">
+      <div class="sec">
+        <nav class="snav"><span class="logo"><b>SCRAP</b><i>envases</i><span>.com</span></span>
+          <ul><li>El CORE</li><li class="on">Para tu SCRAP</li><li>Poseedores</li><li>Gestores</li><li>Normativa</li><li>Contacto · OTS</li></ul>
+          <span class="push"></span><a class="btn ghost">Contactar</a></nav>
+      </div>
+      <div class="annbar"><div class="annnum">1</div><div class="anntxt"><b>Hero</b> — perfil prioritario. Kicker + H1 + subtítulo + CTA. Imagen de operativa de SCRAP.</div></div>
+      <div class="sec"><div class="hero">
+        <div>
+          <div class="kick">Para Sistemas Colectivos (SCRAP)</div>
+          <div class="h1">Todo lo que un SCRAP de envases necesita para operar</div>
+          <p class="sub">El core reúne las tres funciones críticas de un SCRAP —homologación, control documental e incentivos del poseedor— en un ecosistema ya operativo, sin construir una plataforma propia desde cero.</p>
+          <a class="btn">Hablar con la OTS</a>
+        </div>
+        <div class="ph"><span class="lab">IMG · Operativa SCRAP<br>trazabilidad / control</span></div>
+      </div></div>
+      <div class="annbar"><div class="annnum">2</div><div class="anntxt"><b>Contexto</b> — una línea que enmarca el reto del SCRAP.</div></div>
+      <div class="sec alt"><p class="strip">Un SCRAP de envases comerciales e industriales coordina a muchos actores, maneja grandes volúmenes de documentación y responde ante la Administración. El core cubre esas tres necesidades con herramientas que ya funcionan juntas.</p></div>
+      <div class="annbar"><div class="annnum">3</div><div class="anntxt"><b>Tres necesidades → herramienta</b> — bloque central. Cada tarjeta: necesidad, contexto real, solución y enlace a la herramienta.</div></div>
+      <div class="sec">
+        <h3 class="bhead">Homologar, controlar documentación y gestionar incentivos</h3>
+        <div class="needs">
+          <div class="needc"><div class="ic i-p">P</div><div class="nt">Homologar y controlar a tus gestores</div><div class="rl">PROBATUS · homologación</div><p class="cx">Homologar y auditar a cientos de gestores heterogéneos, con un dato defendible ante inspección, no escala a mano.</p><div class="so">PROBATUS evalúa, homologa y hace seguimiento de proveedores de forma homogénea, transparente y auditable.</div><span class="lk">→ probatus.es</span></div>
+          <div class="needc"><div class="ic i-i">I</div><div class="nt">Controlar la documentación de cada servicio</div><div class="rl">INPROGEST · control documental</div><p class="cx">DI, fichas de seguimiento, certificados de reciclado… recopilar, validar, conservar y reportar dos veces (SCRAP y MITECO).</p><div class="so">INPROGEST coordina a los agentes y centraliza el control documental de los servicios contratados.</div><span class="lk">→ inprogest.com</span></div>
+          <div class="needc"><div class="ic i-s">S</div><div class="nt">Documentos e incentivos del poseedor</div><div class="rl">SCRAPP · trazabilidad</div><p class="cx">El incentivo (3–5 €/t) es del poseedor, pero el dato lo tiene el gestor; mover ese flujo con calidad auditable es el cuello de botella.</p><div class="so">SCRAPP traza el flujo entre poseedor, gestor y SCRAP y ordena documentación e incentivos.</div><span class="lk">→ scrapp.es</span></div>
+        </div>
+      </div>
+      <div class="annbar"><div class="annnum">4</div><div class="anntxt"><b>Cierre · OTS</b> — banda de contacto técnico.</div></div>
+      <div class="sec"><div class="band"><div><h3>Tres herramientas, un mismo ecosistema</h3><p>Con el acompañamiento técnico de la Oficina Técnica de SCRAPs (OTS).</p></div><span class="push"></span><a class="btn">Hablar con la OTS</a></div></div>
+      <div class="sec alt"><div class="foot"><span class="logo"><b>SCRAP</b><i>envases</i><span>.com</span></span><span>Pie común · nav · legal</span><span class="social"><i></i><i></i><i></i><i></i></span></div></div>
+    </div>
+  </div>
+
+  <!-- =============== POSEEDORES =============== -->
+  <div class="pagetitle"><span class="tab">C</span> <b>Poseedores</b> · /poseedores</div>
+  <div class="frame">
+    <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="urlbar">https://scrapenvases.com/poseedores</div></div>
+    <div class="site">
+      <div class="sec">
+        <nav class="snav"><span class="logo"><b>SCRAP</b><i>envases</i><span>.com</span></span>
+          <ul><li>El CORE</li><li>Para tu SCRAP</li><li class="on">Poseedores</li><li>Gestores</li><li>Normativa</li><li>Contacto · OTS</li></ul>
+          <span class="push"></span><a class="btn ghost">Contactar</a></nav>
+      </div>
+      <div class="annbar"><div class="annnum">1</div><div class="anntxt"><b>Hero</b> — tono acompañante, no de alarma. Imagen de empresa/almacén con residuos de envase.</div></div>
+      <div class="sec"><div class="hero">
+        <div>
+          <div class="kick">Para poseedores de residuos de envases</div>
+          <div class="h1">Tus residuos de envases, en orden y a disposición de tu SCRAP</div>
+          <p class="sub">Como poseedor final respondes ante la Administración de la trazabilidad de tus residuos. Organiza la documentación, ponla a disposición de tu SCRAP y cumple el RD 1055/2022 —sin cambiar de gestores.</p>
+          <a class="btn">Consultar con la OTS</a>
+        </div>
+        <div class="ph"><span class="lab">IMG · Almacén / poseedor<br>palés · big bags · bidones</span></div>
+      </div></div>
+      <div class="annbar"><div class="annnum">2</div><div class="anntxt"><b>Contexto</b> — la doble obligación (poseedor + RAP) y el incentivo poco conocido.</div></div>
+      <div class="sec alt"><p class="strip">Desde 2022 ya gestionas tus residuos por gestor autorizado y conservas su trazabilidad. Las obligaciones de la RAP <b>no te eximen</b> de las tuyas: conviven. Y por aportar bien esa trazabilidad te corresponde un <b>incentivo</b> que muchos poseedores ni saben que pueden cobrar.</p></div>
+      <div class="annbar"><div class="annnum">3</div><div class="anntxt"><b>Tres necesidades → solución</b> — protagonista SCRAPP.</div></div>
+      <div class="sec">
+        <h3 class="bhead">Ordena, comparte y cumple</h3>
+        <div class="needs">
+          <div class="needc"><div class="ic i-s">1</div><div class="nt">Tu documentación, en un solo sitio</div><div class="rl">SCRAPP · gestión documental</div><p class="cx">DI, fichas y certificados que hoy persigues a tu gestor, bien codificados (LER 15 01, no grupo 20).</p><div class="so">Reúne y ordena esa documentación en un único lugar, clasificada y lista.</div><span class="lk">→ vía SCRAPP</span></div>
+          <div class="needc"><div class="ic i-s">2</div><div class="nt">A disposición de tu SCRAP, sin teclear de más</div><div class="rl">SCRAPP · trazabilidad</div><p class="cx">Aprender una plataforma distinta por cada SCRAP y volver a subir lo mismo es la fricción que más desgasta.</p><div class="so">Pon tu trazabilidad a disposición de tu SCRAP desde un solo canal, ya validada.</div><span class="lk">→ vía SCRAPP</span></div>
+          <div class="needc"><div class="ic i-s">3</div><div class="nt">Cumple y cobra tu incentivo</div><div class="rl">SCRAPP · incentivos</div><p class="cx">El incentivo (3–5 €/t) corresponde por ley al poseedor final. Sin documentación en regla, ni se cumple ni se cobra.</p><div class="so">Cumple el RD 1055/2022 y reclama el incentivo que te corresponde, con la prueba que lo justifica.</div><span class="lk">→ vía SCRAPP</span></div>
+        </div>
+      </div>
+      <div class="annbar"><div class="annnum">4</div><div class="anntxt"><b>Cierre · OTS</b> — "sigues con tus gestores".</div></div>
+      <div class="sec"><div class="band"><div><h3>Mantén tus gestores de siempre</h3><p>Nosotros ponemos el orden documental, con el acompañamiento de la OTS.</p></div><span class="push"></span><a class="btn">Consultar con la OTS</a></div></div>
+      <div class="sec alt"><div class="foot"><span class="logo"><b>SCRAP</b><i>envases</i><span>.com</span></span><span>Pie común · nav · legal</span><span class="social"><i></i><i></i><i></i><i></i></span></div></div>
+    </div>
+  </div>
+
+  <!-- =============== GESTORES =============== -->
+  <div class="pagetitle"><span class="tab">D</span> <b>Gestores</b> · /gestores</div>
+  <div class="frame">
+    <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="urlbar">https://scrapenvases.com/gestores</div></div>
+    <div class="site">
+      <div class="sec">
+        <nav class="snav"><span class="logo"><b>SCRAP</b><i>envases</i><span>.com</span></span>
+          <ul><li>El CORE</li><li>Para tu SCRAP</li><li>Poseedores</li><li class="on">Gestores</li><li>Normativa</li><li>Contacto · OTS</li></ul>
+          <span class="push"></span><a class="btn ghost">Contactar</a></nav>
+      </div>
+      <div class="annbar"><div class="annnum">1</div><div class="anntxt"><b>Hero</b> — ángulo de oportunidad y servicio, no de miedo. Imagen de planta de gestión.</div></div>
+      <div class="sec"><div class="hero">
+        <div>
+          <div class="kick">Para gestores de residuos</div>
+          <div class="h1">Tu papel en el nuevo modelo de RAP de envases</div>
+          <p class="sub">Entrega la documentación de cada servicio en el formato que necesitan los SCRAP y reporta su trazabilidad. Homológate, intégrate y reporta sin multiplicar el trabajo por cada SCRAP.</p>
+          <a class="btn">Hablar con la OTS</a>
+        </div>
+        <div class="ph"><span class="lab">IMG · Planta de gestión<br>reciclaje / trazabilidad</span></div>
+      </div></div>
+      <div class="annbar"><div class="annnum">2</div><div class="anntxt"><b>Contexto</b> — la documentación limpia como ventaja competitiva.</div></div>
+      <div class="sec alt"><p class="strip">Tus clientes poseedores necesitan de ti documentación limpia —DI, ficha de seguimiento, certificado de reciclado— para reportar al SCRAP y cobrar su incentivo. Entregarla bien y reportar por apoderamiento <b>refuerza tu relación con el cliente</b> y tu posición frente a gestores no homologados.</p></div>
+      <div class="annbar"><div class="annnum">3</div><div class="anntxt"><b>Tres necesidades → herramienta</b> — PROBATUS + INPROGEST/SCRAPP.</div></div>
+      <div class="sec">
+        <h3 class="bhead">Homológate, entrega y reporta</h3>
+        <div class="needs">
+          <div class="needc"><div class="ic i-p">P</div><div class="nt">Homológate una vez</div><div class="rl">PROBATUS · homologación</div><p class="cx">Cada SCRAP homologa a sus gestores (requisitos legales, técnicos, ambientales). Repetirlo uno por uno multiplica el trabajo.</p><div class="so">Homológate de forma homogénea y mantén tu documentación al día en un solo sistema.</div><span class="lk">→ vía PROBATUS</span></div>
+          <div class="needc"><div class="ic i-i">I</div><div class="nt">Entrega la documentación limpia</div><div class="rl">INPROGEST · control documental</div><p class="cx">La documentación tiene que llegar bien codificada (LER 15 01) y en el formato del SCRAP; los errores generan devoluciones.</p><div class="so">Genera y entrega la documentación de cada servicio, validada y lista para el SCRAP.</div><span class="lk flag">→ vía INPROGEST</span></div>
+          <div class="needc"><div class="ic i-s">S</div><div class="nt">Reporta por apoderamiento</div><div class="rl">INPROGEST · SCRAPP · reporte</div><p class="cx">Ofrecer el reporte al SCRAP en nombre del cliente, hoy, implica una plataforma distinta por cada SCRAP.</p><div class="so">Reporta en nombre de tus clientes desde un único canal, sin duplicar homologaciones ni plataformas.</div><span class="lk">→ vía INPROGEST + SCRAPP</span></div>
+        </div>
+      </div>
+      <div class="annbar"><div class="annnum">4</div><div class="anntxt"><b>Cierre · OTS</b>.</div></div>
+      <div class="sec"><div class="band"><div><h3>Un solo sistema, no uno por cada SCRAP</h3><p>Con el acompañamiento técnico de la Oficina Técnica de SCRAPs (OTS).</p></div><span class="push"></span><a class="btn">Hablar con la OTS</a></div></div>
+      <div class="sec alt"><div class="foot"><span class="logo"><b>SCRAP</b><i>envases</i><span>.com</span></span><span>Pie común · nav · legal</span><span class="social"><i></i><i></i><i></i><i></i></span></div></div>
+    </div>
+  </div>
+
+</div>

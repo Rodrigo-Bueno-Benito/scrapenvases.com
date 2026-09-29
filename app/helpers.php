@@ -13,6 +13,20 @@ function url(string $path = ''): string {
     return '/' . ltrim($path, '/');
 }
 
+/**
+ * URL de un fichero estático con su marca de tiempo:
+ *   asset('/css/base.css') → /css/base.css?v=1770000000
+ *
+ * Así el navegador recoge la versión nueva en cuanto se edita el fichero,
+ * sin dejar de cachearlo agresivamente el resto del tiempo.
+ */
+function asset(string $path): string {
+    $path = '/' . ltrim($path, '/');
+    $file = __DIR__ . '/../public' . $path;
+    $v = is_file($file) ? filemtime($file) : null;
+    return $v ? $path . '?v=' . $v : $path;
+}
+
 /** Slug amigable para URLs */
 function slugify(string $text): string {
     $text = trim($text);
@@ -63,6 +77,59 @@ function noticia_img_src(?string $imagen): string {
     if (is_file($pubRoot . '/uploads/' . $imagen)) return '/uploads/' . $imagen;
     if (is_file($pubRoot . '/imagenes/' . $imagen)) return '/imagenes/' . $imagen;
     return '/uploads/' . $imagen;
+}
+
+/**
+ * Dimensiones intrínsecas de una imagen local, como atributos HTML.
+ *
+ * Reservar el hueco antes de que cargue evita que el texto salte
+ * (CLS). Devuelve cadena vacía para imágenes remotas o ilegibles:
+ * el `aspect-ratio` de la hoja de estilos sigue cubriendo ese caso.
+ */
+function img_attrs(string $src): string {
+    static $cache = [];
+    if (array_key_exists($src, $cache)) return $cache[$src];
+
+    $r = '';
+    if ($src !== '' && $src[0] === '/' && !str_contains($src, '..')) {
+        $ruta = __DIR__ . '/../public' . $src;
+        if (is_file($ruta)) {
+            $d = @getimagesize($ruta);
+            if ($d && $d[0] > 0 && $d[1] > 0) {
+                $r = ' width="' . (int)$d[0] . '" height="' . (int)$d[1] . '"';
+            }
+        }
+    }
+    return $cache[$src] = $r;
+}
+
+/**
+ * URL pública de cada herramienta del core.
+ *
+ * Por defecto apunta al dominio de producto. Si en `.env` defines
+ * URL_SCRAPP / URL_INPROGEST / URL_PROBATUS —por ejemplo un entorno de
+ * demostración con datos ficticios— se usa ese valor.
+ *
+ * No pongas aquí la instancia de un cliente: es su panel de producción.
+ */
+function plataforma_url(string $tool): ?string {
+    $porDefecto = [
+        'scrapp'    => 'https://scrapp.es/',
+        'inprogest' => 'https://inprogest.com/',
+        'probatus'  => 'https://probatus.es/',
+    ];
+    $tool = strtolower($tool);
+    if (!isset($porDefecto[$tool])) return null;
+    return env('URL_' . strtoupper($tool), $porDefecto[$tool]);
+}
+
+/**
+ * ¿Hay un entorno de demostración real configurado para esta herramienta?
+ * Solo entonces se ofrece el acceso «probar la aplicación de verdad».
+ */
+function plataforma_demo_url(string $tool): ?string {
+    $v = env('DEMO_' . strtoupper($tool));
+    return $v ?: null;
 }
 
 /** Token CSRF por sesión */

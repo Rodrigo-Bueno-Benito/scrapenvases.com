@@ -2,11 +2,23 @@
 /**
  * Instalador idempotente. Crea las tablas si no existen y siembra
  * un usuario admin + noticias de ejemplo. Compatible SQLite y MySQL.
+ *
+ * Solo toca la BBDD cuando el centinela de esquema no está al día, así
+ * una visita normal no ejecuta ningún CREATE ni ALTER.
  */
 require_once __DIR__ . '/../db.php';
 require_once __DIR__ . '/../helpers.php';
 
+/** Subir este número cuando cambie el esquema */
+const SCHEMA_VERSION = 2;
+
+function schema_sentinel_path(): string {
+    return __DIR__ . '/../../data/.schema-v' . SCHEMA_VERSION;
+}
+
 function db_install(): void {
+    if (is_file(schema_sentinel_path())) return;
+
     $pdo = db();
     if (!$pdo) return;
 
@@ -52,8 +64,33 @@ function db_install(): void {
             creado_en $now
         )$eng");
 
-        // Migración: añadir 'seccion' a instalaciones previas (ignora si ya existe)
+        // Consultas de la Oficina Técnica de SCRAPs (OTS)
+        $pdo->exec("CREATE TABLE IF NOT EXISTS consultas (
+            id $pk,
+            nombre VARCHAR(160) NOT NULL,
+            empresa VARCHAR(190) NOT NULL,
+            email VARCHAR(190) NOT NULL,
+            telefono VARCHAR(40) NULL,
+            perfil VARCHAR(20) NOT NULL DEFAULT 'otro',
+            mensaje TEXT NOT NULL,
+            rgpd INT NOT NULL DEFAULT 0,
+            rgpd_en VARCHAR(40) NULL,
+            ip VARCHAR(60) NULL,
+            estado VARCHAR(20) NOT NULL DEFAULT 'nueva',
+            creado_en $now
+        )$eng");
+
+        /* --- Migraciones e índices: solo al subir de versión de esquema --- */
+
+        // 'seccion' en instalaciones previas a la separación de demos por sección
         try { $pdo->exec("ALTER TABLE demos ADD COLUMN seccion VARCHAR(20) NOT NULL DEFAULT 'scrap'"); } catch (Throwable $e) { /* ya existe */ }
+
+        // El slug identifica la noticia en la URL: único en BBDD, no solo por
+        // la comprobación previa de noticia_slug_unico().
+        $ine = $isSqlite ? 'IF NOT EXISTS ' : '';
+        try { $pdo->exec("CREATE UNIQUE INDEX {$ine}ux_noticias_slug ON noticias (slug)"); } catch (Throwable $e) { /* ya existe */ }
+        try { $pdo->exec("CREATE INDEX {$ine}ix_noticias_listado ON noticias (estado, fecha_publicacion)"); } catch (Throwable $e) { /* ya existe */ }
+        try { $pdo->exec("CREATE INDEX {$ine}ix_consultas_estado ON consultas (estado, creado_en)"); } catch (Throwable $e) { /* ya existe */ }
     } catch (Throwable $e) {
         error_log('[INSTALL] ' . $e->getMessage());
         return;
@@ -71,6 +108,16 @@ function db_install(): void {
     $ncount = db_fetch("SELECT COUNT(*) AS c FROM noticias");
     if ($ncount && (int)$ncount['c'] === 0) {
         db_seed_noticias();
+    }
+
+    // Centinela: a partir de aquí las visitas ya no tocan el esquema.
+    // Si no se puede escribir, el instalador vuelve a correr (es idempotente).
+    $sentinel = schema_sentinel_path();
+    $dir = dirname($sentinel);
+    if (!is_dir($dir)) @mkdir($dir, 0775, true);
+    @file_put_contents($sentinel, 'esquema v' . SCHEMA_VERSION . ' — ' . date('c') . "\n");
+    foreach (glob($dir . '/.schema-v*') ?: [] as $old) {
+        if ($old !== $sentinel) @unlink($old);
     }
 }
 

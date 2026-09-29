@@ -2,9 +2,12 @@
 require_admin();
 require_once __DIR__ . '/../data/noticias_db.php';
 require_once __DIR__ . '/../data/demos_db.php';
+require_once __DIR__ . '/../data/consultas_db.php';
 
 $view = $_GET['view'] ?? 'list';
-$view = in_array($view, ['list', 'editor', 'demos'], true) ? $view : 'list';
+$view = in_array($view, ['list', 'editor', 'demos', 'consultas'], true) ? $view : 'list';
+
+$consultasStats = consultas_stats();
 
 $user = current_user();
 $ok = flash_get('admin_ok');
@@ -23,24 +26,28 @@ $categoriasSug = ['Envases', 'Normativa', 'Digitalización', 'Gestión', 'Econom
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panel · ScrapEnvases</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;700;800&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/tokens.css">
-  <link rel="stylesheet" href="/css/base.css">
-  <link rel="stylesheet" href="/css/pages.css">
-  <link rel="stylesheet" href="/css/admin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..112,400..800&family=Public+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="<?= asset('/css/tokens.css') ?>">
+  <link rel="stylesheet" href="<?= asset('/css/base.css') ?>">
+  <link rel="stylesheet" href="<?= asset('/css/pages.css') ?>">
+  <link rel="stylesheet" href="<?= asset('/css/admin.css') ?>">
   <link rel="icon" href="/imagenes/logoScrap.png">
 </head>
 <body class="admin-body">
 <div class="admin-shell">
   <aside class="admin-side">
     <div class="admin-side__brand">
-      <img src="/imagenes/logoScrap.png" alt="">
+      <picture>
+        <source srcset="/imagenes/logoScrap.webp" type="image/webp">
+        <img src="/imagenes/logoScrap.png" alt="" width="180" height="22">
+      </picture>
       <span>Panel</span>
     </div>
     <nav class="admin-nav">
       <a href="/admin" class="<?= $view === 'list' ? 'active' : '' ?>">📰 Noticias</a>
       <a href="/admin?view=editor" class="<?= ($view === 'editor' && !$editing) ? 'active' : '' ?>">✍️ Nueva noticia</a>
       <a href="/admin?view=demos" class="<?= $view === 'demos' ? 'active' : '' ?>">🎬 Demo (app)</a>
+      <a href="/admin?view=consultas" class="<?= $view === 'consultas' ? 'active' : '' ?>">📬 Consultas OTS<?php if ($consultasStats['nuevas'] > 0): ?> <span class="nav-badge"><?= $consultasStats['nuevas'] ?></span><?php endif; ?></a>
       <a href="/" target="_blank">🌐 Ver web ↗</a>
     </nav>
     <div class="admin-side__foot">
@@ -83,7 +90,7 @@ $categoriasSug = ['Envases', 'Normativa', 'Digitalización', 'Gestión', 'Econom
             <tbody>
               <?php foreach ($noticias as $n): ?>
               <tr>
-                <td><img class="thumb" src="<?= e(noticia_img_src($n['imagen'])) ?>" alt=""></td>
+                <td><img class="thumb" src="<?= e($src = noticia_img_src($n['imagen'])) ?>" alt=""<?= img_attrs($src) ?>></td>
                 <td>
                   <strong><?= e($n['titulo']) ?></strong>
                   <?php if ((int)$n['destacada'] === 1): ?><span class="tag" style="margin-left:.4rem">★ Destacada</span><?php endif; ?>
@@ -175,7 +182,7 @@ $categoriasSug = ['Envases', 'Normativa', 'Digitalización', 'Gestión', 'Econom
               </div>
               <div class="imgprev" data-imgpreview>
                 <?php if (!empty($editing['imagen'])): ?>
-                  <img src="<?= e(noticia_img_src($editing['imagen'])) ?>" alt="Imagen actual">
+                  <img src="<?= e($src = noticia_img_src($editing['imagen'])) ?>" alt="Imagen actual"<?= img_attrs($src) ?>>
                 <?php else: ?>
                   <div class="placeholder">Sin imagen — se usará una genérica</div>
                 <?php endif; ?>
@@ -192,7 +199,7 @@ $categoriasSug = ['Envases', 'Normativa', 'Digitalización', 'Gestión', 'Econom
         </div>
       </form>
 
-    <?php else: /* demos */ ?>
+    <?php elseif ($view === 'demos'): /* demos */ ?>
       <?php $demos = demos_all(); ?>
       <div class="admin-topbar">
         <h1>Demo de la aplicación</h1>
@@ -259,7 +266,7 @@ $categoriasSug = ['Envases', 'Normativa', 'Digitalización', 'Gestión', 'Econom
                     <tr>
                       <td>
                         <?php if ($m['kind'] === 'image'): ?>
-                          <img class="thumb" src="<?= e($m['src']) ?>" alt="">
+                          <img class="thumb" src="<?= e($m['src']) ?>" alt=""<?= img_attrs($m['src']) ?>>
                         <?php else: ?>
                           <span class="thumb" style="display:grid;place-items:center;background:var(--paper-alt);color:var(--ink-muted)">▶</span>
                         <?php endif; ?>
@@ -283,9 +290,79 @@ $categoriasSug = ['Envases', 'Normativa', 'Digitalización', 'Gestión', 'Econom
           <?php endif; ?>
         </div>
       </div>
+
+    <?php elseif ($view === 'consultas'): /* consultas recibidas por la OTS */ ?>
+      <?php $consultas = consultas_all(); ?>
+      <div class="admin-topbar">
+        <h1>Consultas de la OTS</h1>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat"><div class="stat__num"><?= $consultasStats['total'] ?></div><div class="stat__label">Recibidas</div></div>
+        <div class="stat"><div class="stat__num"><?= $consultasStats['nuevas'] ?></div><div class="stat__label">Sin atender</div></div>
+      </div>
+
+      <div class="card">
+        <div class="card__head"><h2>Bandeja de entrada</h2></div>
+        <?php if (!$consultas): ?>
+          <div class="empty">
+            <h3>Sin consultas todavía</h3>
+            <p>Aquí aparecerán las consultas enviadas desde el formulario de <a href="/contacto" target="_blank">/contacto</a>.</p>
+          </div>
+        <?php else: ?>
+          <div class="consulta-list">
+            <?php foreach ($consultas as $c): ?>
+              <article class="consulta <?= $c['estado'] === 'nueva' ? 'consulta--nueva' : '' ?>">
+                <header class="consulta__head">
+                  <div>
+                    <strong><?= e($c['nombre']) ?></strong>
+                    <span class="tag"><?= e(consulta_perfil_label($c['perfil'])) ?></span>
+                    <?php if ($c['estado'] === 'nueva'): ?>
+                      <span class="badge badge--draft">Nueva</span>
+                    <?php else: ?>
+                      <span class="badge badge--pub">Atendida</span>
+                    <?php endif; ?>
+                  </div>
+                  <span class="consulta__date"><?= e(fecha_es($c['creado_en'])) ?></span>
+                </header>
+
+                <p class="consulta__org"><?= e($c['empresa']) ?></p>
+
+                <ul class="consulta__meta">
+                  <li><a href="mailto:<?= e($c['email']) ?>"><?= e($c['email']) ?></a></li>
+                  <?php if (!empty($c['telefono'])): ?>
+                    <li><a href="tel:<?= e(preg_replace('/\s+/', '', $c['telefono'])) ?>"><?= e($c['telefono']) ?></a></li>
+                  <?php endif; ?>
+                  <li>RGPD: <?= $c['rgpd'] ? e($c['rgpd_en'] ?: 'aceptado') : 'no consta' ?></li>
+                  <?php if (!empty($c['ip'])): ?><li>IP <?= e($c['ip']) ?></li><?php endif; ?>
+                </ul>
+
+                <p class="consulta__msg"><?= nl2br(e($c['mensaje'])) ?></p>
+
+                <div class="rowactions">
+                  <a class="btn-sm primary" href="mailto:<?= e($c['email']) ?>?subject=<?= e(rawurlencode('Re: tu consulta a la Oficina Técnica de SCRAPs')) ?>">Responder</a>
+                  <form method="post" action="/admin-action" style="display:inline">
+                    <?= csrf_field() ?>
+                    <input type="hidden" name="op" value="consulta_estado">
+                    <input type="hidden" name="id" value="<?= (int)$c['id'] ?>">
+                    <input type="hidden" name="estado" value="<?= $c['estado'] === 'nueva' ? 'atendida' : 'nueva' ?>">
+                    <button class="btn-sm" type="submit"><?= $c['estado'] === 'nueva' ? 'Marcar atendida' : 'Reabrir' ?></button>
+                  </form>
+                  <form method="post" action="/admin-action" onsubmit="return confirm('¿Eliminar esta consulta? Esta acción no se puede deshacer.');" style="display:inline">
+                    <?= csrf_field() ?>
+                    <input type="hidden" name="op" value="consulta_delete">
+                    <input type="hidden" name="id" value="<?= (int)$c['id'] ?>">
+                    <button class="btn-sm danger" type="submit">Borrar</button>
+                  </form>
+                </div>
+              </article>
+            <?php endforeach; ?>
+          </div>
+        <?php endif; ?>
+      </div>
     <?php endif; ?>
   </main>
 </div>
-<script src="/js/main.js" defer></script>
+<script src="<?= asset('/js/main.js') ?>" defer></script>
 </body>
 </html>

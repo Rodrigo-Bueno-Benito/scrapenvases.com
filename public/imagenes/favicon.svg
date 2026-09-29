@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="ScrapEnvases">
+  <!-- Los dos colores del logotipo: el azul de SCRAP y el teal de envases -->
+  <rect width="32" height="32" rx="7" fill="#0076a8"/>
+  <path d="M16 3.5 29 11v10L16 28.5 3 21V11z" fill="#00988b" opacity=".28"/>
+  <text x="16" y="22.4" text-anchor="middle" font-family="Archivo, Segoe UI, Arial, sans-serif"
+        font-size="17" font-weight="700" fill="#ffffff" letter-spacing="-0.5">SE</text>
+</svg>

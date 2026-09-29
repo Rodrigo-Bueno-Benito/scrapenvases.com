@@ -30,6 +30,11 @@ function env_load(): void {
 
 function env(string $key, ?string $default = null): ?string {
     env_load();
+    // $_ENV además de getenv(): en hostings con putenv() deshabilitado,
+    // getenv() no ve nada de lo cargado y la configuración se ignoraría en silencio.
     $v = getenv($key);
+    if ($v === false || $v === '') {
+        $v = $_ENV[$key] ?? false;
+    }
     return ($v === false || $v === '') ? $default : $v;
 }

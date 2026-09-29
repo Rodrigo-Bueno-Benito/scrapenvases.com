@@ -1,0 +1,202 @@
+<title>Índice del portal scrapenvases</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --petrol:#146079;--green:#57a24a;--green-deep:#3f7f37;
+    --ground:#f4f6f6;--surface:#ffffff;--surface-2:#eef2f2;
+    --ink:#152227;--ink-soft:#41575e;--ink-faint:#6d8189;
+    --line:#d7e0e0;--line-soft:#e6ecec;
+    --amber:#b4731a;--amber-bg:#f6ecdb;--green-bg:#e4efdf;--ggreen:#3f7f37;
+    --accent-grad:linear-gradient(100deg,var(--petrol),var(--green));
+    --shadow-soft:0 1px 2px rgba(20,60,72,.05);
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --petrol:#3fa3c4;--green:#78c268;--green-deep:#8fd07f;
+    --ground:#0e181c;--surface:#152227;--surface-2:#1b2b31;
+    --ink:#e9f0f0;--ink-soft:#aebec3;--ink-faint:#7b9198;
+    --line:#2a3c42;--line-soft:#223137;
+    --amber:#e0a44f;--amber-bg:#2c2416;--green-bg:#182a18;--ggreen:#8fd07f;
+    --shadow-soft:0 1px 2px rgba(0,0,0,.3);
+  }}
+  :root[data-theme="dark"]{
+    --petrol:#3fa3c4;--green:#78c268;--green-deep:#8fd07f;
+    --ground:#0e181c;--surface:#152227;--surface-2:#1b2b31;
+    --ink:#e9f0f0;--ink-soft:#aebec3;--ink-faint:#7b9198;
+    --line:#2a3c42;--line-soft:#223137;
+    --amber:#e0a44f;--amber-bg:#2c2416;--green-bg:#182a18;--ggreen:#8fd07f;
+    --shadow-soft:0 1px 2px rgba(0,0,0,.3);
+  }
+  *{box-sizing:border-box}
+  body{background:var(--ground);color:var(--ink);font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:"Archivo",sans-serif;letter-spacing:-.015em;line-height:1.14;margin:0;text-wrap:balance}
+  .mono{font-family:"IBM Plex Mono",monospace}
+  a{color:var(--petrol)}
+
+  header.top{padding:58px 0 30px;border-bottom:1px solid var(--line)}
+  .brandmark{font-family:"Archivo";font-weight:800;font-size:1.05rem;letter-spacing:-.02em;margin-bottom:24px}
+  .brandmark b{color:var(--petrol)}.brandmark i{color:var(--green);font-style:normal}.brandmark span{color:var(--ink-faint);font-weight:600}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--petrol)}
+  header.top h1{font-size:clamp(1.8rem,4.4vw,2.5rem);font-weight:800;margin:12px 0 12px}
+  header.top h1 .g{background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  header.top p{font-size:1.05rem;color:var(--ink-soft);max-width:60ch;margin:0}
+
+  section{padding:40px 0;border-bottom:1px solid var(--line-soft)}
+  .sh{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green-deep);font-weight:600;margin-bottom:14px}
+  h2{font-size:1.35rem;font-weight:700;margin-bottom:6px}
+  .lead{color:var(--ink-soft);font-size:.98rem;margin:0 0 18px;max-width:70ch}
+
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-soft)}
+  table{width:100%;border-collapse:collapse;font-size:.9rem;min-width:640px;background:var(--surface)}
+  th,td{text-align:left;padding:12px 15px;border-top:1px solid var(--line-soft);vertical-align:top}
+  thead th{border-top:none;font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;background:var(--surface-2)}
+  td .doc{font-weight:600;color:var(--ink)}
+  td .files{font-family:"IBM Plex Mono",monospace;font-size:.74rem;color:var(--ink-soft);display:block;margin-top:3px}
+  td .files span{color:var(--ink-faint)}
+  .open{font-family:"Archivo";font-weight:700;font-size:.78rem;color:#fff;background:var(--accent-grad);padding:6px 12px;border-radius:7px;text-decoration:none;white-space:nowrap;display:inline-block}
+  .tag{font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:20px;font-weight:600}
+  .t-str{background:var(--surface-2);color:var(--ink-soft)}.t-copy{background:var(--green-bg);color:var(--ggreen)}.t-wire{background:var(--amber-bg);color:var(--amber)}
+
+  /* sitemap */
+  .map{display:flex;flex-direction:column;gap:8px}
+  .node{display:grid;grid-template-columns:150px 1fr auto;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px 15px;box-shadow:var(--shadow-soft)}
+  .node .pg{font-family:"IBM Plex Mono",monospace;font-size:.74rem;color:var(--petrol);font-weight:600}
+  .node .d{font-size:.86rem;color:var(--ink-soft)}
+  .st{font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:20px;font-weight:600;white-space:nowrap}
+  .st.ok{background:var(--green-bg);color:var(--ggreen)}.st.ex{background:var(--surface-2);color:var(--ink-faint)}.st.pend{background:var(--amber-bg);color:var(--amber)}
+
+  ul.clean{margin:0;padding-left:20px}ul.clean li{margin:6px 0;color:var(--ink-soft);font-size:.93rem}
+  ul.clean li b{color:var(--ink)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow-soft)}
+  .box h3{font-size:1rem;margin-bottom:8px}
+  .box p{margin:0;font-size:.88rem;color:var(--ink-soft)}
+  .box .mono{font-size:.78rem;color:var(--petrol)}
+
+  footer{padding:34px 0 60px;color:var(--ink-faint);font-size:.8rem}
+  footer .brandmark{font-size:.9rem;margin-bottom:8px}
+  @media (max-width:600px){.two{grid-template-columns:1fr}.node{grid-template-columns:1fr;gap:6px}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="brandmark"><b>SCRAP</b><i>envases</i><span>.com</span></div>
+  <div class="eyebrow">Índice de entregables · Carpeta "portal scrapenvases"</div>
+  <h1>Portal <span class="g">scrapenvases</span> — índice del proyecto</h1>
+  <p>Punto de partida de todo el material del rediseño: estrategia, copy de las cinco páginas y wireframes. Cada entregable existe en HTML (para ver y compartir) y, el copy y la estrategia, también en Word (para editar).</p>
+</header>
+
+<section>
+  <div class="sh">01 · El encargo, en una línea</div>
+  <h2>Convertir scrapenvases.com en el escaparate del CORE</h2>
+  <p class="lead">Pasar de una web informativa sobre dos herramientas a un portal del sector que presenta el ecosistema del core —<b>PROBATUS</b> (homologación), <b>INPROGEST</b> (control documental) y <b>SCRAPP</b> (documentos e incentivos)— que ya cubre las necesidades de SCRAPs, gestores y poseedores en la RAP de envases. Tono: neutro de portal.</p>
+</section>
+
+<section>
+  <div class="sh">02 · Entregables</div>
+  <h2>Todos los documentos</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Documento</th><th>Tipo</th><th>Archivos en esta carpeta</th><th>Ver</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="doc">Estrategia — El CORE de la RAP de envases</span><span class="files">propuesta-scrapenvases.html <span>·</span> Propuesta_scrapenvases_CORE.docx</span></td>
+          <td><span class="tag t-str">Estrategia</span></td>
+          <td>Concepto, pulso del sector, mapeo y hoja de ruta</td>
+          <td><a class="open" href="https://claude.ai/code/artifact/ab98cf6b-dc79-4dcb-a398-46227e12544f" target="_blank" rel="noopener">Abrir</a></td>
+        </tr>
+        <tr>
+          <td><span class="doc">Copy · Home + Para tu SCRAP</span><span class="files">copy-scrapenvases.html <span>·</span> Copy_scrapenvases_Home_ParaTuSCRAP.docx</span></td>
+          <td><span class="tag t-copy">Copy</span></td>
+          <td>Textos de las páginas A y B</td>
+          <td><a class="open" href="https://claude.ai/code/artifact/9339e8ad-1510-41db-b201-09fcfe34ba14" target="_blank" rel="noopener">Abrir</a></td>
+        </tr>
+        <tr>
+          <td><span class="doc">Copy · Poseedores + Gestores</span><span class="files">copy-poseedores-gestores.html <span>·</span> Copy_scrapenvases_Poseedores_Gestores.docx</span></td>
+          <td><span class="tag t-copy">Copy</span></td>
+          <td>Textos de las páginas C y D</td>
+          <td><a class="open" href="https://claude.ai/code/artifact/0eb1c615-cc07-4e2a-8564-b7c4bd582c76" target="_blank" rel="noopener">Abrir</a></td>
+        </tr>
+        <tr>
+          <td><span class="doc">Copy · El CORE</span><span class="files">copy-el-core.html <span>·</span> Copy_scrapenvases_El_CORE.docx</span></td>
+          <td><span class="tag t-copy">Copy</span></td>
+          <td>Texto de la página bandera (E)</td>
+          <td><a class="open" href="https://claude.ai/code/artifact/69eb8f27-cf02-414a-b54d-9fbe140d0647" target="_blank" rel="noopener">Abrir</a></td>
+        </tr>
+        <tr>
+          <td><span class="doc">Copy · Contacto / OTS</span><span class="files">copy-contacto-ots.html <span>·</span> Copy_scrapenvases_Contacto_OTS.docx</span></td>
+          <td><span class="tag t-copy">Copy</span></td>
+          <td>Texto de la página F (puerta de entrada)</td>
+          <td><a class="open" href="https://claude.ai/code/artifact/0010da8b-9f73-4a2b-9d8d-89e993455cc0" target="_blank" rel="noopener">Abrir</a></td>
+        </tr>
+        <tr>
+          <td><span class="doc">Wireframe · Home</span><span class="files">wireframe-home.html</span></td>
+          <td><span class="tag t-wire">Wireframe</span></td>
+          <td>Estructura de bloques de la Home</td>
+          <td><a class="open" href="https://claude.ai/code/artifact/1b7631b8-aa94-4a23-8124-3c16d68bd5ff" target="_blank" rel="noopener">Abrir</a></td>
+        </tr>
+        <tr>
+          <td><span class="doc">Wireframes · Perfil (Para tu SCRAP, Poseedores, Gestores)</span><span class="files">wireframes-perfil.html</span></td>
+          <td><span class="tag t-wire">Wireframe</span></td>
+          <td>Las tres páginas de perfil</td>
+          <td><a class="open" href="https://claude.ai/code/artifact/9c73fcce-9dbb-465b-a45d-5fd9aac39102" target="_blank" rel="noopener">Abrir</a></td>
+        </tr>
+        <tr>
+          <td><span class="doc">Wireframe · El CORE</span><span class="files">wireframe-el-core.html</span></td>
+          <td><span class="tag t-wire">Wireframe</span></td>
+          <td>Página bandera con el flujo 01→02→03</td>
+          <td><a class="open" href="https://claude.ai/code/artifact/276d1691-0130-42d1-bf03-118df33fc26e" target="_blank" rel="noopener">Abrir</a></td>
+        </tr>
+        <tr>
+          <td><span class="doc">Wireframe · Contacto / OTS</span><span class="files">wireframe-contacto-ots.html</span></td>
+          <td><span class="tag t-wire">Wireframe</span></td>
+          <td>Formulario, contacto directo y FAQ</td>
+          <td><a class="open" href="https://claude.ai/code/artifact/f99da6ec-3204-4cf9-8b54-31219bd1725b" target="_blank" rel="noopener">Abrir</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="sh">03 · Mapa del portal</div>
+  <h2>Las páginas y su estado</h2>
+  <div class="map">
+    <div class="node"><span class="pg">/ (Home)</span><span class="d">Concepto del CORE + accesos + OTS</span><span class="st ok">Copy + wireframe</span></div>
+    <div class="node"><span class="pg">/el-core</span><span class="d">Página bandera: el ecosistema</span><span class="st ok">Copy + wireframe</span></div>
+    <div class="node"><span class="pg">/para-tu-scrap</span><span class="d">Perfil prioritario</span><span class="st ok">Copy + wireframe</span></div>
+    <div class="node"><span class="pg">/poseedores</span><span class="d">Canal para cumplir + incentivo</span><span class="st ok">Copy + wireframe</span></div>
+    <div class="node"><span class="pg">/gestores</span><span class="d">Homologación y reporte</span><span class="st ok">Copy + wireframe</span></div>
+    <div class="node"><span class="pg">/normativa</span><span class="d">LER 15 01 + RD 1055/2022</span><span class="st ex">Ya existe · reforzar</span></div>
+    <div class="node"><span class="pg">/contacto (OTS)</span><span class="d">Formulario, contacto y FAQ</span><span class="st ok">Copy + wireframe</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="sh">04 · Pendiente de decisión / trabajo</div>
+  <h2>Lo que queda por cerrar</h2>
+  <ul class="clean">
+    <li><b>Email y teléfono de la OTS</b> — confirmar los datos de contacto antes de publicar (hoy marcados como provisionales).</li>
+    <li><b>Imágenes reales</b> del canal industrial (bidones, IBC/GRG, palés, big bags, films) y fotos de María y Rodrigo, para sustituir los huecos.</li>
+    <li><b>Higiene técnica</b> — enlaces de redes a perfiles reales o retirarlos; <span class="mono">&lt;title&gt;</span> por página; separar privacidad de cookies.</li>
+    <li><b>Escaparate de SCRAPs</b> — directorio del sector (fase 3 de la hoja de ruta).</li>
+    <li><b>Verificar cifras</b> del pulso en fuente oficial (MITECO) antes de publicarlas.</li>
+  </ul>
+</section>
+
+<section style="border-bottom:none">
+  <div class="sh">05 · Cómo usar los archivos</div>
+  <div class="two">
+    <div class="box"><h3>Archivos <span class="mono">.html</span></h3><p>Versión visual, para ver y compartir. Se abren en el navegador. Los wireframes y las maquetas viven aquí.</p></div>
+    <div class="box"><h3>Archivos <span class="mono">.docx</span></h3><p>Copy y estrategia en Word, para que el equipo edite los textos. Mismo contenido que su HTML.</p></div>
+  </div>
+  <p class="lead" style="margin-top:16px">Los enlaces "Abrir" llevan a la versión online (privada, solo tú). Para el maquetador, los wireframes marcan estructura; el copy final se toma de los documentos de copy.</p>
+</section>
+
+<footer>
+  <div class="brandmark"><b>SCRAP</b><i>envases</i><span>.com</span></div>
+  Índice del proyecto · Carpeta "portal scrapenvases" · Preparado para Víctor Bueno (Grupo INPWASTE) · Desarrollo INPRONET Solutions · Septiembre 2026
+</footer>
+</div>

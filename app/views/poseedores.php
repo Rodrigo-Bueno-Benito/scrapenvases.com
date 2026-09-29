@@ -1,25 +1,70 @@
+<!-- 1 · HERO — tono acompañante, no de alarma -->
 <section class="pagehero">
-  <div class="pagehero__ring" aria-hidden="true"></div>
   <div class="wrap pagehero__inner" data-reveal>
-    <span class="kicker">Servicios</span>
-    <h1 data-split>Poseedores de residuos</h1>
-    <p>La nueva normativa sobre la RAP ha traído importantes implicaciones para las empresas que actúan como poseedores de residuos de envases comerciales e industriales.</p>
+    <span class="kicker">Para poseedores de residuos de envases</span>
+    <h1 data-split>Tus residuos de envases, en orden y a disposición de tu SCRAP</h1>
+    <p>Como poseedor final, eres quien responde ante la Administración de la trazabilidad de tus residuos de envases comerciales e industriales. scrapenvases.com te da el canal para organizar esa documentación, ponerla a disposición de tu SCRAP y cumplir el RD 1055/2022 —sin cambiar de gestores.</p>
+    <div class="pagehero__actions">
+      <a class="btn btn--primary btn--lg" href="/contacto">Consultar con la OTS</a>
+      <a class="btn btn--light" href="#calculadora">Calcular mi contribución</a>
+    </div>
   </div>
 </section>
 
-<section class="section wrap">
-  <div class="prose" style="max-width:820px; margin-bottom:3rem" data-reveal>
-    <p style="font-size:var(--step-1); color:var(--ink-muted)">Te ayudamos a entender, cumplir y gestionar estas obligaciones de forma sencilla y adaptada a tu operativa diaria. Actuamos como <b class="colordos">aliado técnico y estratégico</b>, conectando a los poseedores con los SCRAP, los gestores y la administración.</p>
-    <p>Queremos que la normativa no sea una carga, sino una oportunidad para mejorar la gestión interna, <b class="coloruno">reducir riesgos legales</b> y contribuir a un modelo más sostenible y circular.</p>
+<!-- 2 · CONTEXTO — la doble obligación y el incentivo poco conocido -->
+<section class="contextband">
+  <div class="wrap-narrow" data-reveal>
+    <p>Desde 2022 ya tienes la obligación de gestionar tus residuos de envases a través de un gestor autorizado y de conservar su trazabilidad. Las nuevas obligaciones de la RAP <strong>no te eximen de las tuyas: conviven</strong>. Y por aportar bien esa trazabilidad te corresponde un incentivo económico que muchos poseedores ni saben que pueden cobrar.</p>
   </div>
-  <div class="duo" data-reveal-group>
-    <div class="servicecard">
-      <div class="servicecard__media"><img src="/imagenes/scrapp-poseedores.svg" alt="SCRAPP para poseedores"></div>
-      <div class="servicecard__body"><span class="servicecard__logo">SCRAPP</span><p>Simplifica la colaboración con gestores y SCRAPs, generando valor dentro de los sistemas de responsabilidad colectiva.</p></div>
+</section>
+
+<!-- 3 · TRES NECESIDADES → SOLUCIÓN (protagonista SCRAPP) -->
+<?php
+$needsKicker = 'Tus obligaciones, resueltas';
+$needsTitulo = 'Ordena, comparte y cumple';
+$needsLead   = 'Lo que hoy te cuesta tiempo, y cómo queda resuelto.';
+$needs = [
+    [
+        'marca'    => '1',
+        'titulo'   => 'Tu documentación, en un solo sitio',
+        'tool'     => 'SCRAPP · gestión documental',
+        'dolor'    => 'Cada retirada genera papel —documento de identificación, ficha de seguimiento, certificado de reciclado efectivo— que hoy persigues a tu gestor para reunir, y que hay que codificar bien (LER 15 01, no el grupo 20).',
+        'solucion' => 'Reúne y ordena esa documentación en un único lugar, clasificada y lista, sin depender de correos sueltos ni carpetas dispersas.',
+        'enlace'   => ['texto' => 'vía SCRAPP', 'url' => 'https://scrapp.es/'],
+    ],
+    [
+        'marca'    => '2',
+        'titulo'   => 'A disposición de tu SCRAP, sin teclear de más',
+        'tool'     => 'SCRAPP · trazabilidad',
+        'dolor'    => 'Cada SCRAP tiene su propia plataforma. Aprender una distinta por cada uno, y volver a subir lo mismo, es la fricción diaria que más desgasta al poseedor.',
+        'solucion' => 'Pon tu trazabilidad a disposición de tu SCRAP desde un solo canal, con la documentación ya validada.',
+        'enlace'   => ['texto' => 'vía SCRAPP', 'url' => 'https://scrapp.es/'],
+    ],
+    [
+        'marca'    => '3',
+        'titulo'   => 'Cumple y cobra tu incentivo',
+        'tool'     => 'SCRAPP · incentivos',
+        'dolor'    => 'El incentivo por trazabilidad (entre 3 y 5 €/t) corresponde por ley al poseedor final —no al gestor—. Sin la documentación en regla, ni se cumple ni se cobra.',
+        'solucion' => 'Cumple el RD 1055/2022 y reclama el incentivo que te corresponde, con la prueba que lo justifica.',
+        'enlace'   => ['texto' => 'vía SCRAPP', 'url' => 'https://scrapp.es/'],
+    ],
+];
+require __DIR__ . '/partials/needs.php';
+?>
+
+<!-- DEMO EN VIVO -->
+<section class="section demoshow">
+  <div class="wrap">
+    <div class="sectionhead" data-reveal>
+      <div>
+        <span class="kicker">Demo en vivo</span>
+        <h2>Tu portal de poseedor, por dentro</h2>
+      </div>
+      <p>Esta es la pantalla que verías cada mes: tus centros con NIMA, las toneladas por material, el tope de tu tarifa y lo que se liquida. Puedes cambiar de centro y editar toneladas.</p>
     </div>
-    <div class="servicecard">
-      <div class="servicecard__media"><img src="/imagenes/probatus-poseedores.svg" alt="PROBATUS para poseedores"></div>
-      <div class="servicecard__body"><span class="servicecard__logo">PROBATUS</span><p>Controla que tus gestores cumplen con los estándares técnicos, legales y ambientales requeridos.</p></div>
+    <div data-reveal>
+      <?php require __DIR__ . '/partials/demo-scrapp.php'; ?>
+      <p class="demonote">Simulación con datos de ejemplo. Nada de lo que hagas aquí sale de tu navegador.</p>
     </div>
   </div>
 </section>
@@ -77,10 +122,9 @@
   </div>
 </section>
 
-<section class="section wrap">
-  <div class="ctaband" data-reveal>
-    <h2>Convierte la obligación en oportunidad</h2>
-    <p>Gestiona tus residuos de envases sin fricciones y reduce riesgos legales.</p>
-    <div style="margin-top:1.5rem"><a class="btn btn--light" href="/normativa">Consultar normativa y LER</a></div>
-  </div>
-</section>
+<!-- 4 · CIERRE · OTS — "sigues con tus gestores" -->
+<?php
+$otsTitulo = 'Mantén tus gestores de siempre';
+$otsTexto  = 'Mantén tus acuerdos actuales con tus gestores. Nosotros ponemos el orden documental, con el acompañamiento de la Oficina Técnica de SCRAPs (OTS).';
+require __DIR__ . '/partials/ots-band.php';
+?>

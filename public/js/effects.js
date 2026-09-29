@@ -1,7 +1,8 @@
 /* ============================================================
    ScrapEnvases — motor de efectos "La RAP conectada"
-   Red de nodos, split-text, contadores, magnetismo, tilt 3D,
-   header inteligente y barra de progreso.
+   Split-text, contadores, header inteligente y barra de progreso.
+   Se retiraron la red de nodos, el magnetismo y el tilt 3D: son
+   gestos de escaparate y el portal se dirige a grandes cuentas.
    Todo se desactiva con prefers-reduced-motion.
    ============================================================ */
 (function () {
@@ -130,88 +131,6 @@
   }
 
   /* ============================================================
-     4) Motor de interpolación compartido (magnetismo + tilt)
-     ============================================================ */
-  var lerpItems = [];
-  var lerpRunning = false;
-  function lerpLoop() {
-    var active = false;
-    lerpItems.forEach(function (it) {
-      var done = true;
-      Object.keys(it.target).forEach(function (k) {
-        var cur = it.state[k] || 0;
-        var next = cur + (it.target[k] - cur) * 0.16;
-        if (Math.abs(it.target[k] - next) > 0.01) done = false;
-        else next = it.target[k];
-        it.state[k] = next;
-      });
-      it.apply(it.state);
-      if (!done) active = true;
-    });
-    if (active) { requestAnimationFrame(lerpLoop); }
-    else { lerpRunning = false; }
-  }
-  function kickLerp() {
-    if (!lerpRunning) { lerpRunning = true; requestAnimationFrame(lerpLoop); }
-  }
-
-  /* ---- Botones magnéticos ---- */
-  if (!REDUCED && FINE_POINTER) {
-    document.querySelectorAll('.btn').forEach(function (btn) {
-      var item = {
-        state: { x: 0, y: 0 },
-        target: { x: 0, y: 0 },
-        apply: function (s) {
-          btn.style.setProperty('--mag-x', s.x.toFixed(2) + 'px');
-          btn.style.setProperty('--mag-y', s.y.toFixed(2) + 'px');
-        }
-      };
-      lerpItems.push(item);
-      btn.addEventListener('pointermove', function (e) {
-        var r = btn.getBoundingClientRect();
-        var dx = e.clientX - (r.left + r.width / 2);
-        var dy = e.clientY - (r.top + r.height / 2);
-        item.target.x = Math.max(-10, Math.min(10, dx * 0.18));
-        item.target.y = Math.max(-8, Math.min(8, dy * 0.3));
-        kickLerp();
-      });
-      btn.addEventListener('pointerleave', function () {
-        item.target.x = 0; item.target.y = 0;
-        kickLerp();
-      });
-    });
-  }
-
-  /* ---- Tilt 3D con brillo [data-tilt] ---- */
-  if (!REDUCED && FINE_POINTER) {
-    document.querySelectorAll('[data-tilt]').forEach(function (card) {
-      var item = {
-        state: { rx: 0, ry: 0 },
-        target: { rx: 0, ry: 0 },
-        apply: function (s) {
-          card.style.setProperty('--rx', s.rx.toFixed(2) + 'deg');
-          card.style.setProperty('--ry', s.ry.toFixed(2) + 'deg');
-        }
-      };
-      lerpItems.push(item);
-      card.addEventListener('pointermove', function (e) {
-        var r = card.getBoundingClientRect();
-        var px = (e.clientX - r.left) / r.width;   // 0..1
-        var py = (e.clientY - r.top) / r.height;
-        item.target.ry = (px - 0.5) * 10;   // gira hacia el cursor
-        item.target.rx = (0.5 - py) * 8;
-        card.style.setProperty('--glow-x', (px * 100).toFixed(1) + '%');
-        card.style.setProperty('--glow-y', (py * 100).toFixed(1) + '%');
-        kickLerp();
-      });
-      card.addEventListener('pointerleave', function () {
-        item.target.rx = 0; item.target.ry = 0;
-        kickLerp();
-      });
-    });
-  }
-
-  /* ============================================================
      5) Header inteligente + barra de progreso
      ============================================================ */
   var header = document.querySelector('.site-header');
@@ -244,131 +163,99 @@
   onScroll();
 
   /* ============================================================
-     6) Red de nodos del hero — los agentes de la RAP conectados
+     6) Scroll suave — inercia corta, no "scroll de agencia"
+     ============================================================
+     Un amortiguador sobre el scroll nativo: el salto de la rueda se
+     reparte en unos fotogramas. Factor alto (0,14) a propósito —
+     lo que se busca es que el movimiento no sea a tirones, no que
+     la página persiga al cursor medio segundo después.
+
+     Se desactiva con menos movimiento, con puntero grueso (el
+     scroll táctil ya tiene su propia inercia del sistema) y si el
+     navegador no trae scrollBehavior, para no quedarnos a medias.
      ============================================================ */
-  var canvas = document.querySelector('[data-net]');
-  if (canvas && !REDUCED) {
-    var ctx = canvas.getContext('2d');
-    var host = canvas.parentElement;
-    var DPR = Math.min(window.devicePixelRatio || 1, 2);
-    var W = 0, H = 0;
-    var nodes = [];
-    var pointer = { x: -9999, y: -9999 };
-    var running = false;
-    var rafId = 0;
+  var suave = !REDUCED && FINE_POINTER && 'scrollBehavior' in document.documentElement.style;
+  if (suave) {
+    var destino = window.scrollY;
+    var animando = false;
 
-    var PALETTE = [
-      { c: '255,255,255', w: 0.72 },   // blanco: la mayoría
-      { c: '255,132,44',  w: 0.16 },   // naranja de marca
-      { c: '211,236,229', w: 0.12 }    // mint suave
-    ];
-    function pickColor() {
-      var r = Math.random(), acc = 0;
-      for (var i = 0; i < PALETTE.length; i++) {
-        acc += PALETTE[i].w;
-        if (r <= acc) return PALETTE[i].c;
-      }
-      return PALETTE[0].c;
+    function tope() {
+      return document.documentElement.scrollHeight - window.innerHeight;
     }
-
-    function resize() {
-      var rect = host.getBoundingClientRect();
-      W = rect.width; H = rect.height;
-      canvas.width = Math.round(W * DPR);
-      canvas.height = Math.round(H * DPR);
-      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-      var count = Math.round(Math.min(64, Math.max(26, (W * H) / 26000)));
-      if (nodes.length !== count) {
-        nodes = [];
-        for (var i = 0; i < count; i++) {
-          nodes.push({
-            x: Math.random() * W,
-            y: Math.random() * H,
-            vx: (Math.random() - 0.5) * 0.35,
-            vy: (Math.random() - 0.5) * 0.35,
-            r: 1.4 + Math.random() * 2.2,
-            c: pickColor()
-          });
-        }
+    /* `behavior: instant` es obligatorio: html lleva scroll-behavior
+       smooth, así que un scrollTo normal animaría cada fotograma
+       intermedio y se sumarían dos suavizados. */
+    function salta(y) { window.scrollTo({ top: y, behavior: 'instant' }); }
+    function paso() {
+      var actual = window.scrollY;
+      var delta = destino - actual;
+      if (Math.abs(delta) < 0.5) {
+        salta(destino);
+        animando = false;
+        return;
       }
+      salta(actual + delta * 0.14);
+      requestAnimationFrame(paso);
     }
-
-    var LINK_DIST = 130;
-    function frame() {
-      ctx.clearRect(0, 0, W, H);
-
-      for (var i = 0; i < nodes.length; i++) {
-        var n = nodes[i];
-        // Deriva
-        n.x += n.vx; n.y += n.vy;
-        // El cursor atrae ligeramente los nodos cercanos (la red responde)
-        var pdx = pointer.x - n.x, pdy = pointer.y - n.y;
-        var pd2 = pdx * pdx + pdy * pdy;
-        if (pd2 < 32400 && pd2 > 1) { // < 180px
-          var f = 0.012 / Math.max(Math.sqrt(pd2), 20);
-          n.vx += pdx * f; n.vy += pdy * f;
+    window.addEventListener('wheel', function (e) {
+      // Zoom del navegador y desplazamiento horizontal: que pase de largo
+      if (e.ctrlKey || e.metaKey || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      // Contenedores con su propio scroll (tablas de las demos) mandan
+      var n = e.target;
+      while (n && n !== document.body) {
+        if (n.scrollHeight - n.clientHeight > 4) {
+          var st = getComputedStyle(n).overflowY;
+          if (st === 'auto' || st === 'scroll') return;
         }
-        // Límite de velocidad + rebote suave en bordes
-        var vmax = 0.55;
-        if (n.vx > vmax) n.vx = vmax; if (n.vx < -vmax) n.vx = -vmax;
-        if (n.vy > vmax) n.vy = vmax; if (n.vy < -vmax) n.vy = -vmax;
-        if (n.x < -20) n.x = W + 20; if (n.x > W + 20) n.x = -20;
-        if (n.y < -20) n.y = H + 20; if (n.y > H + 20) n.y = -20;
+        n = n.parentElement;
       }
+      e.preventDefault();
+      var salto = e.deltaMode === 1 ? e.deltaY * 18 : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY;
+      destino = Math.max(0, Math.min(tope(), destino + salto));
+      if (!animando) { animando = true; requestAnimationFrame(paso); }
+    }, { passive: false });
 
-      // Conexiones
-      ctx.lineWidth = 1;
-      for (var a = 0; a < nodes.length; a++) {
-        for (var b = a + 1; b < nodes.length; b++) {
-          var dx = nodes[a].x - nodes[b].x;
-          var dy = nodes[a].y - nodes[b].y;
-          var d2 = dx * dx + dy * dy;
-          if (d2 < LINK_DIST * LINK_DIST) {
-            var alpha = (1 - Math.sqrt(d2) / LINK_DIST) * 0.35;
-            ctx.strokeStyle = 'rgba(255,255,255,' + alpha.toFixed(3) + ')';
-            ctx.beginPath();
-            ctx.moveTo(nodes[a].x, nodes[a].y);
-            ctx.lineTo(nodes[b].x, nodes[b].y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      // Nodos
-      for (var k = 0; k < nodes.length; k++) {
-        var nd = nodes[k];
-        ctx.fillStyle = 'rgba(' + nd.c + ',0.85)';
-        ctx.beginPath();
-        ctx.arc(nd.x, nd.y, nd.r, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      if (running) rafId = requestAnimationFrame(frame);
-    }
-
-    function start() { if (!running) { running = true; rafId = requestAnimationFrame(frame); } }
-    function stop() { running = false; cancelAnimationFrame(rafId); }
-
-    resize();
-    window.addEventListener('resize', function () { resize(); }, { passive: true });
-
-    host.addEventListener('pointermove', function (e) {
-      var r = canvas.getBoundingClientRect();
-      pointer.x = e.clientX - r.left;
-      pointer.y = e.clientY - r.top;
+    /* Cualquier desplazamiento que no venga de la rueda —una ancla,
+       un scrollIntoView, buscar en la página, arrastrar la barra—
+       manda: si no estamos animando, el destino se reengancha a
+       donde esté la página. Sin esto el amortiguador tira hacia
+       atrás de todo salto programático. */
+    window.addEventListener('scroll', function () {
+      if (!animando) destino = window.scrollY;
+    }, { passive: true });
+    ['keydown', 'mousedown', 'touchstart'].forEach(function (ev) {
+      window.addEventListener(ev, function () { destino = window.scrollY; animando = false; }, { passive: true });
     });
-    host.addEventListener('pointerleave', function () { pointer.x = -9999; pointer.y = -9999; });
-
-    // Solo anima cuando el hero está en pantalla
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { e.isIntersecting ? start() : stop(); });
-      }, { threshold: 0.05 }).observe(host);
-    } else {
-      start();
-    }
-    document.addEventListener('visibilitychange', function () {
-      document.hidden ? stop() : start();
-    });
+    window.addEventListener('resize', function () { destino = window.scrollY; animando = false; }, { passive: true });
   }
+
+  /* ============================================================
+     7) Píldora de contacto permanente
+     ============================================================
+     Aparece cuando la primera pantalla ya quedó atrás y se retira
+     al llegar al pie, que tiene su propia llamada: dos veces la
+     misma acción a la vista es una de más.
+     ============================================================ */
+  var pilote = document.querySelector('[data-pilote]');
+  if (pilote) {
+    var pie = document.querySelector('.site-footer');
+    var visible = false;
+    var pTick = false;
+    function revisa() {
+      pTick = false;
+      var pasadaPrimera = window.scrollY > window.innerHeight * 0.75;
+      var pieALaVista = pie ? pie.getBoundingClientRect().top < window.innerHeight * 0.9 : false;
+      var debe = pasadaPrimera && !pieALaVista;
+      if (debe === visible) return;
+      visible = debe;
+      pilote.classList.toggle('is-on', debe);
+    }
+    window.addEventListener('scroll', function () {
+      if (pTick) return;
+      pTick = true;
+      requestAnimationFrame(revisa);
+    }, { passive: true });
+    revisa();
+  }
+
 })();

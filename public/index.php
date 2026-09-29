@@ -7,12 +7,28 @@ require_once __DIR__ . '/../app/auth.php';
 require_once __DIR__ . '/../app/helpers.php';
 require_once __DIR__ . '/../app/data/install.php';
 
-// Auto-instalación en primer arranque (idempotente)
+// Auto-instalación en primer arranque (idempotente, con centinela de esquema)
 db_install();
 
 $page = $_GET['p'] ?? 'home';
 $page = preg_replace('/[^a-z0-9_-]/i', '', (string)$page);
 if ($page === '') $page = 'home';
+
+/**
+ * Rutas antiguas → nuevas. El rediseño del portal renombró /scrap
+ * a /para-tu-scrap; se conserva el enlace con un 301 para no perder
+ * el posicionamiento ni romper enlaces externos.
+ */
+const REDIRECCIONES = [
+    'scrap'    => '/para-tu-scrap',
+    'core'     => '/el-core',
+    'el_core'  => '/el-core',
+    'ots'      => '/contacto',
+];
+if (isset(REDIRECCIONES[$page])) {
+    header('Location: ' . REDIRECCIONES[$page], true, 301);
+    exit;
+}
 
 $viewPath = __DIR__ . '/../app/views/' . $page . '.php';
 if (!is_file($viewPath)) {

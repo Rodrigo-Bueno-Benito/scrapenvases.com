@@ -4,8 +4,8 @@
     {
       "name": "scrapenvases",
       "runtimeExecutable": "php",
-      "runtimeArgs": ["-S", "localhost:8010", "-t", "public", "public/router.php"],
-      "port": 8010
+      "runtimeArgs": ["-S", "localhost:8000", "-t", "public", "public/router.php"],
+      "port": 8000
     }
   ]
 }

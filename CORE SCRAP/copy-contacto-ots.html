@@ -1,0 +1,173 @@
+<title>Copy de Contacto y OTS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --petrol:#146079;--green:#57a24a;--green-deep:#3f7f37;
+    --ground:#f4f6f6;--surface:#ffffff;--surface-2:#eef2f2;
+    --ink:#152227;--ink-soft:#41575e;--ink-faint:#6d8189;
+    --line:#d7e0e0;--line-soft:#e6ecec;
+    --amber:#b4731a;--amber-bg:#f6ecdb;--green-bg:#e4efdf;--ggreen:#3f7f37;
+    --accent-grad:linear-gradient(100deg,var(--petrol),var(--green));
+    --shadow-soft:0 1px 2px rgba(20,60,72,.05);
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --petrol:#3fa3c4;--green:#78c268;--green-deep:#8fd07f;
+    --ground:#0e181c;--surface:#152227;--surface-2:#1b2b31;
+    --ink:#e9f0f0;--ink-soft:#aebec3;--ink-faint:#7b9198;
+    --line:#2a3c42;--line-soft:#223137;
+    --amber:#e0a44f;--amber-bg:#2c2416;--green-bg:#182a18;--ggreen:#8fd07f;
+    --shadow-soft:0 1px 2px rgba(0,0,0,.3);
+  }}
+  :root[data-theme="dark"]{
+    --petrol:#3fa3c4;--green:#78c268;--green-deep:#8fd07f;
+    --ground:#0e181c;--surface:#152227;--surface-2:#1b2b31;
+    --ink:#e9f0f0;--ink-soft:#aebec3;--ink-faint:#7b9198;
+    --line:#2a3c42;--line-soft:#223137;
+    --amber:#e0a44f;--amber-bg:#2c2416;--green-bg:#182a18;--ggreen:#8fd07f;
+    --shadow-soft:0 1px 2px rgba(0,0,0,.3);
+  }
+  *{box-sizing:border-box}
+  body{background:var(--ground);color:var(--ink);font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:"Archivo",sans-serif;letter-spacing:-.015em;line-height:1.14;margin:0;text-wrap:balance}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  header.top{padding:60px 0 34px;border-bottom:1px solid var(--line)}
+  .brandmark{font-family:"Archivo";font-weight:800;font-size:1.05rem;letter-spacing:-.02em;margin-bottom:26px}
+  .brandmark b{color:var(--petrol)}.brandmark i{color:var(--green);font-style:normal}.brandmark span{color:var(--ink-faint);font-weight:600}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--petrol)}
+  header.top h1{font-size:clamp(1.9rem,4.6vw,2.7rem);font-weight:800;margin:14px 0 14px}
+  header.top h1 .g{background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  header.top p{font-size:1.08rem;color:var(--ink-soft);max-width:56ch;margin:0}
+
+  .page{margin:44px 0 10px}
+  .pagehead{display:flex;align-items:baseline;gap:12px;padding-bottom:16px;border-bottom:2px solid var(--ink);margin-bottom:8px}
+  .pagehead .pg{font-family:"IBM Plex Mono",monospace;font-size:.74rem;font-weight:600;color:var(--green-deep)}
+  .pagehead h2{font-size:1.5rem;font-weight:800}
+  .pagehead .url{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--ink-faint)}
+
+  .field{padding:18px 0;border-bottom:1px solid var(--line-soft)}
+  .flabel{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:8px}
+  .c-kicker{font-family:"IBM Plex Mono",monospace;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--petrol);font-weight:500;margin:0}
+  .c-h1{font-family:"Archivo";font-weight:800;font-size:clamp(1.6rem,3.8vw,2.2rem);letter-spacing:-.02em;line-height:1.14;margin:0}
+  .c-sub{font-size:1.12rem;color:var(--ink-soft);max-width:58ch;margin:0}
+  .c-body{font-size:1rem;color:var(--ink);max-width:64ch;margin:0}
+  .c-cta{display:inline-block;font-family:"Archivo";font-weight:700;font-size:.95rem;color:#fff;background:var(--accent-grad);padding:11px 20px;border-radius:9px}
+  .amber{color:var(--amber);font-weight:600}
+
+  .form{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow-soft);margin-top:4px}
+  .form .row{display:grid;grid-template-columns:150px 1fr;gap:6px 14px;padding:9px 0;border-top:1px solid var(--line-soft);align-items:baseline}
+  .form .row:first-child{border-top:none}
+  .form .fn{font-family:"Archivo";font-weight:700;font-size:.92rem}
+  .form .fn .req{color:var(--green-deep)}
+  .form .fh{font-size:.85rem;color:var(--ink-soft)}
+  .form .foot{margin-top:12px;padding-top:12px;border-top:1px solid var(--line-soft);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+
+  .cardgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+  .cbox{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow-soft)}
+  .cbox h3{font-size:1rem;margin-bottom:8px}
+  .cbox .line{font-size:.92rem;color:var(--ink-soft);margin:3px 0}
+  .cbox .line b{color:var(--ink)}
+  .person{display:flex;gap:10px;align-items:flex-start;margin:8px 0}
+  .person .av{width:34px;height:34px;border-radius:50%;background:var(--surface-2);border:1px dashed var(--line);flex:none}
+  .person .nm{font-family:"Archivo";font-weight:700;font-size:.92rem}
+  .person .rl{font-size:.8rem;color:var(--ink-faint)}
+
+  .faq{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+  .qa{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow-soft)}
+  .qa .q{font-family:"Archivo";font-weight:700;font-size:.95rem}
+  .qa .a{font-size:.9rem;color:var(--ink-soft);margin-top:5px}
+
+  .note{background:var(--amber-bg);border:1px solid color-mix(in srgb,var(--amber) 30%,transparent);border-radius:10px;padding:15px 18px;margin:16px 0 0;font-size:.88rem;color:var(--ink)}
+  .note .nl{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:600;margin-bottom:6px}
+  .note ul{margin:6px 0 0;padding-left:18px}.note li{margin:3px 0}
+
+  footer{padding:36px 0 60px;color:var(--ink-faint);font-size:.8rem;border-top:1px solid var(--line);margin-top:40px}
+  footer .brandmark{font-size:.9rem;margin-bottom:8px}
+  @media (max-width:600px){.cardgrid{grid-template-columns:1fr}.form .row{grid-template-columns:1fr}.pagehead{flex-wrap:wrap}.pagehead .url{margin-left:0;flex-basis:100%}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="brandmark"><b>SCRAP</b><i>envases</i><span>.com</span></div>
+  <div class="eyebrow">Copy para maquetar · Tono neutro de portal · Sept 2026</div>
+  <h1>Textos de <span class="g">Contacto · OTS</span></h1>
+  <p>La puerta de entrada que hoy no existe: un punto único para resolver dudas y empezar a usar el core, con la cara humana del portal —la Oficina Técnica de SCRAPs.</p>
+</header>
+
+<div class="page">
+  <div class="pagehead"><span class="pg">F</span><h2>Contacto · OTS</h2><span class="url">/contacto</span></div>
+
+  <div class="field"><div class="flabel">Kicker</div><p class="c-kicker">Oficina Técnica de SCRAPs (OTS)</p></div>
+
+  <div class="field"><div class="flabel">Titular · H1</div><p class="c-h1">Habla con la Oficina Técnica de SCRAPs</p></div>
+
+  <div class="field"><div class="flabel">Subtítulo</div><p class="c-sub">¿Dudas sobre tus obligaciones en la RAP de envases, sobre el core o sobre cómo empezar? La OTS acompaña a SCRAPs, gestores y poseedores. Cuéntanos tu caso y te orientamos.</p></div>
+
+  <div class="field"><div class="flabel">Párrafo de contexto</div><p class="c-body">La RAP de envases cambia rápido y cada actor tiene dudas distintas. La Oficina Técnica de SCRAPs es el acompañamiento humano del portal: un punto único para resolver dudas técnicas, normativas y operativas, y para dar el primer paso con las herramientas del core.</p></div>
+
+  <div class="field">
+    <div class="flabel">Formulario de consulta · campos</div>
+    <div class="form">
+      <div class="row"><div class="fn">Nombre <span class="req">*</span></div><div class="fh">Nombre y apellidos</div></div>
+      <div class="row"><div class="fn">Empresa <span class="req">*</span></div><div class="fh">Razón social</div></div>
+      <div class="row"><div class="fn">Email <span class="req">*</span></div><div class="fh">Correo de contacto</div></div>
+      <div class="row"><div class="fn">Teléfono</div><div class="fh">Opcional</div></div>
+      <div class="row"><div class="fn">Soy… <span class="req">*</span></div><div class="fh">SCRAP · Gestor · Poseedor · Productor · Otro</div></div>
+      <div class="row"><div class="fn">Tu consulta <span class="req">*</span></div><div class="fh">Cuéntanos brevemente tu caso o tu duda</div></div>
+      <div class="foot"><span class="fh">☑ Acepto la política de privacidad y el tratamiento de mis datos (RGPD).</span></div>
+      <div class="foot"><span class="c-cta">Enviar consulta</span></div>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="flabel">Datos de contacto directo + cara visible</div>
+    <div class="cardgrid">
+      <div class="cbox">
+        <h3>Contacto directo</h3>
+        <div class="line"><b>Email:</b> ots@scrapenvases.com <span class="amber">(por confirmar)</span></div>
+        <div class="line"><b>Teléfono:</b> <span class="amber">(por confirmar)</span></div>
+        <div class="line"><b>Horario:</b> L–V, horario de oficina</div>
+      </div>
+      <div class="cbox">
+        <h3>Quién te atiende</h3>
+        <div class="person"><span class="av"></span><div><div class="nm">María Izquierdo</div><div class="rl">Directora General de INPROECO</div></div></div>
+        <div class="person"><span class="av"></span><div><div class="nm">Rodrigo Bueno</div><div class="rl">Responsable de Desarrollo · INPRONET Solutions</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="flabel">Preguntas frecuentes (bloque de apoyo)</div>
+    <div class="faq">
+      <div class="qa"><div class="q">¿Estoy obligado a estar en un SCRAP?</div><div class="a">Si pones envases comerciales o industriales en el mercado, desde el 1 de enero de 2025 debes adherirte a un SCRAP o constituir un sistema individual.</div></div>
+      <div class="qa"><div class="q">¿Qué es el incentivo y a quién le corresponde?</div><div class="a">Una compensación (entre 3 y 5 €/t) por aportar la trazabilidad del residuo. Corresponde por ley al poseedor final, no al gestor.</div></div>
+      <div class="qa"><div class="q">¿Qué código LER uso para mis residuos de envase?</div><div class="a">La familia LER 15 01 (envases), no los códigos del grupo 20.</div></div>
+      <div class="qa"><div class="q">Soy poseedor, ¿la RAP me quita obligaciones?</div><div class="a">No. Las nuevas obligaciones del productor no te eximen de las tuyas como poseedor: conviven.</div></div>
+    </div>
+  </div>
+
+  <div class="field" style="border-bottom:none">
+    <div class="flabel">Cierre</div>
+    <p class="c-body">La OTS es el acompañamiento de <b>Partner Waste</b> dentro del ecosistema del grupo. Escríbenos y te respondemos con criterio, sin compromiso.</p>
+  </div>
+
+  <div class="note">
+    <div class="nl">Notas para maquetación · Contacto / OTS</div>
+    <ul>
+      <li><span class="amber">Confirmar email y teléfono</span> de la OTS antes de publicar.</li>
+      <li>El formulario debe enviar a la bandeja de la OTS y guardar consentimiento RGPD (fecha/hora).</li>
+      <li>Fotos reales de María y Rodrigo en lugar de los avatares.</li>
+      <li>Enlazar "política de privacidad" a la página legal correcta (recordar: hoy apunta a cookies).</li>
+      <li>El FAQ puede ser acordeón desplegable.</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <div class="brandmark"><b>SCRAP</b><i>envases</i><span>.com</span></div>
+  Copy web · Contacto · OTS · Tono neutro de portal del sector · Preparado para Víctor Bueno (Grupo INPWASTE) · Desarrollo INPRONET Solutions · Septiembre 2026
+</footer>
+</div>

@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . '/../data/noticias_db.php';
 $slug = isset($_GET['slug']) ? preg_replace('/[^a-z0-9-]/i', '', (string)$_GET['slug']) : '';
-$n = $slug ? noticia_by_slug($slug) : null;
+// El header ya la cargó para titular la página: se reutiliza en vez de repetir la consulta
+$n = $GLOBALS['__noticia'] ?? ($slug ? noticia_by_slug($slug) : null);
 
 if (!$n || $n['estado'] !== 'publicada') {
     http_response_code(404);
@@ -40,7 +41,7 @@ $fechaTxt = fecha_es($n['fecha_publicacion']);
   </header>
 
   <figure class="article-edi__hero">
-    <img src="<?= e(noticia_img_src($n['imagen'])) ?>" alt="<?= e($n['titulo']) ?>">
+    <img src="<?= e($src = noticia_img_src($n['imagen'])) ?>" alt="<?= e($n['titulo']) ?>"<?= img_attrs($src) ?>>
   </figure>
 
   <div class="article-edi__body wrap-narrow">
@@ -67,8 +68,8 @@ $fechaTxt = fecha_es($n['fecha_publicacion']);
     <div class="edi-cardgrid" data-reveal-group>
       <?php foreach ($relacionadas as $r): ?>
       <article class="edi-card">
-        <a class="edi-media" href="/noticia/<?= e($r['slug']) ?>">
-          <img src="<?= e(noticia_img_src($r['imagen'])) ?>" alt="<?= e($r['titulo']) ?>" loading="lazy">
+        <a class="edi-media" tabindex="-1" aria-hidden="true" href="/noticia/<?= e($r['slug']) ?>">
+          <img src="<?= e($src = noticia_img_src($r['imagen'])) ?>" alt="<?= e($r['titulo']) ?>" loading="lazy"<?= img_attrs($src) ?>>
         </a>
         <div class="edi-meta">
           <span class="etag etag--outline"><?= e($r['categoria']) ?></span>

@@ -30,7 +30,7 @@ $demoLead = $demoLead ?? 'Vídeos y capturas de la plataforma.';
               <?php elseif ($m['kind'] === 'video-file'): ?>
                 <video controls preload="metadata" src="<?= e($m['src']) ?>"></video>
               <?php else: ?>
-                <a href="<?= e($m['src']) ?>" target="_blank" rel="noopener"><img src="<?= e($m['src']) ?>" alt="<?= e($d['titulo']) ?>" loading="lazy"></a>
+                <a href="<?= e($m['src']) ?>" target="_blank" rel="noopener"><img src="<?= e($m['src']) ?>" alt="<?= e($d['titulo']) ?>" loading="lazy"<?= img_attrs($m['src']) ?>></a>
               <?php endif; ?>
             </div>
             <figcaption class="demo-item__cap">

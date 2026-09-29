@@ -28,6 +28,48 @@
 }
 .admin-nav a:hover { background: rgba(255,255,255,0.1); color: #fff; }
 .admin-nav a.active { background: var(--brand-orange); color: #fff; }
+.nav-badge {
+  margin-left: auto;
+  background: var(--brand-orange);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  min-width: 20px;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  text-align: center;
+}
+.admin-nav a.active .nav-badge { background: rgba(0,0,0,0.25); }
+
+/* ---------- Bandeja de consultas de la OTS ---------- */
+.consulta-list { display: grid; gap: 1rem; padding: 1.25rem; }
+.consulta {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  background: var(--white);
+}
+/* Sin banda lateral: la etiqueta «Nueva» y el fondo ya la distinguen */
+.consulta--nueva { border-color: var(--accent); background: #fffdf9; }
+.consulta__head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 1rem; flex-wrap: wrap; margin-bottom: 0.35rem;
+}
+.consulta__head > div { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.consulta__date { color: var(--ink-muted); font-size: var(--step--1); white-space: nowrap; }
+.consulta__org { margin: 0 0 0.75rem; font-weight: 700; color: var(--brand-teal-dark); }
+.consulta__meta {
+  list-style: none; margin: 0 0 0.9rem; padding: 0;
+  display: flex; flex-wrap: wrap; gap: 0.4rem 1rem;
+  font-size: var(--step--1); color: var(--ink-muted);
+}
+.consulta__msg {
+  margin: 0 0 1rem;
+  padding: 0.9rem 1rem;
+  background: var(--paper-alt);
+  border-radius: var(--radius-sm);
+  white-space: pre-line;
+}
 .admin-side__foot { position: absolute; bottom: 1.5rem; left: 1.25rem; right: 1.25rem; font-size: var(--step--1); }
 .admin-side__foot a { color: rgba(255,255,255,0.8); }
 
