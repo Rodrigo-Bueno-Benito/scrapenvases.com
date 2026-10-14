@@ -1,6 +1,6 @@
 <?php
 /**
- * Carga simple de variables de entorno desde .env (sin dependencias).
+ * Variables de entorno desde .env (sin dependencias).
  */
 function env_load(): void {
     static $loaded = false;
@@ -12,12 +12,8 @@ function env_load(): void {
 
     foreach (file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
         $line = trim($line);
-        if ($line === '' || $line[0] === '#') continue;
-        if (!str_contains($line, '=')) continue;
-        [$k, $v] = explode('=', $line, 2);
-        $k = trim($k);
-        $v = trim($v);
-        // Quitar comillas envolventes
+        if ($line === '' || $line[0] === '#' || !str_contains($line, '=')) continue;
+        [$k, $v] = array_map('trim', explode('=', $line, 2));
         if (strlen($v) >= 2 && ($v[0] === '"' || $v[0] === "'") && $v[-1] === $v[0]) {
             $v = substr($v, 1, -1);
         }
@@ -30,11 +26,8 @@ function env_load(): void {
 
 function env(string $key, ?string $default = null): ?string {
     env_load();
-    // $_ENV además de getenv(): en hostings con putenv() deshabilitado,
-    // getenv() no ve nada de lo cargado y la configuración se ignoraría en silencio.
+    // $_ENV además de getenv(): hay hostings con putenv() deshabilitado.
     $v = getenv($key);
-    if ($v === false || $v === '') {
-        $v = $_ENV[$key] ?? false;
-    }
+    if ($v === false || $v === '') $v = $_ENV[$key] ?? false;
     return ($v === false || $v === '') ? $default : $v;
 }

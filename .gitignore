@@ -1,5 +1,6 @@
 /.env
 /data/*.sqlite
+/data/.schema-v*
 /public/uploads/*
 !/public/uploads/.gitkeep
 /vendor/
