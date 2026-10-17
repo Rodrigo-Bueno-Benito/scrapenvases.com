@@ -114,12 +114,12 @@ function admin_cabecera(string $titulo): void { ?><!doctype html>
 <html lang="es"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex"><title><?= e($titulo) ?></title>
-<link rel="icon" href="/imagenes/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="<?= asset('/css/site.css') ?>">
 </head><body class="p-admin">
 <header class="nav"><div class="wrap nav__in">
-  <a class="nav__logo" href="/"><img src="/imagenes/web/logo-scrapenvases.png" alt="SCRAPenvases.com" width="260" height="33"></a>
+  <a class="nav__logo" href="/"><img src="<?= asset('/imagenes/web/logo-scrapenvases.png') ?>" alt="SCRAPenvases.com" width="260" height="20"></a>
 </div></header><main>
 <?php }
 

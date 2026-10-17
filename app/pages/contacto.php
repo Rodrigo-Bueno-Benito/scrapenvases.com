@@ -16,16 +16,13 @@ $inv = fn(string $k) => in_array($k, $campos, true)
 $otsEmail = env('OTS_EMAIL_PUBLICO', env('OTS_EMAIL', 'ots@scrapenvases.com'));
 $otsTel   = env('OTS_TEL');
 
-hero('contacto',
-    'Oficina Técnica de SCRAPs (OTS)',
-    'Habla con la Oficina Técnica de SCRAPs',
-    '¿Dudas sobre tus obligaciones en la RAP de envases, sobre el core o sobre cómo empezar? La OTS acompaña a SCRAPs, gestores y poseedores. Cuéntanos tu caso y te orientamos.',
-    [], true);
-
+?>
+<h1 class="sr">Habla con la Oficina Técnica de SCRAPs</h1>
+<?php
 franja('La RAP de envases cambia rápido y cada actor tiene dudas distintas. La Oficina Técnica de SCRAPs es el acompañamiento humano del portal: un punto único para resolver dudas técnicas, normativas y operativas, y para dar el primer paso con las herramientas del core.');
 ?>
 
-<section class="sec" id="consulta">
+<section class="sec sec--light" id="consulta">
   <div class="wrap contact">
     <div class="contact__form">
       <?php if ($ok): ?>
@@ -84,7 +81,7 @@ franja('La RAP de envases cambia rápido y cada actor tiene dudas distintas. La 
     </div>
 
     <aside class="contact__aside">
-      <div class="cbox">
+      <div class="cbox cbox--dark">
         <h2>Contacto directo</h2>
         <dl class="cbox__lines">
           <div><dt>Email:</dt><dd><a href="mailto:<?= e($otsEmail) ?>"><?= e($otsEmail) ?></a></dd></div>
@@ -117,10 +114,10 @@ franja('La RAP de envases cambia rápido y cada actor tiene dudas distintas. La 
   </div>
 </section>
 
-<section class="sec sec--alt">
+<section class="sec">
   <div class="wrap wrap--narrow">
     <header class="sec__head">
-      <h2>Preguntas frecuentes</h2>
+      <h2><?= resaltar('Preguntas frecuentes', 'frecuentes') ?></h2>
     </header>
     <div class="faq">
       <?php foreach ([

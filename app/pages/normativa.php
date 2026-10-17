@@ -42,35 +42,33 @@ $obligaciones = [
     ], ['/poseedores', 'Poseedores']],
 ];
 
-hero('normativa',
-    'Marco legal',
-    'Normativa RAP y códigos LER',
+cabecera('normativa',
+    'Normativa RAP', 'y códigos LER',
     'Todo lo que necesitas saber sobre el Real Decreto 1055/2022, de envases y residuos de envases, y la clasificación LER de la familia de envases.',
-    [['Ver texto en el BOE ↗', 'https://www.boe.es/buscar/act.php?id=BOE-A-2022-22690', 'ghost']]);
+    ['Ver texto en el BOE ↗', 'https://www.boe.es/buscar/act.php?id=BOE-A-2022-22690', 'ghost'],
+    function (): void { ?>
+      <div class="keys">
+        <div class="key">
+          <p class="key__dato">1 ene 2025</p>
+          <p>Desde el 1 de enero de 2025, la RAP se aplica también a los envases comerciales e industriales.</p>
+        </div>
+        <div class="key">
+          <p class="key__dato">LER 15 01</p>
+          <p>La familia LER 15 01 (envases), no los códigos del grupo 20.</p>
+        </div>
+        <div class="key">
+          <p class="key__dato">3–5 €/t</p>
+          <p>Una compensación (entre 3 y 5 €/t) por aportar la trazabilidad del residuo. Corresponde por ley al poseedor final, no al gestor.</p>
+        </div>
+      </div>
+    <?php });
 ?>
 
-<section class="strip">
-  <div class="wrap keys">
-    <div class="key">
-      <p class="key__dato">1 ene 2025</p>
-      <p>Desde el 1 de enero de 2025, la RAP se aplica también a los envases comerciales e industriales.</p>
-    </div>
-    <div class="key">
-      <p class="key__dato">LER 15 01</p>
-      <p>La familia LER 15 01 (envases), no los códigos del grupo 20.</p>
-    </div>
-    <div class="key">
-      <p class="key__dato">3–5 €/t</p>
-      <p>Una compensación (entre 3 y 5 €/t) por aportar la trazabilidad del residuo. Corresponde por ley al poseedor final, no al gestor.</p>
-    </div>
-  </div>
-</section>
-
-<section class="sec">
+<section class="sec sec--light">
   <div class="wrap norm">
     <div class="norm__ler">
       <p class="kicker">Catálogo LER</p>
-      <h2>Familia 15 · Envases</h2>
+      <h2><?= resaltar('Familia 15 · Envases', 'Envases') ?></h2>
       <p class="norm__sub">Residuos de envases; absorbentes, trapos de limpieza, materiales de filtración y ropas de protección no especificados en otra categoría.</p>
       <table class="ler">
         <thead><tr><th scope="col">Código</th><th scope="col">Descripción</th></tr></thead>
@@ -85,7 +83,7 @@ hero('normativa',
 
     <div class="norm__oblig">
       <p class="kicker">Obligaciones</p>
-      <h2>¿A quién obliga?</h2>
+      <h2><?= resaltar('¿A quién obliga?', 'obliga?') ?></h2>
       <p class="norm__sub">Real Decreto 1055/2022, de 27 de diciembre, de envases y residuos de envases.</p>
       <div class="faq">
         <?php foreach ($obligaciones as $i => [$titulo, $intro, $items, $enlace]): ?>

@@ -11,7 +11,6 @@ primero en el `.docx` correspondiente y después en la página.
 | Página | Ruta | Copy (texto) | Wireframe (apartados) |
 |---|---|---|---|
 | Home | `/` | `Copy_scrapenvases_Home_ParaTuSCRAP.docx` · A | `wireframe-home.html` |
-| El CORE | `/el-core` | `Copy_scrapenvases_El_CORE.docx` · E | `wireframe-el-core.html` |
 | Para tu SCRAP | `/para-tu-scrap` | `Copy_scrapenvases_Home_ParaTuSCRAP.docx` · B | `wireframes-perfil.html` |
 | Poseedores | `/poseedores` | `Copy_scrapenvases_Poseedores_Gestores.docx` · C | `wireframes-perfil.html` |
 | Gestores | `/gestores` | `Copy_scrapenvases_Poseedores_Gestores.docx` · D | `wireframes-perfil.html` |
@@ -37,8 +36,15 @@ app/
 public/
   index.php     front controller: mapa de páginas, <title> y descripción de cada una
   css/site.css  estilos
-  js/site.js    menú móvil y aparición del flujo 01→02→03 de El CORE
-  imagenes/web/ logos optimizados para la web
+  js/site.js    menú móvil y movimiento ligado al scroll (portada, frases, fotos, herramientas)
+  js/hero3d.js  portada en 3D (Three.js desde jsDelivr): favicon → logo → core; si falla, queda la versión plana
+  js/apps3d.js  logos 3D de los apartados de PROBATUS, INPROGEST y SCRAPP (portada); si falla, queda el logo plano
+  js/journey.js viaje por el core con escenas reales (portada): mapa → PROBATUS → INPROGEST → camión en ruta → SCRAPP, con la pantalla de cada herramienta encajada en su portátil; con "reducir movimiento", apartados apilados
+  imagenes/web/ logos para la web (palabra oscura y blanca, y el logo completo con la red)
+  media/        fotografías del portal; media/3d/ vectores de los logos y red de nodos para la escena 3D
+                media/apps/: pantalla de cada herramienta (sacada del vídeo de lanzamiento y escalada con Magnific)
+                media/viaje/: fotos del viaje (IA de Freepik) y ruta/, los fotogramas del camión
+                media/perfil/: escenas del viaje con la pantalla de cada herramienta en el portátil (páginas de perfil)
 ```
 
 PHP 8.1 o superior, sin dependencias.

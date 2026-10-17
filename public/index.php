@@ -10,10 +10,6 @@ const PAGINAS = [
         'title' => 'La RAP de envases, conectada y bajo control · scrapenvases.com',
         'desc'  => 'El portal del sector que reúne la normativa, la resolución de dudas y el ecosistema de herramientas —SCRAPP, INPROGEST y PROBATUS— con el que SCRAPs, gestores y poseedores operan la responsabilidad ampliada del productor.',
     ],
-    'el-core' => [
-        'title' => 'El CORE: el ecosistema que ya opera la RAP de envases · scrapenvases.com',
-        'desc'  => 'Tres herramientas que encajan entre sí —SCRAPP, INPROGEST y PROBATUS— para cubrir, de punta a punta, lo que la RAP de envases comerciales e industriales exige a SCRAPs, gestores y poseedores.',
-    ],
     'para-tu-scrap' => [
         'title' => 'Para tu SCRAP · scrapenvases.com',
         'desc'  => 'El core reúne las tres funciones críticas de un SCRAP —homologación de gestores, control documental e incentivos del poseedor— en un ecosistema ya operativo.',
@@ -39,14 +35,16 @@ const PAGINAS = [
     'politica-cookies'    => ['title' => 'Política de cookies · scrapenvases.com', 'desc' => 'Política de cookies de scrapenvases.com.', 'legal' => true],
 ];
 
-/** Rutas anteriores al rediseño: se conservan con 301 para no romper enlaces. */
+/** Rutas anteriores: se conservan con 301 para no romper enlaces. El CORE ya no tiene página
+ *  propia: su contenido vive en el viaje de la portada. */
 const REDIRECCIONES = [
     'scrap'    => '/para-tu-scrap',
-    'core'     => '/el-core',
+    'core'     => '/',
+    'el-core'  => '/',
     'ots'      => '/contacto',
     'noticias' => '/',
     'noticia'  => '/',
-    'demos'    => '/el-core',
+    'demos'    => '/',
 ];
 
 $ruta = trim(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/', '/');
